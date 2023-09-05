@@ -1,0 +1,36 @@
+name: Deploy static content to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16  # Adjust to your Node.js version
+
+      - name: Install Dependencies
+        run: |
+          npm install
+          npm install three postprocessing  # Install Three.js and Postprocessing
+        working-directory: ./  # Specify your project's directory if needed
+
+      - name: Build Project
+        run: npm run build
+        working-directory: ./  # Specify your project's directory if needed
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist  # Specify your build output directory
+          publish_branch: main  # You can change this if needed
