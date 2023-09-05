@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 154">
+  <defs>
+    <style>
+      .a,.c,.d,.e,.f{fill:none;}
+      .a,.c,.d,.e,.f,.g{stroke:#fff;}
+      .a,.c,.f{stroke-linecap:round;}
+      .a,.d,.e,.f,.g{stroke-miterlimit:10;}
+      .a,.c{stroke-width:4px;}
+      .g{}
+      .c{stroke-linejoin:round;}
+      .d,.f{stroke-width:3px;}
+      .e{stroke-width:2px;}
+
+      /* Define keyframes for the animation */
+      @keyframes fillLineAnimation {
+        0%, 100% {
+          stroke-dashoffset: 1000;
+          fill-opacity: 0;
+        }
+        50% {
+          stroke-dashoffset: 0;
+          fill-opacity: 1;
+        }
+      }
+
+      /* Apply the animation to specific SVG elements */
+      .a, .c, .d, .e, .f, .g {
+        animation: fillLineAnimation 7s infinite alternate; /* Set animation to run infinitely and alternate direction */
+      }
+
+      /* Set initial styles for the animated elements */
+      .a, .c, .d, .e, .f, .g {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        fill-opacity: 0;
+      }
+    </style>
+  </defs>
+  <rect class="a" x="2" y="2" width="150" height="150" rx="9.03"/>
+  <rect class="c" x="14.81" y="13.49" width="73.73" height="80.15" rx="6.42"/>
+  <rect class="d" x="116.69" y="99.42" width="25" height="25" rx="6.78"/>
+  <rect class="e" x="129.19" y="79.13" width="10" height="10" rx="2.35"/>
+  <rect class="f" x="15.81" y="122.3" width="18.01" height="18.01" rx="3.07"/>
+  <rect class="g" x="124.58" y="21.32" width="7.89" height="7.89"/>
+</svg>

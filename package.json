@@ -1,0 +1,10 @@
+{
+  "name": "sturdybinder.github.io",
+  "version": "1.0.0",
+  "main": "main.js",
+  "license": "MIT",
+  "dependencies": {
+    "postprocessing": "^6.33.0",
+    "three": "^0.155.0"
+  }
+}

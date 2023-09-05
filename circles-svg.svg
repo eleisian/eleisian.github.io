@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+    <defs>
+        <style>
+            .a {
+                fill: none;
+                stroke: #fff;
+                stroke-miterlimit: 10;
+                stroke-width: 3;
+                animation-duration: 10s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+            }
+
+            .circle1 {
+                animation: rotate 10s linear infinite;
+            }
+
+            .circle2 {
+                animation: rotate 20s ease-in-out infinite;
+            }
+
+            .circle3 {
+                animation: scale 15s ease-in-out infinite;
+            }
+
+            @keyframes rotate {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            @keyframes scale {
+                0%, 100% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.2);
+                }
+            }
+        </style>
+    </defs>
+    <circle class="a circle1" cx="250" cy="250" r="200"/>
+    <circle class="a circle2" cx="350" cy="250" r="80"/>
+    <circle class="a circle3" cx="400" cy="250" r="40"/>
+</svg>

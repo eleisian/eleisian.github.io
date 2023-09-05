@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hey, you found me!</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
+</head>
+<body>
+    <script type="module" src="scrollBehavior"></script>
+    <nav class="nav-container" role="navigation">
+    <a href="#section1" onClick="scrollToSection('section1'); return false;" class="navbarText">home</a>
+
+    <a href="#section2" onClick="scrollToSection('section2'); return false;" class="navbarText">about</a>
+    <a href="#section3" onClick="scrollToSection('section3'); return false;" class="navbarText">portfolio</a>
+    <a href="ewang-resume.pdf" class="navbarText">Resume</a>
+    <a href="#section4" onClick="scrollToSection('section4'); return false;" class="navbarText">contact</a>
+    </nav>
+  <section id="section1" class="section" data-color="#3498db">
+    <div class="name-container">
+    <div class="name-text">Emmanuel Wang
+    <img src="tetrisgarden-logo.svg" width="32" height="32"></div>
+    </div>
+  </section>
+
+  <section id="section2" class="section">
+    <script type="module" src="main.js"></script>
+    <div id="animation-container"></div>
+    <div class="about-container">
+    <h1>Hello, I am a recent graduate from the University of Florida with a Bachelors Degree in Digital Arts and Sciences. </h1>
+    <br>
+    <h2>I have interests in UI/UX design, creative coding, web3, fintech, and music!</h2>
+    </div>
+  </section>
+
+  <section id="section3" class="section">
+    <div class="projects-container">
+      <a href="https://sturdybinder.github.io/everywhere-is-the-ocean/" class="navbarText">everywhere is the ocean</a>
+      <a href="https://sturdybinder.github.io/-2" class="navbarText">this website is awesome</a>
+      <a href="https://sturdybinder.github.io/ascii-renderer" class="navbarText">ascii-renderer</a>
+      <a href="https://sturdybinder.github.io/jquery-terminal-rpg" class="navbarText">jquery terminal</a>
+      <a href="https://sturdybinder.github.io/orbital" class="navbarText">orbital</a>
+    </div>
+  </section>
+
+  <section id="section4" class="section">
+    <div class="contact-container">
+      <a href="https://github.com/sturdybinder" class="navbarText">github</a>
+      <a href="https://www.linkedin.com/in/emmanuel-wang/" class="navbarText">linkedin</a>
+    </div>
+  </section>
+</body>
+</html>

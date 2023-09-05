@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci Blooming Animation</title>
+    <script type="module">
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.134.0/build/three.module.js';
+
+        // Set up the scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+        camera.position.z=1000;
+
+        // Create a blooming Fibonacci design
+        const fibonacciPoints = [];
+        const numPoints = 1000;
+        const goldenRatio = (1 + Math.sqrt(5)) / 2;
+        for (let i = 1; i <= numPoints; i++) {
+            const angle = i * (Math.PI * 2) / goldenRatio;
+            const radius = Math.sqrt(i);
+            const x = radius * Math.cos(angle);
+            const y = radius * Math.sin(angle);
+            fibonacciPoints.push(new THREE.Vector3(x, y, 0));
+        }
+
+        const geometry = new THREE.BufferGeometry().setFromPoints(fibonacciPoints);
+        const material = new THREE.LineBasicMaterial({ color: 0x00ff00 });
+        const fibonacciLine = new THREE.Line(geometry, material);
+        scene.add(fibonacciLine);
+
+        camera.position.z = 5;
+
+        // Animation loop
+        const animate = () => {
+            requestAnimationFrame(animate);
+
+            // Rotate the Fibonacci design
+            fibonacciLine.rotation.x += 0.005;
+            fibonacciLine.rotation.y += 0.005;
+
+            renderer.render(scene, camera);
+        };
+
+        animate();
+    </script>
+</head>
+<body>
+</body>
+</html>
