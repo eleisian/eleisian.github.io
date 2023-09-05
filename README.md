@@ -1,2 +1,0 @@
-# sturdybinder.github.io
- 
