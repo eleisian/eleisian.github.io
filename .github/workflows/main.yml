@@ -21,6 +21,7 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
+          npm install vite -g  # Install Vite globally
           npm install three postprocessing  # Install Three.js and Postprocessing
         working-directory: ./  # Specify your project's directory if needed
 
@@ -33,4 +34,4 @@ jobs:
         with:
           deploy_key: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist  # Specify your build output directory
-          publish_branch: main  # You can change this if needed
+          publish_branch: gh-pages  # You can change this if needed
