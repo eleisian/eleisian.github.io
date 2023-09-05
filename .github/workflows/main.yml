@@ -1,4 +1,4 @@
-name: Deploy static content to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -13,6 +13,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Set up SSH key
+        run: |
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-add ~/.ssh/id_rsa
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -21,7 +29,6 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          npm install vite -g  # Install Vite globally
           npm install three postprocessing  # Install Three.js and Postprocessing
         working-directory: ./  # Specify your project's directory if needed
 
