@@ -34,4 +34,4 @@ jobs:
         with:
           github_token: ${{ github.token }}
           publish_dir: ./dist  # Specify your build output directory
-          publish_branch: gh-pages  # You can change this if needed
+          publish_branch: main  # You can change this if needed
