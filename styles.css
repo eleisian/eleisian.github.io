@@ -10,7 +10,7 @@ html {
   scroll-snap-duration: 10ms;
 }
 
-body {
+body{
   background-color: black;
   font-family: 'Arial', sans-serif;
   font-weight: bold;
