@@ -152,7 +152,7 @@ canvas.webgl {
 /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
   body {
-    font-size: 10px;
+    font-size: 8px;
   }
 
   .nav-container {
@@ -179,9 +179,13 @@ canvas.webgl {
     align-items: center; 
     margin-top: 20px;
   }
+  .about-container{
+  margin-right: 10%;
+  max-width: 50%;
+  }
 
  #animation-container {
-    width: 100%; 
+    width: 20%; 
     height: auto; 
     margin-top: 0; 
     margin-bottom: 30px;

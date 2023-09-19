@@ -1,22 +1,41 @@
 const scene2 = new THREE.Scene();
 const camera2 = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
 const renderer2 = new THREE.WebGLRenderer({ alpha: true }); // Set alpha to true
-renderer2.setSize(250, 250);
-document.getElementById('animation-container').appendChild(renderer2.domElement);
+const container = document.getElementById('animation-container');
+let containerWidth, containerHeight;
 
-const lineCount = 100;
-const linesGroup2 = new THREE.Group();
-scene2.add(linesGroup2);
 
-const rotationSpeed = 0.099;
-const movementSpeed = 0.01;
-const mouse = new THREE.Vector2();
-const mouseMoveThreshold = 100;
+function init() {
+  container.appendChild(renderer2.domElement);
 
-let previousMouseX = 0;
-let previousMouseY = 0;
+  // Function to update the renderer size
+  function updateRendererSize() {
+    containerWidth = container.clientWidth;
+    containerHeight = container.clientHeight;
+    renderer2.setSize(containerWidth, containerHeight);
+    camera2.aspect = containerWidth / containerHeight;
+    camera2.updateProjectionMatrix();
+  }
 
-function createRandomLine() {
+  // Initial setup
+  updateRendererSize();
+
+  // Listen for window resize events and update renderer size
+  window.addEventListener('resize', updateRendererSize, false);
+
+  const lineCount = 100;
+  const linesGroup2 = new THREE.Group();
+  scene2.add(linesGroup2);
+
+  const rotationSpeed = 0.099;
+  const movementSpeed = 0.01;
+  const mouse = new THREE.Vector2();
+  const mouseMoveThreshold = 100;
+
+  let previousMouseX = 0;
+  let previousMouseY = 0;
+
+  function createRandomLine() {
   const material = new THREE.LineBasicMaterial({ color: 0xffffff }); // Set color to white
   const geometry = new THREE.BufferGeometry();
   const positions = new Float32Array(6);
@@ -80,4 +99,8 @@ function animateScene2() {
 }
 
 animateScene2();
+}
+  
+init();
+
    
