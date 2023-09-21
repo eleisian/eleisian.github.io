@@ -4,6 +4,7 @@
   "main": "main.js",
   "license": "MIT",
   "dependencies": {
+    "colormap": "^2.3.2",
     "postprocessing": "^6.33.0",
     "three": "^0.155.0"
   },
