@@ -1,5 +1,3 @@
-import * as THREE from "../node_modules/three/build/three.module.js";
-
 const scene2 = new THREE.Scene();
 const camera2 = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
 const renderer2 = new THREE.WebGLRenderer({ alpha: true }); // Set alpha to true
