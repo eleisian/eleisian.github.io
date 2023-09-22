@@ -6,8 +6,6 @@
 }
 
 html {
-  scroll-snap-type: y mandatory;
-  scroll-snap-duration: 10ms;
 }
 
 body{
@@ -56,8 +54,6 @@ header {
   justify-content: center;
   position: relative;
   height: 100vh;
-  scroll-snap-align: start;
-  scroll-snap-duration: 10ms;
   overflow: hidden;
 }
 
