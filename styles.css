@@ -60,16 +60,21 @@ header {
 
 /* Background Gradient for Sections */
 #section1 {
-  background: linear-gradient(to bottom, #1a1a1a, #333333);
+  
 }
 #section2 {
-  background: linear-gradient(to bottom, #333333, #4d4d4d);
+
 }
 #section3 {
-  background: linear-gradient(to bottom, #4d4d4d, #666666);
+
 }
 #section4 {
-  background: linear-gradient(to bottom, #666666, #808080);
+
+}
+
+#landscape-container{
+  z-index: 50000;
+  width: 100%;
 }
 
 /* Navigation Container Styles */
@@ -118,7 +123,6 @@ canvas.webgl {
 }
 
 .name-container {
-  position: fixed; 
   display: flex;
   align-items: center;
   font-size: 42px;
