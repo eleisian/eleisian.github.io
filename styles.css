@@ -1,4 +1,5 @@
 /* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500;900&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +11,7 @@ html {
 
 body{
   background-color: black;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Source Code Pro', monospace;
   font-weight: bold;
   text-transform: uppercase;
   color: white;
@@ -120,8 +121,6 @@ canvas.webgl {
   position: fixed; 
   display: flex;
   align-items: center;
-  font-family: 'Arial', sans-serif;
-  font-weight: bold;
   font-size: 42px;
   color: white;
   text-transform: uppercase;
