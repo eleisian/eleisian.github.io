@@ -77,9 +77,10 @@ section {
 }
 
 #landscape{
-    display: flex;
+  display: flex;
   width: 500px;
   height: 500px;
+  z-index: -1;
 }
 
 
@@ -193,5 +194,6 @@ section {
   display: flex;
   width: 100px;
   height: 100px;
+  z-index: -1;
 }
 }
