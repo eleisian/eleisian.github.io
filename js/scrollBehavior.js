@@ -33,7 +33,7 @@ document.addEventListener("scroll", function () {
 
 // Call the initializePage function when the page loads
 function initializePage() {
-  var firstSection = document.querySelector(".section");
+  var firstSection = document.querySelector("section");
   var firstLinkId = firstSection.id;
   var firstLink = document.querySelector(`[href="#${firstLinkId}"]`);
   firstLink.classList.add("active");

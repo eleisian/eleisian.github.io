@@ -24,7 +24,7 @@ const createDot = () => {
         const z = 0;
 
         const dotGeometry = new THREE.SphereGeometry(0.005, 8, 8);
-        const dotMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const dotMaterial = new THREE.MeshBasicMaterial({ color: '#ffaf1e' });
         const dot = new THREE.Mesh(dotGeometry, dotMaterial);
         dot.position.set(x, y, z);
         scene.add(dot);
@@ -44,7 +44,7 @@ const handleWindowResize = () => {
 };
 window.addEventListener("resize", handleWindowResize);
 
-camera.position.z = 1;
+camera.position.z = 0.5;
 
 // Render the initial 400 dots
 for (let i = 1; i <= initialDotsCount; i++) {

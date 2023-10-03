@@ -80,7 +80,8 @@ section {
   display: flex;
   width: 500px;
   height: 500px;
-  z-index: -1;
+  
+  position: relative;
 }
 
 
@@ -88,8 +89,13 @@ section {
 .nav-container {
   display: flex;
   position: fixed;
+  align-items: center;
+  justify-content: left;
+  height: 30px;
+  width: 100%;
   top: 5%;
   left: 1%;
+  z-index: 10000;
 }
 
 .navbarText {
