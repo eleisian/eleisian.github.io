@@ -134,6 +134,8 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: auto;
+  height: auto;
   font-size: 42px;
   color: white;
   text-transform: uppercase;
@@ -144,7 +146,7 @@ section {
 .name-text {
   opacity: 0;
   transform: translateY(20px);
-  animation: fade-in 1s 0.5s forwards, slide-up 1s 0.5s forwards;
+  animation: fade-in 1s 0.2s forwards, slide-up 1s 0.2s forwards;
 }
 /* Keyframes for Animations */
 @keyframes fade-in {
@@ -152,10 +154,21 @@ section {
     opacity: 1;
   }
 }
+@keyframes fade-out{
+  to{
+    opacity: 0;
+  }
+}
+
 
 @keyframes slide-up {
   to {
     transform: translateY(0);
+  }
+}
+@keyframes slide-down {
+  to {
+    transform: translateY(1);
   }
 }
 /* Media Query for Mobile Devices */
