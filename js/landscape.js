@@ -44,7 +44,7 @@ const handleWindowResize = () => {
 };
 window.addEventListener("resize", handleWindowResize);
 
-camera.position.z = 0.5;
+camera.position.z = 0.75;
 
 // Render the initial 400 dots
 for (let i = 1; i <= initialDotsCount; i++) {
