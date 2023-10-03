@@ -8,15 +8,14 @@ container.appendChild(renderer.domElement);
 renderer.setClearColor(0x000000, 0);
 
 const dots = [];
-let dotIndex = 0;
-const numDots = 2000; // Total number of dots you want
+const maxDots = 2000; // Maximum number of dots
 const initialDotsCount = 400; // Number of dots to render initially
 const initialRadius = 0.008;
 const phi = (1 + Math.sqrt(5)) / 2;
 
 const createDot = () => {
-    if (dotIndex < numDots) {
-        const i = dotIndex + 1;
+    if (dots.length < maxDots) {
+        const i = dots.length + 1;
         const theta = 2 * Math.PI * i / phi;
         const radius = initialRadius * Math.sqrt(i);
         const x = radius * Math.cos(theta);
@@ -29,8 +28,9 @@ const createDot = () => {
         dot.position.set(x, y, z);
         scene.add(dot);
         dots.push(dot);
-
-        dotIndex++;
+    } else {
+        // Recycle existing dots
+        dots[dots.length % maxDots].position.set(0, 0, 0); // Reset position to the center
     }
 };
 
@@ -54,17 +54,16 @@ for (let i = 1; i <= initialDotsCount; i++) {
 const animate = () => {
     requestAnimationFrame(animate);
 
-    // Render only the dots that have been added so far
-    for (let i = 0; i < dotIndex; i++) {
-        dots[i].visible = true;
-    }
+    // Add dots gradually during the animation
+    createDot();
 
-    if (dotIndex < numDots) {
-        // Add dots gradually during the animation
-        createDot();
-    }
+    // Render all dots
+    dots.forEach((dot) => {
+        dot.visible = true;
+    });
 
     renderer.render(scene, camera);
+    scene.rotation.z += 0.0005;
 };
 
 handleWindowResize();

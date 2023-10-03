@@ -52,10 +52,6 @@ a.active::after {
 
 /* Section Styles */
 section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
   height: 100vh;
   overflow: hidden;
 }
@@ -74,14 +70,19 @@ section {
 
 }
 .landscape-container{ 
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  margin-top: 7%;
 }
 
 #landscape{
-  display: flex;
   width: 500px;
   height: 500px;
-  
-  position: relative;
+  position: absolute;
+
 }
 
 
@@ -131,11 +132,13 @@ section {
 
 .name-container {
   display: flex;
+  justify-content: center;
   align-items: center;
   font-size: 42px;
   color: white;
   text-transform: uppercase;
   letter-spacing: 2px;
+  margin-top: 20%;
 }
 
 .name-text {
@@ -177,7 +180,7 @@ section {
   }
   .name-container,
   .contact-container {
-    top: 40%;
+    margin-top: 60%;
   }
   .projects-container {
     display: flex;
@@ -196,10 +199,5 @@ section {
     margin-top: 0; 
     margin-bottom: 30px;
   }
-  #landscape{
-  display: flex;
-  width: 100px;
-  height: 100px;
-  z-index: -1;
-}
+ 
 }
