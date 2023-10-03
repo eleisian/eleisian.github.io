@@ -9,6 +9,13 @@
 html {
 }
 
+header {
+  position: sticky;
+  top: 0;
+  background-color: blue;
+  /* Other header styles */
+}
+
 body{
   background-color: black;
   font-family: 'Source Code Pro', monospace;
@@ -43,13 +50,8 @@ a.active::after {
   width: 100%;
 }
 
-header {
-  padding: 5rem;
-  text-align: center; 
-}
-
 /* Section Styles */
-.section {
+section {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,11 +73,15 @@ header {
 #section4 {
 
 }
-
-#landscape-container{
-  z-index: 50000;
-  width: 100%;
+.landscape-container{ 
 }
+
+#landscape{
+    display: flex;
+  width: 500px;
+  height: 500px;
+}
+
 
 /* Navigation Container Styles */
 .nav-container {
@@ -83,7 +89,6 @@ header {
   position: fixed;
   top: 5%;
   left: 1%;
-  z-index: 100; 
 }
 
 .navbarText {
@@ -116,11 +121,6 @@ header {
     height: 500px;
   }
 
-/* WebGL Styles */
-canvas.webgl {
-  position: absolute;
-  z-index: 2;
-}
 
 .name-container {
   display: flex;
@@ -189,4 +189,9 @@ canvas.webgl {
     margin-top: 0; 
     margin-bottom: 30px;
   }
+  #landscape{
+  display: flex;
+  width: 100px;
+  height: 100px;
+}
 }

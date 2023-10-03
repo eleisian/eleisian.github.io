@@ -16,7 +16,7 @@ function scrollToSection(id) {
 
 // Add an event listener to track scroll and update active link
 document.addEventListener("scroll", function () {
-  var sections = document.querySelectorAll(".section");
+  var sections = document.querySelectorAll("section");
   sections.forEach(section => {
     var rect = section.getBoundingClientRect();
     if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {

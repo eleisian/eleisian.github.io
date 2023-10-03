@@ -7,16 +7,24 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <script src="js/scrollBehavior.js" type="module" ></script>
-    <nav class="nav-container" role="navigation">
-    <a href="#section1" onClick="scrollToSection('section1'); return false;" class="navbarText">home</a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script type="module" src="js/scrollBehavior.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/landscape.js"></script>
 
+
+    <header>
+  <nav class="nav-container" role="navigation">
+    <a href="#section1" onClick="scrollToSection('section1'); return false;" class="navbarText">home</a>
     <a href="#section2" onClick="scrollToSection('section2'); return false;" class="navbarText">about</a>
     <a href="#section3" onClick="scrollToSection('section3'); return false;" class="navbarText">portfolio</a>
     <a href="assets/ewang-resume.pdf" class="navbarText">Resume</a>
     <a href="#section4" onClick="scrollToSection('section4'); return false;" class="navbarText">contact</a>
-    </nav>
-  <section id="section1" class="section" data-color="#3498db">
+  </nav>
+</header>
+
+  <section id="section1">
+    <div id="landscape"></div>
     <div class="name-container">
     <div class="name-text">Emmanuel Wang
     <img src="assets/tetrisgarden-logo.svg" width="32" height="32"></div>
@@ -24,10 +32,7 @@
   </section>
 
   <section id="section2" class="section">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <div id="animation-container"></div>
-    <script src="js/main.js" type="module"></script>
-
     <div class="about-container">
     <h1>Hello! I'm a recent graduate from the University of Florida with a degree in Digital Arts and Sciences. My passion lies in JavaScript, C#, and creating games in Unity. </h1>
     <br>
@@ -35,7 +40,7 @@
     </div>
   </section>
 
-  <section id="section3" class="section">
+  <section id="section3">
     <div class="projects-container">
       <a href="https://sturdybinder.github.io/orbital" class="navbarText">orbital</a>
       <a href="https://sturdybinder.github.io/everywhere-is-the-ocean/" class="navbarText">everywhere is the ocean</a>
@@ -47,11 +52,12 @@
     </div>
   </section>
 
-  <section id="section4" class="section">
+  <section id="section4">
     <div class="contact-container">
       <a href="https://github.com/sturdybinder" class="navbarText">github</a>
       <a href="https://www.linkedin.com/in/emmanuel-wang/" class="navbarText">linkedin</a>
     </div>
   </section>
+  <footer></footer>
 </body>
 </html>
