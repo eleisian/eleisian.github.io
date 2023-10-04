@@ -88,7 +88,7 @@ function animateScene2() {
   scene2.rotation.y += (mouse.x - scene2.rotation.y) * rotationSpeed;
 
   // Move the camera along the z-axis to create a sense of traversal
-  camera2.position.z -= movementSpeed;
+
 
   // Reset the camera position when it goes too far
   if (camera2.position.z < 0) {

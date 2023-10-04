@@ -53,7 +53,6 @@ a.active::after {
 /* Section Styles */
 section {
   height: 100vh;
-  overflow: hidden;
 }
 
 /* Background Gradient for Sections */
@@ -61,13 +60,17 @@ section {
   
 }
 #section2 {
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #section3 {
 
 }
 #section4 {
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .landscape-container{ 
   display: flex;
@@ -191,9 +194,11 @@ section {
     font-size: 12px;
     margin: 0 10px;
   }
-  .name-container,
+  .name-container{
+
+  }
   .contact-container {
-    margin-top: 60%;
+  
   }
   .projects-container {
     display: flex;
@@ -202,13 +207,9 @@ section {
     margin-top: 20px;
   }
   .about-container{
-  margin-right: 10%;
-  max-width: 50%;
   }
 
- #animation-container {
-    width: 20%; 
-    height: auto; 
+ #animation-container { 
     margin-top: 0; 
     margin-bottom: 30px;
   }
