@@ -124,7 +124,6 @@ section {
 #animation-container {
     width: 800px; 
     height: 800px;
-    height: auto; 
     margin-left: 10%;
   }
 
@@ -204,13 +203,15 @@ section {
   .projects-container {
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: left; 
     margin-top: 20px;
   }
   .about-container{
   }
 
  #animation-container { 
+    width: 50%;
+    height: 50%;
     margin-top: 0; 
     margin-bottom: 30px;
   }
