@@ -19,8 +19,6 @@ header {
 body{
   background-color: black;
   font-family: 'Source Code Pro', monospace;
-  font-weight: bold;
-  text-transform: uppercase;
   color: white;
 }
 
@@ -148,6 +146,8 @@ section {
 
 .name-text {
   opacity: 0;
+  font-weight: bold;
+  text-transform: uppercase;
   transform: translateY(20px);
   animation: fade-in 1s 0.2s forwards, slide-up 1s 0.2s forwards;
 }
@@ -185,6 +185,8 @@ section {
   justify-content: center; 
   align-items: center; 
   position: fixed;
+  font-weight: bold;
+  text-transform: uppercase;
   top: 95%;
   left: 50%;
   transform: translateX(-50%); 
@@ -192,6 +194,8 @@ section {
 
   .navbarText {
     font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
     margin: 0 10px;
   }
   .name-container{
