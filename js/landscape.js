@@ -1,11 +1,12 @@
 const container = document.getElementById("landscape");
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ alpha: true });
 container.appendChild(renderer.domElement);
 
 // Set clear color to transparent
-renderer.setClearColor(0x000000, 0);
+renderer.setClearColor(0xffffff, 0);
+
 
 const dots = [];
 const maxDots = 2000; // Maximum number of dots

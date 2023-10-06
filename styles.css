@@ -9,21 +9,17 @@
 html {
 }
 
-header {
-  position: sticky;
-  top: 0;
-  background-color: blue;
-  /* Other header styles */
-}
 
 body{
-  background-color: black;
+  background: linear-gradient(135deg, #d4f490, #a8e063);
+  background-size: 200% 200%;
+  animation: gradientAnimation 7s ease infinite;
   font-family: 'Source Code Pro', monospace;
-  color: white;
+  color: black;
 }
 
 a {
-  color: white;
+  color: black;
   text-decoration: none;
   position: relative;
 }
@@ -33,7 +29,7 @@ a::after {
   display: block;
   width: 0;
   height: 2px;
-  background-color: white;
+  background-color: black;
   position: absolute;
   bottom: -5px;
   left: 0;
@@ -120,10 +116,14 @@ section {
 }
 
 #animation-container {
-    width: 800px; 
-    height: 800px;
+    width: auto; 
+    height: auto;
     margin-left: 10%;
   }
+canvas{
+  width: auto;
+  height: auto;
+}
 
 .pdf-container {
     width: 100%;
@@ -138,7 +138,7 @@ section {
   width: auto;
   height: auto;
   font-size: 42px;
-  color: white;
+  color: black;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-top: 20%;
@@ -173,6 +173,17 @@ section {
   to {
     transform: translateY(1);
   }
+}
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
@@ -212,6 +223,8 @@ section {
   }
   .about-container{
   }
+
+
 
  #animation-container { 
     width: 50%;

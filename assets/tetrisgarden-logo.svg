@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 154 154">
   <defs>
     <style>
-      .a,.c,.d,.e,.f{fill:none;}
-      .a,.c,.d,.e,.f,.g{stroke:#fff;}
-      .a,.c,.f{stroke-linecap:round;}
-      .a,.d,.e,.f,.g{stroke-miterlimit:10;}
-      .a,.c{stroke-width:4px;}
-      .g{}
-      .c{stroke-linejoin:round;}
-      .d,.f{stroke-width:3px;}
-      .e{stroke-width:2px;}
+      .a, .c, .d, .e, .f { fill: none; }
+      .a, .c, .d, .e, .f, .g { stroke: black; }
+      .a, .c, .f { stroke-linecap: round; }
+      .a, .d, .e, .f, .g { stroke-miterlimit: 10; }
+      .a, .c { stroke-width: 4px; }
+      .g {}
+      .c { stroke-linejoin: round; }
+      .d, .f { stroke-width: 3px; }
+      .e { stroke-width: 2px; }
 
       /* Define keyframes for the animation */
       @keyframes fillLineAnimation {

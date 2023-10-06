@@ -36,7 +36,7 @@ function init() {
   let previousMouseY = 0;
 
   function createRandomLine() {
-  const material = new THREE.LineBasicMaterial({ color: 'grey' }); // Set color to white
+  const material = new THREE.LineBasicMaterial({ color: 'black' });
   const geometry = new THREE.BufferGeometry();
   const positions = new Float32Array(6);
 
