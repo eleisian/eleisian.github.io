@@ -1,16 +1,14 @@
-const container = document.getElementById("landscape");
+const canvas = document.getElementById("landscape");
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ alpha: true });
-container.appendChild(renderer.domElement);
+const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
 
 // Set clear color to transparent
 renderer.setClearColor(0xffffff, 0);
 
-
 const dots = [];
-const maxDots = 2000; // Maximum number of dots
-const initialDotsCount = 400; // Number of dots to render initially
+const maxDots = 2000;
+const initialDotsCount = 400;
 const initialRadius = 0.008;
 const phi = (1 + Math.sqrt(5)) / 2;
 
@@ -24,41 +22,41 @@ const createDot = () => {
         const z = 0;
 
         const dotGeometry = new THREE.SphereGeometry(0.005, 8, 8);
-        const dotMaterial = new THREE.MeshBasicMaterial({ color: '#ffaf1e' });
+        const dotMaterial = new THREE.MeshBasicMaterial({ color: 0xffaf1e });
         const dot = new THREE.Mesh(dotGeometry, dotMaterial);
         dot.position.set(x, y, z);
         scene.add(dot);
         dots.push(dot);
     } else {
-        // Recycle existing dots
-        dots[dots.length % maxDots].position.set(0, 0, 0); // Reset position to the center
+        dots[dots.length % maxDots].position.set(0, 0, 0);
     }
 };
 
 const handleWindowResize = () => {
-    const { clientWidth, clientHeight } = container;
-
+    const { clientWidth, clientHeight } = canvas;
+    
+    // Update the camera's aspect ratio
     camera.aspect = clientWidth / clientHeight;
     camera.updateProjectionMatrix();
 
+    // Set the renderer's size to match the CSS size
     renderer.setSize(clientWidth, clientHeight);
 };
+
 window.addEventListener("resize", handleWindowResize);
 
-camera.position.z = 0.75;
+// Set initial camera position and look at the scene center
+camera.position.set(0, 0, 1);
+camera.lookAt(0, 0, 0);
 
-// Render the initial 400 dots
 for (let i = 1; i <= initialDotsCount; i++) {
     createDot();
 }
 
 const animate = () => {
     requestAnimationFrame(animate);
-
-    // Add dots gradually during the animation
     createDot();
 
-    // Render all dots
     dots.forEach((dot) => {
         dot.visible = true;
     });
