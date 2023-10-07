@@ -1,5 +1,5 @@
 /* Global Styles */
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -48,6 +48,30 @@ a.active::after {
 section {
   height: 100vh;
 }
+/* Background Gradient for Sections */
+#section1 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#section2 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#section3 {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+#section4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .dot-container {
   display: flex;
   justify-content: center;
@@ -66,46 +90,18 @@ section {
   margin-bottom: 10px; /* Adjust the space between dots here */
  }
 
-
-
-/* Background Gradient for Sections */
-#section1 {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#section2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#section3 {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
-#section4 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .landscape-container{
   display: flex;
   align-items: center;
   justify-content: center;
   width: auto;
   height: auto;
-  
-
 }
 
 #landscape{
   position: absolute;
   width: 800px;
   height: 800px;
-
 }
 
 
@@ -122,31 +118,35 @@ section {
   z-index: 10000;
 }
 
-.navbarText {
-  font-size: 13px;
+.nav-text {
+  font-size: 12px;
   margin: 0 20px;
 }
+
 .projects-container{
   display: flex;
   flex-direction: column; 
   align-items: left;
   margin-top: 20px; 
   gap: 10px;
+  z-index: 1;
 }
 
 .about-container{
-  margin-right: 10%;
   max-width: 50%;
 }
-
-#animation-container {
-    width: auto; 
-    height: auto;
-    margin-left: 10%;
-  }
-canvas{
-  width: auto;
-  height: auto;
+.animation-container{
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+#animation{
+  width: 250px;
+  height: 250px;
 }
 
 .pdf-container {
@@ -159,16 +159,15 @@ canvas{
   width: auto;
   height: auto;
   margin-top: 21%;
+
 }
 
 .name-text {
   opacity: 0;
   font-size: 42px;
   color: black;
-  text-transform: uppercase;
   letter-spacing: 2px;
-  font-weight: bold;
-  text-transform: uppercase;
+  font-weight: semi-bold;
   transform: translateY(20px);
   animation: fade-in 1s 0.2s forwards, slide-up 1s 0.2s forwards;
 }
@@ -210,6 +209,7 @@ canvas{
 @media (max-width: 768px) {
   body {
     font-size: 8px;
+    overflow-x: hidden;
   }
 
   .nav-container {
@@ -217,17 +217,12 @@ canvas{
   justify-content: center; 
   align-items: center; 
   position: fixed;
-  font-weight: bold;
-  text-transform: uppercase;
   top: 95%;
-  left: 50%;
-  transform: translateX(-50%); 
+  height: auto;
 }
 
-  .navbarText {
+  .nav-text {
     font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
     margin: 0 10px;
   }
   .name-container{
@@ -236,18 +231,23 @@ canvas{
   .contact-container {
   
   }
+  .name-text{
+    font-size: 36px;
+  }
   .projects-container {
-    display: flex;
     flex-direction: column;
-    align-items: left; 
-    margin-top: 20px;
+    justify-content: left;
+    align-self: left; 
+
   }
   .about-container{
   }
+  .about-text{
+    font-size: 15px;
+  }
 
-
-
- #animation-container { 
+ .animation-container { 
+    position: relative;
     width: 50%;
     height: 50%;
     margin-top: 0; 

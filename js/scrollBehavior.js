@@ -63,7 +63,7 @@ document.addEventListener("scroll", function () {
     if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
       var sectionId = section.id;
       var activeLink = document.querySelector(`[href="#${sectionId}"]`);
-      var links = document.querySelectorAll(".navbarText");
+      var links = document.querySelectorAll(".nav-text");
       links.forEach(link => {
         link.classList.remove("active");
       });
@@ -92,7 +92,7 @@ function scrollToSection(id) {
   element.scrollIntoView({ behavior: "smooth" });
 
   // Remove active class from all links
-  var links = document.querySelectorAll(".navbarText");
+  var links = document.querySelectorAll(".nav-text");
   links.forEach(link => {
     link.classList.remove("active");
   });
