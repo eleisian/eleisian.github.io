@@ -9,11 +9,7 @@
 html {
 }
 
-
 body{
-  background: linear-gradient(135deg, #d4f490, #a8e063);
-  background-size: 200% 200%;
-  animation: gradientAnimation 7s ease infinite;
   font-family: 'Source Code Pro', monospace;
   color: black;
 }
@@ -104,7 +100,6 @@ section {
   height: 800px;
 }
 
-
 /* Navigation Container Styles */
 .nav-container {
   display: flex;
@@ -154,7 +149,6 @@ section {
     height: 500px;
   }
 
-
 .name-container {
   width: auto;
   height: auto;
@@ -183,7 +177,6 @@ section {
   }
 }
 
-
 @keyframes slide-up {
   to {
     transform: translateY(0);
@@ -194,22 +187,11 @@ section {
     transform: translateY(1);
   }
 }
-@keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+
 /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
   body {
     font-size: 8px;
-    overflow-x: hidden;
   }
 
   .nav-container {
@@ -219,6 +201,7 @@ section {
   position: fixed;
   top: 95%;
   height: auto;
+  width: auto;
 }
 
   .nav-text {
