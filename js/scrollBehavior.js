@@ -104,3 +104,30 @@ function scrollToSection(id) {
   // Call the function to reload animations when scrolling
   reloadAnimations();
 }
+
+const inkContainer = document.getElementById('ink-container');
+let lastDotTime = 0;
+const dotCooldown = 25; // Set the cooldown time in milliseconds
+
+document.addEventListener('mousemove', (e) => {
+    const currentTime = Date.now();
+    if (currentTime - lastDotTime > dotCooldown) {
+        createInkDot(e.clientX, e.clientY);
+        lastDotTime = currentTime;
+    }
+});
+
+function createInkDot(x, y) {
+    const inkDot = document.createElement('div');
+    inkDot.classList.add('ink-dot');
+    inkDot.style.left = x + 'px';
+    inkDot.style.top = y + 'px';
+    inkContainer.appendChild(inkDot);
+
+    // Remove the dot after a delay
+    setTimeout(() => {
+        inkContainer.removeChild(inkDot);
+    }, 10000); // Adjust the delay (in milliseconds) for fading away
+}
+
+
