@@ -272,10 +272,8 @@ section {
   }
 
  .animation-container { 
-    position: relative;
-    width: 50%;
-    height: 50%;
-    margin-top: 0; 
+    width: 25%;
+    height: 25%;
     margin-bottom: 30px;
   }
  
