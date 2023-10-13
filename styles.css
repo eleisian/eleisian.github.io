@@ -115,7 +115,6 @@ section {
 .nav-text {
   font-size: 12px;
   margin: 0 20px;
-  position: relative;
 }
 
 .projects-container{
@@ -150,8 +149,12 @@ section {
   justify-content: left;
 }
 
+.contact-container .nav-text {
+  position: relative;
+}
+
 .contact-container .nav-text::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 10px;
   height: 10px;
@@ -160,8 +163,8 @@ section {
   transform: scale(0);
   transition: transform 0.2s ease-in-out;
   transform-origin: center center;
-  top: -10px;
-  left: 50%; /* Center horizontally */
+  top: 100%; /* Place the dot below the link */
+  left: 50%; /* Center the dot horizontally */
   opacity: 0;
 }
 
@@ -169,6 +172,7 @@ section {
   transform: scale(1);
   opacity: 1;
 }
+
 
 .pdf-container {
     width: 100%;
@@ -178,7 +182,6 @@ section {
 .name-container {
   width: auto;
   height: auto;
-  margin-top: 21%;
 
 }
 
