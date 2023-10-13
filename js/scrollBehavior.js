@@ -64,8 +64,11 @@ const dotCooldown = 25;
 document.addEventListener('mousemove', e => {
   const currentTime = Date.now();
   if (currentTime - lastDotTime > dotCooldown) {
-    createInkDot(e.clientX, e.clientY);
-    lastDotTime = currentTime;
+    // Check if the mouse is in the bottom 80% of the section
+    if (isMouseInBottom80Percent(e, document.querySelector('section'))) {
+      createInkDot(e.clientX, e.clientY);
+      lastDotTime = currentTime;
+    }
   }
 });
 
@@ -84,3 +87,15 @@ function createInkDot(x, y) {
   inkContainer.appendChild(inkDot);
   inkDotTimeout = setTimeout(() => inkContainer.removeChild(inkDot), 10000);
 }
+
+function isMouseInBottom80Percent(event, section) {
+  const sectionRect = section.getBoundingClientRect();
+  const sectionHeight = sectionRect.height;
+  const mouseY = event.clientY;
+
+  // Calculate the bottom 80% of the section
+  const bottom80Percent = sectionRect.top + sectionHeight * 0.2;
+
+  return mouseY >= bottom80Percent && mouseY <= sectionRect.bottom;
+}
+
