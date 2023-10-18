@@ -236,6 +236,7 @@ section {
 /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
   body {
+    overflow-x: hidden;
     font-size: 8px;
   }
 
@@ -244,9 +245,7 @@ section {
   justify-content: center; 
   align-items: center; 
   position: fixed;
-  top: 95%;
-  height: auto;
-  width: auto;
+  
 }
 
   .nav-text {

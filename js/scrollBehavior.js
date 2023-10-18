@@ -99,3 +99,12 @@ function isMouseInBottom80Percent(event, section) {
   return mouseY >= bottom80Percent && mouseY <= sectionRect.bottom;
 }
 
+const documentWidth = document.documentElement.offsetWidth;
+
+document.querySelectorAll('*').forEach((node) => {
+  if (node.offsetWidth > documentWidth) {
+    console.log(node);
+  }
+});
+
+
