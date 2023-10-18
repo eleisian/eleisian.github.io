@@ -78,7 +78,6 @@ navContainer?.addEventListener('mouseenter', () => clearTimeout(inkDotTimeout));
 
 navContainer?.addEventListener('mouseleave', () => createInkDot(x, y));
 
-let inkDotTimeout: number;
 
 function createInkDot(x: number, y: number) {
   const inkDot = document.createElement('div');
@@ -101,8 +100,4 @@ function isMouseInBottom80Percent(event: MouseEvent, section: HTMLElement) {
 
 const documentWidth = document.documentElement.offsetWidth;
 
-document.querySelectorAll<HTMLElement>('*').forEach((node: HTMLElement) => {
-  if (node.offsetWidth > documentWidth) {
-    console.log(node);
-  }
-});
+
