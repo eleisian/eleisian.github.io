@@ -1,13 +1,13 @@
 // Function to replay the animation
-function replayAnimation(element: HTMLElement) {
+function replayAnimation(element) {
   element.classList.remove("name-text");
   void element.offsetWidth;
   element.classList.add("name-text");
 }
 
-const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
-  entries.forEach((entry: IntersectionObserverEntry) => {
-    const element = entry.target as HTMLElement;
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    const element = entry.target;
     element.classList.toggle("name-text", entry.isIntersecting);
     element.style.opacity = entry.isIntersecting ? '0' : '1';
     element.style.transform = entry.isIntersecting ? 'translateY(20px)' : 'translateY(0)';
@@ -18,91 +18,91 @@ const observer = new IntersectionObserver((entries: IntersectionObserverEntry[])
   });
 });
 
-document.querySelectorAll<HTMLElement>(".name-text").forEach(element => observer.observe(element));
+document.querySelectorAll(".name-text").forEach(function (element) {
+  return observer.observe(element);
+});
 
 function reloadAnimations() {
-  document.querySelectorAll<HTMLElement>(".name-text").forEach(element => {
-    const rect = element.getBoundingClientRect();
+  document.querySelectorAll(".name-text").forEach(function (element) {
+    var rect = element.getBoundingClientRect();
     if (rect.top <= window.innerHeight && rect.bottom >= 0) {
       replayAnimation(element);
     }
   });
 }
 
-document.addEventListener("scroll", () => {
-  document.querySelectorAll<HTMLElement>("section").forEach(section => {
-    const rect = section.getBoundingClientRect();
+document.addEventListener("scroll", function () {
+  document.querySelectorAll("section").forEach(function (section) {
+    var rect = section.getBoundingClientRect();
     if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-      document.querySelectorAll<HTMLElement>(".nav-text").forEach(link => link.classList.remove("active"));
-      document.querySelector<HTMLElement>(`[href="#${section.id}"]`)!.classList.add("active");
+      document.querySelectorAll(".nav-text").forEach(function (link) {
+        return link.classList.remove("active");
+      });
+      document.querySelector("[href='#" + section.id + "']").classList.add("active");
     }
   });
   reloadAnimations();
 });
 
 function initializePage() {
-  const firstSection = document.querySelector<HTMLElement>("section");
-  const firstLinkId = firstSection!.id;
-  document.querySelector<HTMLElement>(`[href="#${firstLinkId}"]`)!.classList.add("active");
+  var firstSection = document.querySelector("section");
+  var firstLinkId = firstSection.id;
+  document.querySelector("[href='#" + firstLinkId + ']').classList.add("active");
 }
 
 window.addEventListener("load", initializePage);
 
-function scrollToSection(id: string) {
+function scrollToSection(id) {
   event?.preventDefault();
-  const element = document.getElementById(id);
+  var element = document.getElementById(id);
   element?.scrollIntoView({ behavior: "smooth" });
-  document.querySelectorAll<HTMLElement>(".nav-text").forEach(link => link.classList.remove("active"));
-  document.querySelector<HTMLElement>(`[href="#${id}"]`)!.classList.add("active");
+  document.querySelectorAll(".nav-text").forEach(function (link) {
+    return link.classList.remove("active");
+  });
+  document.querySelector("[href='#" + id + ']').classList.add("active");
   reloadAnimations();
 }
 
-const inkContainer = document.getElementById('ink-container') as HTMLElement;
-let lastDotTime = 0;
-const dotCooldown = 25;
+var inkContainer = document.getElementById('ink-container');
+var lastDotTime = 0;
+var dotCooldown = 25;
 
-document.addEventListener('mousemove', e => {
-  const currentTime = Date.now();
+document.addEventListener('mousemove', function (e) {
+  var currentTime = Date.now();
   if (currentTime - lastDotTime > dotCooldown) {
-    // Check if the mouse is in the bottom 80% of the section
-    if (isMouseInBottom80Percent(e, document.querySelector<HTMLElement>('section')!)) {
+    if (isMouseInBottom80Percent(e, document.querySelector('section'))) {
       createInkDot(e.clientX, e.clientY);
       lastDotTime = currentTime;
     }
   }
 });
 
-const navContainer = document.querySelector<HTMLElement>('.nav-container');
+var navContainer = document.querySelector('.nav-container');
 
-navContainer?.addEventListener('mouseenter', () => clearTimeout(inkDotTimeout));
+navContainer?.addEventListener('mouseenter', function () {
+  return clearTimeout(inkDotTimeout);
+});
 
-navContainer?.addEventListener('mouseleave', () => createInkDot(x, y));
+navContainer?.addEventListener('mouseleave', function () {
+  return createInkDot(x, y);
+});
 
-let inkDotTimeout: number;
-
-function createInkDot(x: number, y: number) {
-  const inkDot = document.createElement('div');
+function createInkDot(x, y) {
+  var inkDot = document.createElement('div');
   inkDot.className = 'ink-dot';
-  inkDot.style.cssText = `left: ${x}px; top: ${y}px;`;
+  inkDot.style.cssText = "left: " + x + "px; top: " + y + "px;";
   inkContainer.appendChild(inkDot);
-  inkDotTimeout = setTimeout(() => inkContainer.removeChild(inkDot), 10000);
+  inkDotTimeout = setTimeout(function () {
+    return inkContainer.removeChild(inkDot);
+  }, 10000);
 }
 
-function isMouseInBottom80Percent(event: MouseEvent, section: HTMLElement) {
-  const sectionRect = section.getBoundingClientRect();
-  const sectionHeight = sectionRect.height;
-  const mouseY = event.clientY;
-
-  // Calculate the bottom 80% of the section
-  const bottom80Percent = sectionRect.top + sectionHeight * 0.2;
-
+function isMouseInBottom80Percent(event, section) {
+  var sectionRect = section.getBoundingClientRect();
+  var sectionHeight = sectionRect.height;
+  var mouseY = event.clientY;
+  var bottom80Percent = sectionRect.top + sectionHeight * 0.2;
   return mouseY >= bottom80Percent && mouseY <= sectionRect.bottom;
 }
 
-const documentWidth = document.documentElement.offsetWidth;
-
-document.querySelectorAll<HTMLElement>('*').forEach((node: HTMLElement) => {
-  if (node.offsetWidth > documentWidth) {
-    console.log(node);
-  }
-});
+var documentWidth = document.documentElement.offsetWidth;

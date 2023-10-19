@@ -78,6 +78,7 @@ navContainer?.addEventListener('mouseenter', () => clearTimeout(inkDotTimeout));
 
 navContainer?.addEventListener('mouseleave', () => createInkDot(x, y));
 
+  
 
 function createInkDot(x: number, y: number) {
   const inkDot = document.createElement('div');
