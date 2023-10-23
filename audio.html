@@ -84,98 +84,163 @@
     .jp-controls button:focus {
         outline: none;
     }
-</style>
+
+    /* Add CSS for the audio visualizer */
+    #audio-visualizer {
+        width: 100%;
+        height: 200px;
+    }
+    </style>
 
 </head>
 <body>
     <div id="jquery_jplayer_1" class="jp-jplayer"></div>
-<div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
-    <div class="jp-type-single">
-        <div class="jp-gui jp-interface">
-            <div class="jp-progress">
-                <div class="jp-seek-bar">
-                    <div class="jp-play-bar"></div>
+    <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
+        <div class="jp-type-single">
+            <div class="jp-gui jp-interface">
+                <div class="jp-progress">
+                    <div class="jp-seek-bar">
+                        <div class="jp-play-bar"></div>
+                    </div>
+                    <div class="jp-current-time" role="timer" aria-label="time">0:00</div>
+                    <div class="jp-duration" role="timer" aria-label="duration">0:00</div>
                 </div>
-                <div class="jp-current-time" role="timer" aria-label="time">0:00</div>
-                <div class="jp-duration" role="timer" aria-label="duration">0:00</div>
+                <div class="jp-controls-holder jp-controls">
+                    <button class="jp-previous" role="button" tabindex="0"><i class="fas fa-step-backward"></i>⏮</button>
+                    <button class="jp-play" role="button" tabindex="0"><i class="fas fa-play"></i>▶</button>
+                    <button class="jp-stop" role="button" tabindex="0"><i class="fas fa-stop"></i>⏸</button>
+                    <button class="jp-next" role="button" tabindex="0"><i class="fas fa-step-forward"></i>⏭</button>
+                </div>
             </div>
-            <div class="jp-controls-holder jp-controls">
-                <button class="jp-previous" role="button" tabindex="0"><i class="fas fa-step-backward"></i>⏮</button>
-                <button class="jp-play" role="button" tabindex="0"><i class="fas fa-play"></i>▶</button>
-
-                <button class="jp-stop" role="button" tabindex="0"><i class="fas fa-stop"></i>⏸</button>
-                <button class="jp-next" role="button" tabindex="0"><i class="fas fa-step-forward"></i>⏭</button>
+            <div class="jp-details">
+                <div class="jp-title" aria-label="title">&nbsp;</div>
             </div>
+            <ul class="jp-playlist">
+                <!-- Add list of songs dynamically here -->
+            </ul>
         </div>
-        <div class="jp-details">
-            <div class="jp-title" aria-label="title">&nbsp;</div>
-        </div>
-        <ul class="jp-playlist">
-            <!-- Add list of songs dynamically here -->
-        </ul>
     </div>
-</div>
+    
+    <!-- Add the p5.js script for audio visualization -->
+    <canvas id="audio-visualizer"></canvas>
 
     <script src="jPlayer-2.9.2/lib/jquery.min.js"></script>
     <script src="jPlayer-2.9.2/dist/jplayer/jquery.jplayer.min.js"></script>
+    
+    <!-- Include p5.js library -->
+    <script src="p5/p5.js"></script>
+    <script src="p5/addons/p5.sound.js"></script>
+    
     <script>
-        var mp3s = [
-            { title: "Song 1", mp3: "assets/222.mp3" },
-            { title: "Song 2", mp3: "assets/brakes.mp3" },
-            { title: "Song 3", mp3: "assets/weather.mp4"},
-            { title: "Song 4", mp3: "assets/0302.mp3"},
+    var mp3s = [
+        { title: "Song 1", mp3: "assets/222.mp3" },
+        { title: "Song 2", mp3: "assets/brakes.mp3" },
+        { title: "Song 3", mp3: "assets/weather.mp4" },
+        { title: "Song 4", mp3: "assets/0302.mp3" }
+    ];
 
-            // Add more songs here
-        ];
+    var currentIndex = 0;
 
-        var currentIndex = 0;
-
-        function initializePlaylist() {
-            var $playlist = $(".jp-playlist");
-            $playlist.empty();
-            mp3s.forEach(function (song, index) {
-                var listItem = $('<li class="jp-playlist-item" tabindex="0"></li>')
-                    .text(song.title)
-                    .click(function () {
-                        currentIndex = index;
-                        playCurrentSong();
-                    });
-                $playlist.append(listItem);
-            });
-        }
-
-        function playCurrentSong() {
-            $("#jquery_jplayer_1").jPlayer("setMedia", mp3s[currentIndex]).jPlayer("play");
-        }
-
-        $(document).ready(function () {
-            $("#jquery_jplayer_1").jPlayer({
-                ready: function (event) {
-                    initializePlaylist();
+    function initializePlaylist() {
+        var $playlist = $(".jp-playlist");
+        $playlist.empty();
+        mp3s.forEach(function (song, index) {
+            var listItem = $('<li class="jp-playlist-item" tabindex="0"></li>')
+                .text(song.title)
+                .click(function () {
+                    currentIndex = index;
                     playCurrentSong();
-                },
-                swfPath: "http://jplayer.org/latest/dist/jplayer",
-                supplied: "mp3, oga",
-                wmode: "window",
-                useStateClassSkin: true,
-                autoBlur: false,
-                smoothPlayBar: true,
-                keyEnabled: true,
-                remainingDuration: true,
-                toggleDuration: true
-            });
+                });
+            $playlist.append(listItem);
+        });
+    }
 
-            $(".jp-next").click(function () {
+    function playCurrentSong() {
+        $("#jquery_jplayer_1").jPlayer("setMedia", {
+            mp3: mp3s[currentIndex].mp3
+        });
+        $("#jquery_jplayer_1").jPlayer("play");
+    }
+
+    function preload() {
+    // Preload audio files
+    sound = loadSound(mp3s[currentIndex].mp3);
+}
+
+function setup() {
+    var canvas = createCanvas(window.innerWidth, 200).parent("audio-visualizer");
+    sound.play(); // Start playing the audio
+    amplitude = new p5.Amplitude();
+}
+
+
+    // Initialize p5.js sketch for audio visualization
+    // Initialize p5.js sketch for audio visualization
+// Initialize p5.js sketch for audio visualization
+function sketch(p) {
+    var sound;
+
+    p.setup = function () {
+        var canvas = p.createCanvas(window.innerWidth, 200).parent("audio-visualizer");
+        sound = p.loadSound(mp3s[currentIndex].mp3);
+        sound.play(); // Start playing the audio
+    }
+
+    p.draw = function () {
+        p.background(0); // Clear the canvas
+
+        // Get the current amplitude of the audio
+        var level = sound.getLevel();
+
+        // Map the amplitude to the height of the canvas
+        var height = p.map(level, 0, 1, 0, p.height);
+
+        // Draw a visual representation of the audio
+        p.fill(255);
+        p.rect(0, p.height - height, p.width, height);
+    }
+}
+
+
+// Initialize the p5.js sketch
+var audioVisualizer = new p5(sketch);
+
+
+    // Initialize the p5.js sketch
+    var audioVisualizer = new p5(sketch);
+
+    $(document).ready(function () {
+        // Initialize jPlayer and other JavaScript code here
+        $("#jquery_jplayer_1").jPlayer({
+            ready: function () {
+                initializePlaylist();
+                playCurrentSong();
+            },
+            ended: function () {
                 currentIndex = (currentIndex + 1) % mp3s.length;
                 playCurrentSong();
-            });
-
-            $(".jp-previous").click(function () {
-                currentIndex = (currentIndex - 1 + mp3s.length) % mp3s.length;
-                playCurrentSong();
-            });
+            },
+            swfPath: "jPlayer-2.9.2/dist/jplayer",
+            supplied: "mp3",
+            cssSelectorAncestor: "#jp_container_1",
+            wmode: "window"
         });
+        
+        // Set up button click handlers
+        $(".jp-play").click(function () {
+            $("#jquery_jplayer_1").jPlayer("play");
+        });
+        $(".jp-previous").click(function () {
+            currentIndex = (currentIndex - 1 + mp3s.length) % mp3s.length;
+            playCurrentSong();
+        });
+        $(".jp-next").click(function () {
+            currentIndex = (currentIndex + 1) % mp3s.length;
+            playCurrentSong();
+        });
+    });
     </script>
+
     <h1>just some audio I have produced with Ableton.</h1>
 </body>
 </html>
