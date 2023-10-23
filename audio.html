@@ -164,11 +164,11 @@
         // Initialize p5.js sketch for audio visualization
        
 
-        $(document).ready(function () {
+         $(document).ready(function () {
             $("#jquery_jplayer_1").jPlayer({
                 ready: function (event) {
                     initializePlaylist();
-                    playCurrentSong();
+                    // Do not play automatically
                 },
                 swfPath: "http://jplayer.org/latest/dist/jplayer",
                 supplied: "mp3, oga",
@@ -197,6 +197,11 @@
                     title: ".jp-title",
                 },
                 loop: false,
+            });
+
+            // Add an event listener to start playing when the play button is clicked
+            $(".jp-play").click(function () {
+                playCurrentSong();
             });
 
             $(".jp-next").click(function () {
