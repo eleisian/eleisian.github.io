@@ -162,46 +162,7 @@
         }
 
         // Initialize p5.js sketch for audio visualization
-        function sketch(p) {
-    var song;
-    var amplitude;
-
-    p.setup = function() {
-        var canvas = p.createCanvas(window.innerWidth, 200).parent("audio-visualizer");
-        // Load the audio file
-        song = p.loadSound(mp3s[currentIndex].mp3, function() {
-            // Play the loaded song
-            song.play();
-        });
-
-        // Create an amplitude analyzer
-        amplitude = new p5.Amplitude();
-
-        // Adjust the canvas width based on the window width
-        canvas.elt.style.width = "100%";
-        canvas.elt.style height = "200px";
-
-        // Set the background color to a lighter color
-        p.background(30);
-    }
-
-    p.draw = function() {
-        // Adjust the fill color to a contrasting color
-        p.fill(255);
-
-        // Get the current amplitude of the audio
-        var level = amplitude.getLevel();
-
-        // Map the amplitude to the height of the canvas
-        var height = p.map(level, 0, 1, 0, p.height);
-
-        // Draw a visual representation of the audio
-        p.rect(0, p.height - height, p.width, height);
-    }
-}
-
-        // Initialize the p5.js sketch
-        var audioVisualizer = new p5(sketch);
+       
 
         $(document).ready(function () {
             $("#jquery_jplayer_1").jPlayer({
