@@ -109,17 +109,22 @@ section {
 }
 
 /* Navigation Container Styles */
+/* Fixed navigation bar */
 .nav-container {
   display: flex;
   position: fixed;
   align-items: center;
   justify-content: left;
-  height: 30px;
+  height: 5%;
   width: 100%;
-  top: 5%;
-  left: 1%;
+  top: 0;
+  left: 0;
+  background-color: white;
   z-index: 10000;
 }
+
+
+
 
 .nav-text {
   font-size: 12px;
@@ -251,50 +256,52 @@ section {
 @media (max-width: 768px) {
   body {
     overflow-x: hidden;
-    font-size: 8px;
+
+  }
+  html {
+    overflow-x: hidden;
   }
 
+
   .nav-container {
-  display: flex;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center; /* Center horizontally */
   position: fixed;
-  
-}
+
+  }
 
   .nav-text {
     font-size: 12px;
     margin: 0 10px;
   }
-  .name-container{
-
-  }
-  .contact-container {
   
-  }
-  .name-text{
+  .name-text {
     font-size: 36px;
   }
+
   .projects-container {
     flex-direction: column;
-    justify-content: left;
-    align-self: left; 
+    align-items: left;
+    margin-top: 20px;
+    gap: 10px;
+    z-index: 1;
+  }
 
+  .about-container {
+    max-width: 50%;
   }
-  .about-container{
-  }
-  .about-text{
+
+  .about-text {
     font-size: 15px;
   }
 
- .animation-container { 
+  .animation-container {
     position: relative;
     align-items: left;
     justify-content: left;
     margin-top: 10%;
-    width: 25%;
-    height: 25%;
+    width: 15%;
+    height: 15%;
     margin-bottom: 30px;
   }
- 
 }
+

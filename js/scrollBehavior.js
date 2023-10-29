@@ -47,10 +47,13 @@ document.addEventListener("scroll", function () {
 function initializePage() {
   var firstSection = document.querySelector("section");
   var firstLinkId = firstSection.id;
-  document.querySelector("[href='#" + firstLinkId + ']').classList.add("active");
+  document.querySelector("[href='#" + firstLinkId + "']").classList.add("active");
 }
 
-window.addEventListener("load", initializePage);
+window.addEventListener("load", function () {
+  initializePage(); // Call the initializePage function when the page is loaded.
+});
+
 
 function scrollToSection(id) {
   event?.preventDefault();
@@ -66,6 +69,7 @@ function scrollToSection(id) {
 var inkContainer = document.getElementById('ink-container');
 var lastDotTime = 0;
 var dotCooldown = 25;
+var inkDotTimeout;
 
 document.addEventListener('mousemove', function (e) {
   var currentTime = Date.now();
@@ -78,9 +82,12 @@ document.addEventListener('mousemove', function (e) {
 });
 
 var navContainer = document.querySelector('.nav-container');
+var x, y; // Variables for mouse coordinates
 
-navContainer?.addEventListener('mouseenter', function () {
-  return clearTimeout(inkDotTimeout);
+navContainer?.addEventListener('mouseenter', function (e) {
+  x = e.clientX;
+  y = e.clientY;
+  clearTimeout(inkDotTimeout);
 });
 
 navContainer?.addEventListener('mouseleave', function () {
