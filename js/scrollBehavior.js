@@ -67,49 +67,38 @@ function scrollToSection(id) {
 }
 
 var inkContainer = document.getElementById('ink-container');
-var lastDotTime = 0;
-var dotCooldown = 25;
-var inkDotTimeout;
+var dotCooldown = 100; // Set a lower cooldown for smoother trail
+var inkDots = [];
 
 document.addEventListener('mousemove', function (e) {
-  var currentTime = Date.now();
-  if (currentTime - lastDotTime > dotCooldown) {
-    if (isMouseInBottom80Percent(e, document.querySelector('section'))) {
-      createInkDot(e.clientX, e.clientY);
-      lastDotTime = currentTime;
-    }
+  if (isMouseInBottom80Percent(e, document.querySelector('section'))) {
+    createInkDot(e.clientX, e.clientY);
   }
 });
 
-var navContainer = document.querySelector('.nav-container');
-var x, y; // Variables for mouse coordinates
-
-navContainer?.addEventListener('mouseenter', function (e) {
-  x = e.clientX;
-  y = e.clientY;
-  clearTimeout(inkDotTimeout);
-});
-
-navContainer?.addEventListener('mouseleave', function () {
-  return createInkDot(x, y);
-});
+function isMouseInBottom80Percent(event, section) {
+  var sectionRect = section.getBoundingClientRect();
+  var sectionHeight = sectionRect.height;
+  var mouseY = event.clientY;
+  var top20Percent = sectionRect.top + sectionHeight * 0.2;
+  return mouseY >= top20Percent && mouseY <= sectionRect.bottom;
+}
 
 function createInkDot(x, y) {
   var inkDot = document.createElement('div');
   inkDot.className = 'ink-dot';
   inkDot.style.cssText = "left: " + x + "px; top: " + y + "px;";
   inkContainer.appendChild(inkDot);
-  inkDotTimeout = setTimeout(function () {
-    return inkContainer.removeChild(inkDot);
-  }, 10000);
+
+  // Add the new dot to the array of dots
+  inkDots.push(inkDot);
+
+  // Remove the oldest dot if there are too many dots in the trail
+  if (inkDots.length > 10) {
+    inkContainer.removeChild(inkDots.shift());
+  }
 }
 
-function isMouseInBottom80Percent(event, section) {
-  var sectionRect = section.getBoundingClientRect();
-  var sectionHeight = sectionRect.height;
-  var mouseY = event.clientY;
-  var bottom80Percent = sectionRect.top + sectionHeight * 0.2;
-  return mouseY >= bottom80Percent && mouseY <= sectionRect.bottom;
-}
+
 
 var documentWidth = document.documentElement.offsetWidth;
