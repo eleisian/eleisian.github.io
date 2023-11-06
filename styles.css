@@ -1,9 +1,10 @@
 /* Global Styles */
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@font-face {
+  font-family: 'Geist-Sans'; /* Choose a name for your font */
+  src: url('assets/fonts/Geist-Regular.woff2') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
 html {
@@ -11,7 +12,7 @@ html {
 }
 
 body{
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'Geist-Sans', sans-serif;
   color: black;
 }
 
