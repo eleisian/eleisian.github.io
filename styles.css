@@ -231,6 +231,17 @@ section {
   transform: translate(-50%, -50%); /* Center the dot relative to its own size */
 }
 
+.rectangle-grid{
+  display: flex;
+  gap: 50px;
+}
+
+.rectangle{
+  width: 75px;
+  height: 200px; /* Set the height of the vertical rectangles */
+  background-color: grey;
+}
+
 /* Keyframes for Animations */
 @keyframes fade-in {
   to {
