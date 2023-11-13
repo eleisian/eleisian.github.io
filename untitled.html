@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monty Hall</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .portal-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .portal-item {
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+            perspective: 1000px; /* Add perspective for 3D effect */
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d; /* Preserve 3D transformations */
+            transition: transform 0.5s;
+            transform-origin: center; /* Set transform origin for the flip effect */
+            cursor: pointer;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg); /* Flip when flipped class is added */
+        }
+
+        .front,
+        .back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden; /* Hide the backface when flipped */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.3s; /* Add transition for text content */
+        }
+
+        .front {
+            background-color: #fff;
+        }
+
+        .back {
+            background-color: #e0e0e0;
+            transform: rotateY(180deg); /* Initially flipped to show the back */
+        }
+
+        .portal-item img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 50%;
+        }
+
+        .portal-item h3 {
+            margin-top: 10px;
+            transition: opacity 0.3s; /* Add transition for text content */
+        }
+
+        .refresh-button {
+            margin-top: 20px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="portal-container">
+        <div class="portal-item" id="portalItem1">
+            <div class="card" onclick="flipCard(this)">
+                <div class="front">
+                    <h3 id="text1">Click to Flip</h3>
+                </div>
+                <div class="back">
+                    <img src="https://tesla-cdn.thron.com/delivery/public/image/tesla/03c34975-991c-45ee-a340-2b700bf7de01/bvlatuR/std/960x540/meet-your-tesla_model-s" alt="Car">
+                    <p>Car</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="portal-item" id="portalItem2">
+            <div class="card" onclick="flipCard(this)">
+                <div class="front">
+                    <h3 id="text2">Click to Flip</h3>
+                </div>
+                <div class="back">
+                    <img src="https://tesla-cdn.thron.com/delivery/public/image/tesla/03c34975-991c-45ee-a340-2b700bf7de01/bvlatuR/std/960x540/meet-your-tesla_model-s" alt="Car">
+                    <p>Car</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="portal-item" id="portalItem3">
+            <div class="card" onclick="flipCard(this)">
+                <div class="front">
+                    <h3 id="text3">Click to Flip</h3>
+                </div>
+                <div class="back">
+                    <img src="https://www.rollingstone.com/wp-content/uploads/2023/04/elon-musk-RS-1800.jpg?w=80&h=80&crop=1" alt="Goat">
+                    <p id="goatText">Goat</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="refresh-button" onclick="refreshCards()">Refresh</button>
+
+    <script>
+        function flipCard(card) {
+            card.classList.toggle('flipped');
+        }
+
+        function refreshCards() {
+            // Remove flipped class from all cards
+            let cards = document.querySelectorAll('.card');
+            cards.forEach(function(card) {
+                card.classList.remove('flipped');
+            });
+
+            // Change text content with a delay
+            setTextWithDelay('goatText', 'Goat', 300); // Add this line to reset the goat text
+
+            // Shuffle the portal items with a slight delay
+            setTimeout(function() {
+                let portalContainer = document.querySelector('.portal-container');
+                for (let i = portalContainer.children.length; i >= 0; i--) {
+                    portalContainer.appendChild(portalContainer.children[Math.random() * i | 0]);
+                }
+            }, 300);
+        }
+
+        function setTextWithDelay(elementId, newText, delay) {
+            setTimeout(function() {
+                let textElement = document.getElementById(elementId);
+                textElement.textContent = newText;
+            }, delay);
+        }
+    </script>
+</body>
+</html>
