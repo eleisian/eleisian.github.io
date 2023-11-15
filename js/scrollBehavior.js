@@ -24,8 +24,8 @@ document.querySelectorAll(".name-text").forEach(function (element) {
 
 function reloadAnimations() {
   document.querySelectorAll(".name-text").forEach(function (element) {
-    var rect = element.getBoundingClientRect();
-    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+    const entry = observer.takeRecords().find(entry => entry.target === element);
+    if (entry && entry.isIntersecting) {
       replayAnimation(element);
     }
   });
