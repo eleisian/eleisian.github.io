@@ -14,6 +14,7 @@ html {
 body{
   font-family: 'Geist-Sans', sans-serif;
   color: black;
+  background: linear-gradient(to bottom, #F0F0F0, #CCCCCC);
 }
 
 a {
@@ -116,13 +117,10 @@ section {
 .nav-container {
   display: flex;
   position: fixed;
+  left: 75%;
   align-items: center;
-  justify-content: left;
   height: 5%;
   width: 100%;
-  top: 0;
-  left: 0;
-  background-color: white;
   z-index: 10000;
 }
 
@@ -145,6 +143,9 @@ section {
 
 .about-container{
   max-width: 50%;
+}
+.about-text{
+
 }
 .animation-container{
   display: flex;
@@ -280,6 +281,7 @@ section {
   .nav-container {
   justify-content: center; /* Center horizontally */
   position: fixed;
+  left: 0;
 
   }
 
