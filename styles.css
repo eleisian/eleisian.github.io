@@ -14,7 +14,7 @@ html {
 body{
   font-family: 'Geist-Sans', sans-serif;
   color: black;
-  background: linear-gradient(to bottom, #F0F0F0, #CCCCCC);
+  background: linear-gradient(to bottom, #F5F5F5, #F0F0F0);
 }
 
 a {
