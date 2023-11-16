@@ -108,6 +108,7 @@ section {
   position: absolute;
   width: 800px;
   height: 800px;
+  bottom:  5%;
 }
 
 /* Navigation Container Styles */
