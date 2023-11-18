@@ -14,7 +14,7 @@ html {
 body{
   font-family: 'Geist-Sans', sans-serif;
   color: black;
-  background: linear-gradient(to bottom, #F5F5F5, #F0F0F0);
+  background: white;
 }
 
 a {
@@ -122,6 +122,7 @@ section {
   height: 5%;
   width: 100%;
   z-index: 10000;
+  background-color: white;
 }
 
 
@@ -285,7 +286,7 @@ section {
   left: 0;
   bottom: 96%;
   height: 4%;
-  background-color: lightgrey;
+  background-color: white;
 
   }
 
