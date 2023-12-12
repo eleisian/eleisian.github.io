@@ -97,6 +97,9 @@ section {
   margin-bottom: 20px; /* Adjust the space between dots here */
  }
 
+.section1-box{
+  
+}
 .landscape-container{
   display: flex;
   align-items: center;
@@ -200,8 +203,7 @@ section {
   }
 
 .name-container {
-  width: auto;
-  height: auto;
+  display: flex;
 
 }
 
