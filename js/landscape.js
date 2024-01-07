@@ -50,8 +50,9 @@ var planets = [
 document.addEventListener('mousemove', function(event) {
   // Calculate the rotation based on the mouse position
   var mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-  
+  var mouseY = (event.clientY / window.innerWidth) * 2 - 1;
   scene.rotation.y = mouseX * Math.PI;
+  scene.rotation.x = mouseY * Math.PI;
 });
 
 // Set up animation
