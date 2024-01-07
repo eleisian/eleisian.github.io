@@ -46,6 +46,14 @@ var planets = [
   new Planet(0.18, 0xFF00FF, 11, 10, 64, 0.002, 0.5)
 ];
 
+// Event listener for mousemove
+document.addEventListener('mousemove', function(event) {
+  // Calculate the rotation based on the mouse position
+  var mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+  
+  scene.rotation.y = mouseX * Math.PI;
+});
+
 // Set up animation
 function animate() {
   requestAnimationFrame(animate);
