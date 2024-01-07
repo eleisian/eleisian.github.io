@@ -19,7 +19,7 @@ function Planet(radius, color, orbitRadiusX, orbitRadiusY, orbitSegments, orbitS
   this.orbit = new THREE.Line(new THREE.BufferGeometry().setFromPoints(this.orbitPoints), this.orbitMaterial);
 
   // Planet
-  this.planetGeometry = new THREE.CircleGeometry(radius, 32);
+  this.planetGeometry = new THREE.SphereGeometry(radius, 32);
   this.planetMaterial = new THREE.MeshBasicMaterial({ color: color, side: THREE.DoubleSide });
 
   this.planet = new THREE.Mesh(this.planetGeometry, this.planetMaterial);
