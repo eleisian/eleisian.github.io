@@ -4,214 +4,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your FullPage Website</title>
+    <title>My Website</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css" />
-    <!-- Add Font Awesome CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* Add your default styles here */
-        body {
-            transition: background-color 0.5s, color 0.5s;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-color: #f8f8f8; /* Light mode background color */
-            color: #333; /* Light mode text color */
-            overflow: hidden; /* Hide scrollbar */
-            position: relative;
-        }
-
-        .waves-overlay {
-            position: absolute;
-            bottom:0;
-            left: 0;
-            width: 100%;
-            height: 15vh;
-            pointer-events: none; /* Allow interactions with elements beneath the waves */
-            z-index: 1; /* Place waves above other content */
-        }
-
-        .section {
-            color: black; /* Default text color */
-            position: relative;
-            z-index: 2; /* Place sections above waves */
-        }
-
-        .slide-content {
-            align-content: left;
-            justify-content: center;
-            margin-left: 25%;
-            position: relative;
-            z-index: 2; /* Place slide content above waves */
-        }
-
-        .slide-content img {
-            width: 150px;
-            height: 150px;
-        }
-
-        #darkModeBtn {
-            cursor: pointer;
-            position: absolute;
-            width: 32px;
-            height: 32px;
-            bottom: 20px;
-            left: 20px;
-            background-color: #8c8c8c66;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            display: flex;
-            align-content: center;
-            z-index: 2; /* Place button above waves */
-        }
-
-        /* Add dark mode styles here */
-        .dark-mode .fp-section {
-            background-color: #242424 !important; /* Dark mode slide background color */
-            color: #fff !important; /* Dark mode slide text color */
-        }
-
-        .dark-mode #fp-nav ul li a span,
-        .fp-slidesNav ul li a span {
-            background: white;
-        }
-
-        .waves {
-            position: relative;
-            width: 100%;
-            height: 15vh;
-            min-height: 100px;
-            max-height: 150px;
-        }
-
-        .parallax > use {
-            animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
-        }
-
-        .parallax > use:nth-child(1) {
-            animation-delay: -2s;
-            animation-duration: 7s;
-        }
-
-        .parallax > use:nth-child(2) {
-            animation-delay: -3s;
-            animation-duration: 10s;
-        }
-
-        .parallax > use:nth-child(3) {
-            animation-delay: -4s;
-            animation-duration: 13s;
-        }
-
-        .parallax > use:nth-child(4) {
-            animation-delay: -5s;
-            animation-duration: 20s;
-        }
-
-        @keyframes move-forever {
-            0% {
-                transform: translate3d(-90px, 0, 0);
-            }
-
-            100% {
-                transform: translate3d(85px, 0, 0);
-            }
-        }
-
-        /* Shrinking for mobile */
-        @media (max-width: 768px) {
-            .waves {
-                height: 40px;
-                min-height: 40px;
-            }
-
-            .content {
-                height: 30vh;
-            }
-
-            h1 {
-                font-size: 24px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
-    <div class="waves-overlay">
-        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-            <defs>
-                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-            </defs>
-            <g class="parallax">
-                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
-                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
-                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
-                <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
-            </g>
-        </svg>
-    </div>
 
-    <div id="fullpage">
-        <div class="section">
-            <div class="slide-content">
-                <img src="./assets/icons/image-icon.png">
-                <h2>Hi, I'm Emmanuel</h2>
-                <p>I'm pursuing my master's at the University of Colorado Boulder.</p>
-            </div>
+<div id="fullpage">
+    <div class="section">
+        <div class="slide-content">
+            <img src="./assets/icons/image-icon.png">
+            <h2>Hi, I'm Emmanuel</h2>
+            <p>I'm pursuing my master's at the University of Colorado Boulder.</p>
         </div>
-        <div class="section">
-            <div class="slide-content">
-            <h2>I'm blue</h2>
-            <p>If i was green I would die.</p>
-            </div>
+    </div>
+    <div class="section">
+        <div class="projects-content">
+            <h2>Projects</h2>
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Orbital
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        This is a 2D platformer shooter game that includes a random map generator. It was written with C# and compiled with Unity.
+                        You can play it here: 
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      jQuery-terminal-rpg 
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      This project is a rock paper scissors computer that you can play in a terminal. It was creating with the jQuery-terminal
+                      library. By inputting your own API code you can also talk to a tuned version of ChatGPT that responds slightly offensively if you 
+                      input wrong commands. You can try it out here: 
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Loading Screens
+                    </button>
+                  </h2>
+                  <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                     This project was a dive into creating cool and visually appealing loading screens with Blender. 
+                     Theoretically these loading screens can be linked with a scriptling language to be placed within a website or video game.
+                     Check it out here:
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Ascii-renderer
+                      </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                       This project was built upon an existing project that I found on <a href="https://codesandbox.io"><code>Codesandbox.io</code></a> Someone had already created an
+                       Ascii-renderer for 3D objects with react-three-fiber. However they failed to add a function so that you can import your own GLTF 
+                       objects to the scene. I just simply created a function to do so. <a href="https://eleisian.github.io/ascii-renderer"><code>https://eleisian.github.io/ascii-renderer</code></a>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              
         </div>
-        <div class="section">
-            <div class="slide-content">
+    </div>
+    
+    <div class="section">
+        <div class="slide-content">
             <h2>Discover Section 3</h2>
             <p>Content for Section 3 goes here.</p>
-            </div>
-        </div>
-        <div class="section">
-            <div class="slide-content">
-            <h2>Enjoy Section 4</h2>
-            <p>Content for Section 4 is here.</p>
-            </div>
         </div>
     </div>
+    <div class="section">
+        <div class="slide-content">
+            <h2>Enjoy Section 4</h2>
+            <p>Content for Section 4 is here.</p>
+        </div>
+    </div>
+</div>
 
-    <!-- Dark mode toggle button with Font Awesome sun/moon icons -->
-    <button id="darkModeBtn">
-        <i class="fas fa-moon"></i>
-    </button>
+<!-- Dark mode toggle button with Font Awesome sun/moon icons -->
+<button id="darkModeBtn">
+    <i class="fas fa-moon"></i>
+</button>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        new fullpage('#fullpage', {
-            navigation: true, // Add navigation dots
-            sectionsColor: ['#f2f2f2', '#4BBFC3', '#7BAABE', '#FF8C00'], // Set section background colors
-        });
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-        // Dark mode toggle function
-        function toggleDarkMode() {
-            const body = $('body');
-            const darkModeBtn = $('#darkModeBtn');
 
-            body.toggleClass('dark-mode');
-            darkModeBtn.toggleClass('active');
+<script>
+    new fullpage('#fullpage', {
+        navigation: true, // Add navigation dots
+        sectionsColor: ['#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2'], // Set section background colors
+        scrollingSpeed: 700, // Set the scrolling speed
+    });
 
-            // Update button text
-            const buttonText = body.hasClass('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i> ';
-            darkModeBtn.html(buttonText);
-        }
+    // Dark mode toggle function
+    function toggleDarkMode() {
+        const body = $('body');
+        const darkModeBtn = $('#darkModeBtn');
 
-        // Dark mode button click event
-        $('#darkModeBtn').on('click', toggleDarkMode);
-    </script>
+        body.toggleClass('dark-mode');
+        darkModeBtn.toggleClass('active');
+
+        // Update button text
+        const buttonText = body.hasClass('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i> ';
+        darkModeBtn.html(buttonText);
+    }
+
+    // Dark mode button click event
+    $('#darkModeBtn').on('click', toggleDarkMode);
+</script>
 </body>
 
 </html>

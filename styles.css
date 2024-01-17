@@ -1,0 +1,78 @@
+/* Add your default styles here */
+body {
+    transition: background-color 0.5s, color 0.5s;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: #f8f8f8; /* Light mode background color */
+    color: #333; /* Light mode text color */
+    overflow: hidden; /* Hide scrollbar */
+    position: relative;
+}
+
+.section {
+    color: black; /* Default text color */
+    position: relative;
+    z-index: 2; /* Place sections above other content */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-content {
+    text-align: left;
+    margin-left: 25%;
+    position: relative;
+    z-index: 2; /* Place slide content above other content */
+}
+.projects-content{
+    text-align: left;
+    margin-left:25%;
+    max-width: 50%;
+    max-height: 100%;
+    position: relative;
+    z-index: 2; /* Place slide content above other content */
+}
+
+.slide-content img {
+    width: 150px;
+    height: 150px;
+}
+
+#darkModeBtn {
+    cursor: pointer;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    bottom: 25px;
+    left: 25px;
+    background-color: #8c8c8c66;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-content: center;
+    z-index: 2; /* Place button above other content */
+}
+.fp-section {
+    background-color: #f8f8f8; /* Light mode slide background color */
+    color: #333; /* Light mode slide text color */
+    transition: background-color 0.5s, color 0.5s; /* Add transition properties */
+}
+
+
+/* Add dark mode styles here */
+.dark-mode .fp-section {
+    background-color: #242424 !important;
+    color: #fff !important;
+    transition: background-color 0.5s, color 0.5s; /* Add transition properties */
+}
+
+
+.dark-mode #fp-nav ul li a span,
+.fp-slidesNav ul li a span {
+    background: white;
+}
