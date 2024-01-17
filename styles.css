@@ -88,20 +88,21 @@ body {
     flex-direction: row;
 }
 
-
-
 .contact-content h1{
     font-weight: bold;
     text-decoration: underline;
     color: #333; 
 }
+
 .contact-content h1 a {
     color: inherit; /* Inherit text color from the parent */
     text-decoration: inherit; /* Inherit text decoration from the parent */
 }
+
 .dark-mode .contact-content h1 a{
     color:#f8f8f8;
 }
+
 #darkModeBtn {
     cursor: pointer;
     position: absolute;
@@ -123,7 +124,6 @@ body {
     color: #333; /* Light mode slide text color */
     transition: background-color 0.5s, color 0.5s; /* Add transition properties */
 }
-
 
 /* Add dark mode styles here */
 .dark-mode .fp-section {
