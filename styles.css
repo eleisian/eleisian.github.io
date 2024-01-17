@@ -21,24 +21,60 @@ body {
     justify-content: center;
 }
 
-.slide-content {
+.start-content {
     text-align: left;
-    margin-left: 25%;
-    position: relative;
+    margin-left: 10%;
+    top:50%;
+    transform: translateY(-50%); 
+    line-height: 5%;
+    position: absolute;
     z-index: 2; /* Place slide content above other content */
 }
+
+.start-content img {
+    width: 150px;
+    height: 150px;
+}
+
+.dark-mode .start-content{
+    color:white;
+}
+
+.skills-container{
+    max-width: 50%;
+    left: 50%;
+}
+
+.progress-bar-container {
+    max-width: 30%;
+    margin-left: 38%;
+}
+
+.icon {
+    margin-right: 10px; /* Adjust margin as needed */
+}
+
+@keyframes fillAnimation {
+    from{
+        width: 0;
+    }
+    to {
+        width: var(--progress-width, 0);
+    }
+}
+.progress-bar {
+    width: var(--progress-width, 0);
+    max-width: 100%;
+    animation: fillAnimation 2s ease-out forwards; /* Use 'forwards' to retain the final state of the animation */
+}
+
 .projects-content{
     text-align: left;
-    margin-left:25%;
+    margin-left:35%;
     max-width: 50%;
     max-height: 100%;
     position: relative;
     z-index: 2; /* Place slide content above other content */
-}
-
-.slide-content img {
-    width: 150px;
-    height: 150px;
 }
 
 #darkModeBtn {
@@ -75,4 +111,22 @@ body {
 .dark-mode #fp-nav ul li a span,
 .fp-slidesNav ul li a span {
     background: white;
+}
+
+@media (max-width: 768px) {
+    .start-content {
+        margin-left: 5%;
+        max-width: 30%;
+        line-height: 100%; /* Adjust the margin for smaller devices */
+    }
+
+    .start-content img {
+        width: 100px; /* Adjust the image size for smaller devices */
+        height: 100px;
+    }
+
+    .progress-bar-container {
+        max-width: 40%;
+        margin-left: 40%;
+    }
 }
