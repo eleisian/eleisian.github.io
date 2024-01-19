@@ -178,6 +178,7 @@
                 <a href="https://github.com/eleisian" target="_blank"><i class="fab fa-github fa-xl"></i></a>
                 <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter fa-xl"></i></a>
                 <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram fa-xl"></i></a>
+                <a href="https://linkedin.com/in/emmanuel-wang" target="_blank"><i class="fab fa-linkedin fa-xl"></i></a>
             </div>
         </div>
     </div>
@@ -213,6 +214,25 @@ integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cD
         // Update button text
         const buttonText = body.hasClass('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i> ';
         darkModeBtn.html(buttonText);
+    }
+
+    var startContent = document.getElementById("start-content");
+    var section = document.querySelector(".section");
+
+    // Check screen width on page load and move the content if needed
+    moveContentOnLoad();
+
+    // Check screen width on window resize and move the content if needed
+    window.addEventListener("resize", moveContentOnLoad);
+
+    function moveContentOnLoad() {
+        if (window.innerWidth <= 767) {
+            // Move the start content inside the section on smaller screens
+            section.appendChild(startContent);
+        } else {
+            // If screen width is larger, ensure start content is outside the section
+            document.body.appendChild(startContent);
+        }
     }
 
     // Dark mode button click event

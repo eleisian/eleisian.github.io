@@ -10,17 +10,6 @@ body {
     position: relative;
 }
 
-.section {
-    color: black; /* Default text color */
-    position: relative;
-    z-index: 2; /* Place sections above other content */
-    text-align: center;
-    display: flex;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-}
-
 .start-content {
     text-align: left;
     margin-left: 10%;
@@ -107,7 +96,7 @@ body {
 }
 
 .contact-content{
-    margin-left:10%;
+    margin-left:50%;
 }
 
 .contact-content h1{
