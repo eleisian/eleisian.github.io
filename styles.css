@@ -1,6 +1,5 @@
 /* Add your default styles here */
 body {
-    transition: background-color 0.5s, color 0.5s;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -17,6 +16,7 @@ body {
     z-index: 2; /* Place sections above other content */
     text-align: center;
     display: flex;
+    height: 100vh;
     align-items: center;
     justify-content: center;
 }
@@ -26,14 +26,24 @@ body {
     margin-left: 10%;
     top:50%;
     transform: translateY(-50%); 
-    line-height: 5%;
     position: absolute;
     z-index: 2; /* Place slide content above other content */
+}
+
+.start-content h2{
+    margin-bottom:0;
+    line-height: 1;
+}
+
+.start-content p{
+    margin-bottom:0;
+    line-height: 1;
 }
 
 .start-content img {
     width: 150px;
     height: 150px;
+    border-radius:50%;
 }
 
 .skills-container{
@@ -43,7 +53,7 @@ body {
 
 .progress-bar-container {
     max-width: 30%;
-    margin-left: 48%;
+    margin-left: 40%;
 }
 
 .icon {
@@ -64,13 +74,28 @@ body {
     animation: fillAnimation 2s ease-out forwards; /* Use 'forwards' to retain the final state of the animation */
 }
 
-.projects-content, .about-content{
+.projects-container{
     text-align: left;
     margin-left:35%;
     max-width: 50%;
     max-height: 100%;   
     position: relative;
     z-index: 2; /* Place slide content above other content */
+}
+
+.about-container {
+    text-align: left;
+    margin-left: 35%;
+    max-width: 50%;
+    max-height: 100%;
+    position: relative;
+    z-index: 2; /* Place slide content above other content */
+    padding: 20px; /* Add padding for spacing inside the terminal box */
+    border: 1px solid #000; /* Black stroke for the terminal box */
+    background-color: #f8f8f8; /* Light background color for the terminal box */
+    color: #000; /* Text color inside the terminal box */
+    border-radius: 8px; /* Add rounded corners for aesthetics */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
 }
 
 .contact-container{
@@ -82,7 +107,7 @@ body {
 }
 
 .contact-content{
-    margin-left:20%;
+    margin-left:10%;
 }
 
 .contact-content h1{
@@ -143,6 +168,11 @@ body {
 
 .dark-mode .start-content{
     color:white;
+}
+
+footer{
+    background-color: black;
+    z-index: 2;
 }
 
 @media (max-width: 768px) {
