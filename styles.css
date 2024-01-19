@@ -1,35 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 /* Add your default styles here */
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Jost", sans-serif;
     margin: 0;
     padding: 0;
     height: 100vh;
     background-color: #f8f8f8; /* Light mode background color */
-    color: #333; /* Light mode text color */
+    color: #444; /* Light mode text color */
     overflow: hidden; /* Hide scrollbar */
     position: relative;
 }
 
-.start-content {
+.my-container {
     text-align: left;
     margin-left: 10%;
+    padding:25px;
     top:50%;
     transform: translateY(-50%); 
     position: absolute;
     z-index: 2; /* Place slide content above other content */
 }
 
-.start-content h2{
+.my-container h1{
+    color: greenyellow;
+    line-height: 1;
+    margin-bottom:0;
+}
+
+.my-container h2{
     margin-bottom:0;
     line-height: 1;
 }
 
-.start-content p{
+.my-container p{
     margin-bottom:0;
     line-height: 1;
 }
 
-.start-content img {
+.my-container img {
     width: 150px;
     height: 150px;
     border-radius:50%;
@@ -73,6 +81,10 @@ body {
     z-index: 2; /* Place slide content above other content */
 }
 
+.projects-container h2{
+    color: #222;
+}
+
 .about-container {
     text-align: left;
     margin-left: 35%;
@@ -88,16 +100,21 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
 }
 
+.about-container h2{
+    color: #222;
+}
+
 .contact-container{
     display: flex;
     position: relative;
     align-items: center;
+    text-align: center;
     justify-content: center;
     flex-direction: row;
 }
 
 .contact-content{
-    margin-left:50%;
+    
 }
 
 .contact-content h1{
@@ -159,9 +176,10 @@ body {
     color:#f8f8f8;
 }
 
-.dark-mode .start-content{
+.dark-mode .my-container{
     color:white;
 }
+
 
 footer{
     background-color: black;
@@ -169,13 +187,16 @@ footer{
 }
 
 @media (max-width: 768px) {
-    .start-content {
-        margin-left: 5%;
+    .my-container {
+        margin-left: 0%;
         max-width: 30%;
-        line-height: 100%; /* Adjust the margin for smaller devices */
+        line-height: 100%;
+    }
+    .my-container h1{
+        font-size: 24px;
     }
 
-    .start-content img {
+    .my-container img {
         width: 100px; /* Adjust the image size for smaller devices */
         height: 100px;
     }
