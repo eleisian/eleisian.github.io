@@ -182,6 +182,11 @@
             </div>
         </div>
     </div>
+
+    <div class="counter-box">
+        <i class="fas fa-user"></i>
+        <span id="pageViewCount">0</span>
+    </div>
     
 </div>
 
@@ -216,16 +221,14 @@ integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cD
         darkModeBtn.html(buttonText);
     }
 
-    var startContent = document.getElementById("start-content");
-    var section = document.querySelector(".section");
-
-    // Check screen width on page load and move the content if needed
+    document.addEventListener("DOMContentLoaded", function () {
     moveContentOnLoad();
-
-    // Check screen width on window resize and move the content if needed
     window.addEventListener("resize", moveContentOnLoad);
 
     function moveContentOnLoad() {
+        var startContent = document.querySelector(".start-content");
+        var section = startContent.nextElementSibling;
+
         if (window.innerWidth <= 767) {
             // Move the start content inside the section on smaller screens
             section.appendChild(startContent);
@@ -234,6 +237,31 @@ integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cD
             document.body.appendChild(startContent);
         }
     }
+    });
+    
+    function updatePageViewCount() {
+    fetch('pageviews.json')
+        .then(response => response.json())
+        .then(data => {
+            const count = data.count + 1;
+
+            // Update the count in the JSON file
+            fetch('./pageviews.json', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ count }),
+            });
+
+            // Display the count on the page
+            document.getElementById('pageViewCount').textContent = count;
+        })
+        .catch(error => console.error('Error fetching/updating page view count:', error));
+    }
+
+    // Update the count on page load
+    updatePageViewCount();
 
     // Dark mode button click event
     $('#darkModeBtn').on('click', toggleDarkMode);

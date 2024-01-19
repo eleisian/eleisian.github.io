@@ -109,7 +109,6 @@ body {
     color: inherit; /* Inherit text color from the parent */
     text-decoration: inherit; /* Inherit text decoration from the parent */
 }
-  
 
 #darkModeBtn {
     cursor: pointer;
