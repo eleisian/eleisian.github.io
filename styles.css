@@ -33,6 +33,7 @@ body {
     width: 150px;
     height: 150px;
     border-radius:50%;
+    border: 1px solid #00000044;
 }
 
 .skills-container{
@@ -116,7 +117,7 @@ body {
     width: 32px;
     height: 32px;
     bottom: 25px;
-    left: 25px;
+    right: 25px;
     background-color: #8c8c8c66;
     color: #fff;
     border: none;
@@ -136,6 +137,10 @@ body {
     background-color: #f8f8f8; /* Light mode slide background color */
     color: #333; /* Light mode slide text color */
     transition: background-color 0.5s, color 0.5s; /* Add transition properties */
+}
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span {
+    border: 1px solid #00000044;
 }
 
 /* Add dark mode styles here */
