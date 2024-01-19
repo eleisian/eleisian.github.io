@@ -100,10 +100,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
 }
 
-.about-container h2{
-    color: #222;
-}
-
 .contact-container{
     display: flex;
     position: relative;
@@ -111,10 +107,6 @@ body {
     text-align: center;
     justify-content: center;
     flex-direction: row;
-}
-
-.contact-content{
-    
 }
 
 .contact-content h1{
@@ -125,7 +117,14 @@ body {
 
 .contact-content h1 a {
     color: inherit; /* Inherit text color from the parent */
-    text-decoration: inherit; /* Inherit text decoration from the parent */
+    text-decoration: inherit;
+     /* Inherit text decoration from the parent */
+}
+
+.contact-content h1 a:hover{
+    color: rgb(109, 216, 255); /* Inherit text color from the parent */
+    text-decoration: inherit;
+     /* Inherit text decoration from the parent */
 }
 
 #darkModeBtn {
