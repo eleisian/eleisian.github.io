@@ -1,50 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
-/* Add your default styles here */
+
 body {
     font-family: "Jost", sans-serif;
     margin: 0;
     padding: 0;
     height: 100vh;
-    background-color: #f8f8f8; /* Light mode background color */
-    color: #444; /* Light mode text color */
-    overflow: hidden; /* Hide scrollbar */
+    background-color: #f8f8f8;
+    color: #444;
+    overflow: hidden;
     position: relative;
 }
 
 .my-container {
     text-align: left;
     margin-left: 10%;
-    padding:25px;
-    top:50%;
-    transform: translateY(-50%); 
+    padding: 25px;
+    top: 50%;
+    transform: translateY(-50%);
     position: absolute;
-    z-index: 2; /* Place slide content above other content */
+    z-index: 2;
 }
 
-.my-container h1{
+.my-container h1 {
     color: greenyellow;
     line-height: 1;
-    margin-bottom:0;
+    margin-bottom: 0;
 }
 
-.my-container h2{
-    margin-bottom:0;
+.my-container h2 {
+    margin-bottom: 0;
     line-height: 1;
 }
 
-.my-container p{
-    margin-bottom:0;
+.my-container p {
+    margin-bottom: 0;
     line-height: 1;
 }
 
 .my-container img {
     width: 150px;
     height: 150px;
-    border-radius:50%;
+    border-radius: 50%;
     border: 1px solid #00000044;
 }
 
-.skills-container{
+.skills-container {
     max-width: 50%;
     left: 50%;
 }
@@ -55,11 +55,11 @@ body {
 }
 
 .icon {
-    margin-right: 10px; /* Adjust margin as needed */
+    margin-right: 10px;
 }
 
 @keyframes fillAnimation {
-    from{
+    from {
         width: 0;
     }
     to {
@@ -69,19 +69,19 @@ body {
 .progress-bar {
     width: var(--progress-width, 0);
     max-width: 100%;
-    animation: fillAnimation 2s ease-out forwards; /* Use 'forwards' to retain the final state of the animation */
+    animation: fillAnimation 2s ease-out forwards;
 }
 
-.projects-container{
+.projects-container {
     text-align: left;
-    margin-left:35%;
+    margin-left: 35%;
     max-width: 50%;
-    max-height: 100%;   
+    max-height: 100%;
     position: relative;
-    z-index: 2; /* Place slide content above other content */
+    z-index: 2;
 }
 
-.projects-container h2{
+.projects-container h2 {
     color: #222;
 }
 
@@ -91,16 +91,16 @@ body {
     max-width: 50%;
     max-height: 100%;
     position: relative;
-    z-index: 2; /* Place slide content above other content */
-    padding: 20px; /* Add padding for spacing inside the terminal box */
-    border: 1px solid #000; /* Black stroke for the terminal box */
-    background-color: #f8f8f8; /* Light background color for the terminal box */
-    color: #000; /* Text color inside the terminal box */
-    border-radius: 8px; /* Add rounded corners for aesthetics */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    z-index: 2;
+    padding: 20px;
+    border: 1px solid #000;
+    background-color: #f8f8f8;
+    color: #000;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.contact-container{
+.contact-container {
     display: flex;
     position: relative;
     align-items: center;
@@ -109,22 +109,20 @@ body {
     flex-direction: row;
 }
 
-.contact-content h1{
+.contact-content h1 {
     font-weight: bold;
     text-decoration: underline;
-    color: #333; 
+    color: #333;
 }
 
 .contact-content h1 a {
-    color: inherit; /* Inherit text color from the parent */
+    color: inherit;
     text-decoration: inherit;
-     /* Inherit text decoration from the parent */
 }
 
-.contact-content h1 a:hover{
-    color: rgb(109, 216, 255); /* Inherit text color from the parent */
+.contact-content h1 a:hover {
+    color: rgb(109, 216, 255);
     text-decoration: inherit;
-     /* Inherit text decoration from the parent */
 }
 
 #darkModeBtn {
@@ -140,30 +138,30 @@ body {
     padding: 10px;
     border-radius: 5px;
     display: flex;
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
-    z-index: 2; /* Place button above other content */
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
 }
 
 #darkModeBtn i {
-    margin: 0; /* Remove default icon margin */
+    margin: 0;
 }
 
 .fp-section {
-    background-color: #f8f8f8; /* Light mode slide background color */
-    color: #333; /* Light mode slide text color */
-    transition: background-color 0.5s, color 0.5s; /* Add transition properties */
+    background-color: #f8f8f8;
+    color: #333;
+    transition: background-color 0.5s, color 0.5s;
 }
+
 #fp-nav ul li a span,
 .fp-slidesNav ul li a span {
     border: 1px solid #00000044;
 }
 
-/* Add dark mode styles here */
 .dark-mode .fp-section {
     background-color: #242424 !important;
     color: #fff !important;
-    transition: background-color 0.5s, color 0.5s; /* Add transition properties */
+    transition: background-color 0.5s, color 0.5s;
 }
 
 .dark-mode #fp-nav ul li a span,
@@ -171,16 +169,19 @@ body {
     background: white;
 }
 
-.dark-mode .contact-content h1 a{
-    color:#f8f8f8;
+.dark-mode .contact-content h1 a {
+    color: #f8f8f8;
 }
 
-.dark-mode .my-container{
-    color:white;
+.dark-mode .contact-content h1 a:hover {
+    color: rgb(109, 216, 255);
 }
 
+.dark-mode .my-container {
+    color: white;
+}
 
-footer{
+footer {
     background-color: black;
     z-index: 2;
 }
@@ -191,12 +192,12 @@ footer{
         max-width: 30%;
         line-height: 100%;
     }
-    .my-container h1{
+    .my-container h1 {
         font-size: 24px;
     }
 
     .my-container img {
-        width: 100px; /* Adjust the image size for smaller devices */
+        width: 100px;
         height: 100px;
     }
 
@@ -205,16 +206,16 @@ footer{
         margin-left: 40%;
     }
 
-    .about-content{
-        margin-left:40%;
+    .about-content {
+        margin-left: 40%;
     }
 
-    .projects-content{
-        margin-left:40%;
+    .projects-content {
+        margin-left: 40%;
         max-width: 50%;
     }
     .accordion-body {
-        overflow-y: auto; /* Enable vertical scrollbar */
-        max-height: 200px; /* Set the maximum height for scrolling */
+        overflow-y: auto;
+        max-height: 200px;
     }
 }
