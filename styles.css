@@ -90,7 +90,6 @@ body {
     margin-left: 35%;
     max-width: 50%;
     max-height: 100%;
-    position: relative;
     z-index: 2;
     padding: 20px;
     border: 1px solid #000;
@@ -157,7 +156,12 @@ body {
 .fp-slidesNav ul li a span {
     border: 1px solid #00000044;
 }
+/*Dark Mode*/
 
+body.dark-mode .navbar {
+    background-color: rgba(0, 0, 0, 0.913)!important;
+    color: #fff !important;
+}
 .dark-mode .fp-section {
     background-color: #242424 !important;
     color: #fff !important;
@@ -181,41 +185,53 @@ body {
     color: white;
 }
 
+.dark-mode .projects-container h2{
+    color:white;
+}
+
 footer {
     background-color: black;
     z-index: 2;
 }
 
 @media (max-width: 768px) {
-    .my-container {
-        margin-left: 0%;
-        max-width: 30%;
-        line-height: 100%;
-    }
-    .my-container h1 {
-        font-size: 24px;
-    }
-
-    .my-container img {
-        width: 100px;
-        height: 100px;
+    .container-fluid img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        
     }
 
     .progress-bar-container {
-        max-width: 40%;
-        margin-left: 40%;
+        max-width: 70%;
+        margin: 0 auto;
     }
 
-    .about-content {
-        margin-left: 40%;
+    .projects-container {
+        margin: 0 auto;
+        margin-top: 15%;
+        max-width: 90%;
+        max-height:600px;
     }
+    .about-container{
+        max-width: 80%;
+        margin: 0 auto;
+        margin-top:20%;
 
-    .projects-content {
-        margin-left: 40%;
-        max-width: 50%;
     }
     .accordion-body {
         overflow-y: auto;
         max-height: 200px;
     }
+    .contact-container{
+        margin-left: 0%;
+    }
+    #fp-nav {
+    z-index: 9001;
+    position:absolute;
+    margin-right:20px;
+    top:0;
+
+    transform:rotate(270deg);
+}
 }
