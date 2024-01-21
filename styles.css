@@ -228,10 +228,10 @@ footer {
     }
     #fp-nav {
     z-index: 9001;
+    margin-top:-2%;
     position:absolute;
     margin-right:20px;
     top:0;
-
     transform:rotate(270deg);
-}
+    }   
 }
