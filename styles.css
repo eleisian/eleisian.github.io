@@ -221,7 +221,7 @@ footer {
     }
     .accordion-body {
         overflow-y: auto;
-        max-height: 200px;
+        max-height: 300px;
     }
     .contact-container{
         margin-left: 0%;
