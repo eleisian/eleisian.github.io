@@ -87,7 +87,7 @@ body {
 
 .about-container, .blog-container{
     display: none;
-    overflow-y:auto;
+    overflow-y:scroll;
     text-align: left;
     margin-left: 35%;
     max-height: 30%;
