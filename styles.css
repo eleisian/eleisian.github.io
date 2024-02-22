@@ -87,11 +87,11 @@ body {
 
 .about-container, .blog-container{
     display: none;
-    overflow-y:scroll   ;
+    overflow-y:auto;
     text-align: left;
     margin-left: 35%;
+    max-height: 30%;
     max-width: 50%;
-    max-height: 50%;
     z-index: 2;
     padding: 20px;
     border: 1px solid #000;
@@ -99,13 +99,21 @@ body {
     color: #000;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: max-height 1s ease;
 }
 
 .visible {
+    animation: expandHeight 1s ease;
     display: block;
-    max-height: 80%;
-    transition: max-height 1s ease;
+    max-height: 60%;
+}
+@keyframes expandHeight {
+    from {
+       max-height: 30%; /* Starting height */
+    }
+
+    to {
+        max-height: 60% /* Ending height */
+    }
 }
 
 .contact-container {

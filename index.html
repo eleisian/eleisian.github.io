@@ -253,7 +253,6 @@ integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cD
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
 
 <script>
     new fullpage('#fullpage', {
@@ -275,44 +274,15 @@ integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cD
         darkModeBtn.html(buttonText);
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-    moveContentOnLoad();
-    window.addEventListener("resize", moveContentOnLoad);
-
-    function moveContentOnLoad() {
-        var startContent = document.querySelector(".start-content");
-        var section = startContent.nextElementSibling;
-
-        if (window.innerWidth <= 767) {
-            // Move the start content inside the section on smaller screens
-            section.appendChild(startContent);
-        } else {
-            // If screen width is larger, ensure start content is outside the section
-            document.body.appendChild(startContent);
-        }
-    }
-    });
-    
     function toggleContent(showId, hideId) {
         event.preventDefault();
         var showContainer = document.getElementById(showId);
         var hideContainer = document.getElementById(hideId);
 
-        // Set the max-height of the hide container to its scroll height
 
         hideContainer.classList.remove('visible');
-
-        // Temporarily set the max-height of the show container to its scroll height
         showContainer.classList.add('visible');
 
-        setTimeout(function () {
-            hideContainer.style.maxHeight = '10%';
-        }, 10);
-
-        // After a delay, set the max-height of the show container to 100% to match content size
-        setTimeout(function () {
-            showContainer.style.maxHeight = '60%';
-        }, 10);
     }
 
 
