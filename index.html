@@ -191,8 +191,8 @@
         <div class="about-container visible" id="about-container">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#" onclick="toggleContent('about-container', 'blog-container')">About me</a></li>
-                    <li class="breadcrumb-item"><a href="#" onclick="toggleContent('blog-container', 'about-container')">Blog</a></li>
+                    <li class="breadcrumb-item"><a href="" onclick="toggleContent('about-container', 'blog-container')">About me</a></li>
+                    <li class="breadcrumb-item"><a href="" onclick="toggleContent('blog-container', 'about-container')">Blog</a></li>
                 </ol>
             </nav>
             <p>I am a recent graduate from the University of Florida studying digital arts and sciences.</p>
@@ -292,6 +292,7 @@ integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cD
     });
     
     function toggleContent(showId, hideId) {
+        event.preventDefault();
         var showContainer = document.getElementById(showId);
         var hideContainer = document.getElementById(hideId);
 
