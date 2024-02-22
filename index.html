@@ -225,8 +225,8 @@
             </blockquote>
         </div>
     </div>
-
     <div class="section">
+        <canvas id="threeCanvas"></canvas>
         <div class="contact-container">
         <div class="contact-content">
             <h1><a href="mailto:emmanueltwang@gmail.com">Let's talk</a></h1>
@@ -252,6 +252,8 @@
 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
 
 <script>
     new fullpage('#fullpage', {
@@ -326,6 +328,42 @@ integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cD
     twttr.widgets.load();
   });
     
+</script>
+<script>
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("threeCanvas"), alpha: true });
+
+renderer.setSize(200, 200);
+
+// Create the outer wireframe cube
+const outerCubeGeometry = new THREE.BoxGeometry();
+const outerEdges = new THREE.EdgesGeometry(outerCubeGeometry);
+const material = new THREE.LineBasicMaterial({ color: 0x000000 });
+const outerWireframe = new THREE.LineSegments(outerEdges, material);
+scene.add(outerWireframe);
+
+// Create the inner wireframe cube
+const innerCubeGeometry = new THREE.BoxGeometry(2, 2, 2);
+const innerEdges = new THREE.EdgesGeometry(innerCubeGeometry);
+const innerWireframe = new THREE.LineSegments(innerEdges, material);
+scene.add(innerWireframe);
+
+// Set camera position
+camera.position.z = 5;
+
+// Position the inner cube inside the outer cube
+innerWireframe.position.set(0, 0, 0); // Adjust the position as needed
+
+// Render the scene
+const animate = function () {
+    requestAnimationFrame(animate);
+    outerWireframe.rotation.y += 0.01;
+    innerWireframe.rotation.y -= 0.03; // Rotate the inner cube in the opposite direction
+    renderer.render(scene, camera);
+};
+
+animate();
 </script>
 </body>
 
