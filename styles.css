@@ -103,7 +103,6 @@ body {
 .blog-container.chrome-specific {
     position: absolute;
     top:22.5%;
-    
 }
 
 .visible {
@@ -283,8 +282,13 @@ body.dark-mode .navbar {
     .about-container, .blog-container{
         max-width: 80%;
         margin: 0 auto;
-        margin-top:20%;
+        margin-top:0%;
 
+    }
+    .blog-container.chrome-specific{
+        position:absolute;
+        margin-top: 0;
+        margin-left: 10%;
     }
     .accordion-body {
         overflow-y: auto;
