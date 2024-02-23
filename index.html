@@ -124,6 +124,12 @@
 
             <br>
             <!-- Begin blog posts -->
+            <p><strong>02/23/24</strong></p>
+            <p>Just did some website testing on different browsers. I noticed that Google Chrome applies CSS styles differently
+            than Firefox or Safari. Infact, I had to make a Chrome specific function that makes this blog container positioned absolutely,
+            which totally removes the 'fun-factor' of this transition animation. So if you're viewing this website on Chrome just know your 
+            browser sucks and Google is totally selling your information to the Chinese Communist Party. Cheers.
+            </p>
             <p><strong>02/22/24</strong></p>
             <p>Orbital Dev Log</p>
             <img src="https://i.imgur.com/C6o3HfJ.png" alt="screenshot of game" style="width: 80%; margin-bottom:5%;">
@@ -297,14 +303,19 @@ integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cD
 
     function toggleContent(showId, hideId) {
         event.preventDefault();
-        var showContainer = document.getElementById(showId);
-        var hideContainer = document.getElementById(hideId);
+        var showContainer = $("#" + showId);
+        var hideContainer = $("#" + hideId);
 
-
-        hideContainer.classList.remove('visible');
-        showContainer.classList.add('visible');
-
+        hideContainer.removeClass('visible');
+        showContainer.addClass('visible');
     }
+
+    $(document).ready(function() {
+        // Check if the browser is Chrome
+        if(/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) {
+            $(".blog-container").addClass("chrome-specific");
+        }
+    });
 
     $('.about-container, .blog-container').on('wheel touchmove', function(event) {
         event.stopPropagation();

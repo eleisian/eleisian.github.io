@@ -99,6 +99,20 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.blog-container.chrome-specific {
+    position: absolute;
+    top:22.5%;
+}
+
+
+.visible {
+    animation: expandHeight 1s ease;
+    display:flex;
+    flex-direction: column;
+    max-height: 60%;
+    
+}
+
 .breadcrumb-item a {
     font-weight: normal;
     font-style:normal;
@@ -111,12 +125,6 @@ body {
     
 }
 
-
-.visible {
-    animation: expandHeight 1s ease;
-    display: block;
-    max-height: 60%;
-}
 @keyframes expandHeight {
     from {
        max-height: 30%; /* Starting height */
