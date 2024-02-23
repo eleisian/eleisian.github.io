@@ -290,6 +290,12 @@ integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cD
         body.toggleClass('dark-mode');
         darkModeBtn.toggleClass('active');
 
+        const darkModeMaterial = new THREE.LineBasicMaterial({ color: body.hasClass('dark-mode') ? 0xffffff : 0x000000 });
+
+        // Update outer cube material color
+        outerWireframe.material = darkModeMaterial;
+        innerWireframe.material = darkModeMaterial;
+
         // Update button text
         const buttonText = body.hasClass('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i> ';
         darkModeBtn.html(buttonText);
