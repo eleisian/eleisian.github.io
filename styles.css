@@ -110,19 +110,16 @@ body {
     display:flex;
     flex-direction: column;
     max-height: 60%;
-    
 }
 
 .breadcrumb-item a {
     font-weight: normal;
     font-style:normal;
     color: rgb(0, 0, 0);
-
 }
 
 .breadcrumb-item a:hover {
     color: #1c8cc0;
-    
 }
 
 @keyframes expandHeight {
