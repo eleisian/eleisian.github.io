@@ -290,6 +290,13 @@ body.dark-mode .navbar {
         margin-top: 0;
         margin-left: 10%;
     }
+    .blog-img-flex{
+        display: grid;
+    }
+    .blog-img-flex img{
+        width:50%;
+        height:50%;
+    }
     .accordion-body {
         overflow-y: auto;
         max-height: 300px;
