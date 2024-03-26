@@ -116,6 +116,7 @@ body {
     max-height: 60%;
 }
 
+
 .breadcrumb-item a {
     font-weight: normal;
     font-style:normal;
@@ -250,24 +251,13 @@ body.dark-mode .navbar {
     color:white;
 }
 
-.dark-mode .accordion-header button {
+.dark-mode .accordion-button, .dark-mode .accordion-body{
     color: #ffffff;
-    background-color: #626262;
-}
-
-.dark-mode .accordion-body {
     background-color: #242424;
-    color: #ffffff;
-    border-top: 1px solid #707070;
 }
 
-/* Custom styles for Bootstrap accordion icon */
-/* Change the color of the accordion icon to white */
-.accordion-icon.active {
-    fill: white; /* Change this to your desired active color */
-}
-.breadcrumb-divider{
-    color:white;
+.dark-mode .accordion-item{
+    border-color:rgb(86, 179, 219);
 }
 
 #threeCanvas{
