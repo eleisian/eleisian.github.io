@@ -87,7 +87,7 @@ body {
 
 .about-container, .blog-container{
     display: none;
-    overflow-y:scroll;
+    overflow-y: auto;
     text-align: left;
     margin-left: 35%;
     max-height: 30%;
@@ -100,12 +100,14 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: background-color 0.5s, color 0.5s;
+    scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
 }
 
 .blog-container.chrome-specific {
     position: absolute;
     top:22.5%;
 }
+
 
 .visible {
     animation: expandHeight 1s ease;
@@ -240,7 +242,8 @@ body.dark-mode .navbar {
 .dark-mode .about-container, .dark-mode .blog-container{
     background-color: #242424;
     color:white;
-    border: 1px solid #89f1af;
+    border: 1px solid #f1ef89;
+    scrollbar-color: rgba(196, 196, 196, 0.5) transparent;
 }
 
 .dark-mode .about-container a , .dark-mode .blog-container a{
