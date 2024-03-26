@@ -39,6 +39,7 @@ body {
     width: 150px;
     height: 150px;
     border-radius: 50%;
+    object-fit: cover;
    
 }
 
@@ -98,6 +99,7 @@ body {
     color: #000;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.5s, color 0.5s;
 }
 
 .blog-container.chrome-specific {
@@ -234,6 +236,18 @@ body.dark-mode .navbar {
 .social-icons a:hover {
     color: #00ffe1;
 }
+
+.dark-mode .about-container, .dark-mode .blog-container{
+    background-color: #242424;
+    color:white;
+    border: 1px solid #89f1af;
+}
+
+.dark-mode .about-container a , .dark-mode .blog-container a{
+    color:white;
+}
+
+
 
 
 #threeCanvas{
