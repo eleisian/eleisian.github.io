@@ -319,6 +319,7 @@ body.dark-mode .navbar {
         max-width: 80%;
         margin: 0 auto;
         margin-top:0%;
+        overflow-x: hidden;
 
     }
     .blog-container.chrome-specific{
