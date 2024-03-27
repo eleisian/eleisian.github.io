@@ -11,6 +11,10 @@ body {
     position: relative;
 }
 
+.section {
+    position: relative; /* Add this line */
+}
+
 .my-container {
     text-align: left;
     margin-left: 10%;
@@ -86,6 +90,7 @@ body {
 }
 
 .about-container, .blog-container{
+    position: relative;
     display: none;
     overflow-y: auto;
     text-align: left;
@@ -197,7 +202,7 @@ body {
 /*Dark Mode*/
 
 body.dark-mode .navbar {
-    background-color: rgba(0, 0, 0, 0.913)!important;
+    background-color: rgba(91, 91, 91, 0.127)!important;
     color: #fff !important;
 }
 .dark-mode .fp-section {
@@ -266,10 +271,20 @@ body.dark-mode .navbar {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -95%);
-
 }
+    #p5-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+    
 
 @media (max-width: 768px) {
+    .navbar {
+        background-color: rgba(222, 222, 222, 0.123)!important;
+        color: #000000 !important;
+    }
     .container-fluid {
         display: flex;
         align-items: center;

@@ -30,7 +30,6 @@
         </div>
     </div>
         
-
 <div id="fullpage">
     <div class="section">
         <div class="about-container visible" id="about-container">
@@ -56,8 +55,6 @@
             <br>
             <!-- Begin blog posts -->
             <p><strong>03/26/24</strong></p>
-            <p>I have been applying to several jobs recently and have come across many feminist recruiters gatekeeping their evil corporations.
-            I feel a strong hatred from these groups of people towards my existence.</p>
             <p>"Beware the preachers,
                 beware the knowers,
                 beware those who are always reading books,
@@ -238,6 +235,9 @@ integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cD
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="cube.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+<script src="boid.js" defer></script>
 
 <script>
     new fullpage('#fullpage', {
@@ -281,7 +281,7 @@ integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cD
         }
     });
 
-    $('.about-container, .blog-container').on('wheel touchmove', function(event) {
+    $('.blog-container').on('wheel touchmove', function(event) {
         event.stopPropagation();
     });
     // Dark mode button click event
@@ -291,42 +291,6 @@ integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cD
     twttr.widgets.load();
   });
     
-</script>
-<script>
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("threeCanvas"), alpha: true });
-
-renderer.setSize(200, 200);
-
-// Create the outer wireframe cube
-const outerCubeGeometry = new THREE.BoxGeometry();
-const outerEdges = new THREE.EdgesGeometry(outerCubeGeometry);
-const material = new THREE.LineBasicMaterial({ color: 0x000000 });
-const outerWireframe = new THREE.LineSegments(outerEdges, material);
-scene.add(outerWireframe);
-
-// Create the inner wireframe cube
-const innerCubeGeometry = new THREE.BoxGeometry(2, 2, 2);
-const innerEdges = new THREE.EdgesGeometry(innerCubeGeometry);
-const innerWireframe = new THREE.LineSegments(innerEdges, material);
-scene.add(innerWireframe);
-
-// Set camera position
-camera.position.z = 5;
-
-// Position the inner cube inside the outer cube
-innerWireframe.position.set(0, 0, 0); // Adjust the position as needed
-
-// Render the scene
-const animate = function () {
-    requestAnimationFrame(animate);
-    outerWireframe.rotation.y += 0.01;
-    innerWireframe.rotation.y -= 0.03; // Rotate the inner cube in the opposite direction
-    renderer.render(scene, camera);
-};
-
-animate();
 </script>
 </body>
 
