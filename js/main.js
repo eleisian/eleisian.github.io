@@ -8,21 +8,25 @@
     function toggleDarkMode() {
         const body = $('body');
         const darkModeBtn = $('#darkModeBtn');
-
+        const accordion = $('.accordion');
+        const breadcrumbNav = $('nav[aria-label="breadcrumb"]');
+    
         body.toggleClass('dark-mode');
         darkModeBtn.toggleClass('active');
-
-        const darkModeMaterial = new THREE.LineBasicMaterial({ color: body.hasClass('dark-mode') ? 0xffffff : 0x000000 });
-
-        // Update outer cube material color
-        outerWireframe.material = darkModeMaterial;
-        innerWireframe.material = darkModeMaterial;
-
+    
+        // Update data-bs-theme attribute for accordion
+        accordion.attr('data-bs-theme', body.hasClass('dark-mode') ? 'dark' : 'light');
+        
+        // Update data-bs-theme attribute for breadcrumb
+        breadcrumbNav.attr('data-bs-theme', body.hasClass('dark-mode') ? 'dark' : 'light');
+    
         // Update button text
         const buttonText = body.hasClass('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i> ';
         darkModeBtn.html(buttonText);
     }
-
+    
+    
+    
     function toggleContent(showId, hideId) {
         event.preventDefault();
         var showContainer = $("#" + showId);

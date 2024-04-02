@@ -47,27 +47,8 @@ body {
    
 }
 
-.skills-container {
-    max-width: 50%;
-    left: 50%;
-}
-
-.progress-bar-container {
-    max-width: 30%;
-    margin-left: 40%;
-}
-
 .icon {
     margin-right: 10px;
-}
-
-@keyframes fillAnimation {
-    from {
-        width: 0;
-    }
-    to {
-        width: var(--progress-width, 0);
-    }
 }
 
 .progress-bar {
