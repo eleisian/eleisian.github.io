@@ -23,6 +23,13 @@
         // Update button text
         const buttonText = body.hasClass('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i> ';
         darkModeBtn.html(buttonText);
+    
+        // Example Three.js update for dark mode
+        const darkModeMaterial = new THREE.LineBasicMaterial({ color: body.hasClass('dark-mode') ? 0xffffff : 0x000000 });
+        outerWireframe.material = darkModeMaterial;
+        innerWireframe.material = darkModeMaterial;
+    
+        // Additional Three.js updates as needed
     }
     
     
