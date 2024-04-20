@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terminal Projects</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.18.0/css/jquery.terminal.min.css"/>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.18.0/css/jquery.terminal.min.css" />
     <link rel="stylesheet" href="./styles.css">
     <style>
-        /* Center the terminal content */
-        .section {
+        /* Center the terminal cont ent */
+        :root {
+            --terminal-width: 80%;
+            --terminal-height: 80%;
+            --background-color: transparent;
+        }
+        body {
+            background-color: black;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -19,24 +27,43 @@
         #terminal {
             width: 100%;
             height: 100%;
+            bottom: 0;
         }
+
+        .terminal-wrapper {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        
+        }
+        .cmd,
+  .cmd div,
+  .cmd span[data-text]:not(.cmd-inverted):not(.token):not(.emoji),
+  .terminal,
+  .terminal-output>:not(.raw) a,
+  .terminal-output>:not(.raw) div,
+  .terminal-output>:not(.raw) span[data-text]:not(.token):not(.inverted):not(.terminal-inverted):not(.cmd-inverted):not(.terminal-error):not(.emoji) {
+    color:var(--color,#aaa);
+    background-color:var(--background,transparent)
+  }
 
         /* Center the ASCII art within the terminal */
         .ascii-art {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%;
+            position: fixed-height;
             height: 100%;
-            margin:0;
+            width: 100%;
+            margin: 0;
         }
     </style>
 </head>
+
 <body>
-    <div class="section">
-        <div id="terminal">
-            <div class="ascii-art">
-                <pre>
+    <div id="terminal">
+        <div class="ascii-art">
+            <pre>
 
 
       _      _     _                                     
@@ -50,23 +77,21 @@
 
 
                 </pre>
-            </div>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.18.0/js/jquery.terminal.min.js"></script>
     <script>
-        $(document).ready(function() {
-            var term = $('#terminal').terminal(function(command) {
+        $(document).ready(function () {
+            var term = $('#terminal').terminal(function (command) {
                 if (command === 'ls' || command === 'dir' || command === 'projects') {
                     this.echo("Available projects:");
-                    this.echo("- <a href='#' class='project-link' data-project='orbital' style='color: white;'>Orbital</a>", { raw: true });
-                    this.echo("- <a href='#' class='project-link' data-project='gumroads' style='color: white;'>Gumroads</a>", { raw: true });
-                    this.echo("- <a href='#' class='project-link' data-project='brick-breaker' style='color: white;'>Brick-breaker</a>", { raw: true });
-                    this.echo("- <a href='#' class='project-link' data-project='react-three-loading' style='color: white;'>React-Three-Loading</a>", { raw: true });
-                    this.echo("- <a href='#' class='project-link' data-project='ascii-renderer' style='color: white;'>ASCII-Renderer</a>", { raw: true });
-                    this.echo("- <a href='#' class='project-link' data-project='everywhere-is-the-ocean' style='color: white;'>Everywhere-is-the-ocean</a>", { raw: true });
+                    this.echo("- <a href='#' class='project-link' data-project='Orbital' style='color: white;'>Orbital</a>", { raw: true });
+                    this.echo("- <a href='#' class='project-link' data-project='Gumroads' style='color: white;'>Gumroads</a>", { raw: true });
+                    this.echo("- <a href='#' class='project-link' data-project='Brick-breaker' style='color: white;'>Brick-breaker</a>", { raw: true });
+                    this.echo("- <a href='#' class='project-link' data-project='React-Three-Loading' style='color: white;'>React-Three-Loading</a>", { raw: true });
+                    this.echo("- <a href='#' class='project-link' data-project='ASCII-Renderer' style='color: white;'>ASCII-Renderer</a>", { raw: true });
+                    this.echo("- <a href='#' class='project-link' data-project='Everywhere-is-the-ocean' style='color: white;'>Everywhere-is-the-ocean</a>", { raw: true });
                 } else if (command === 'help') {
                     this.echo("- 'ls': view available projects.");
                     this.echo("- 'about': view information about Emmanuel");
@@ -99,7 +124,7 @@
                 prompt: 'guest@eleisiancorp ~ $'
             });
 
-            $('#terminal').on('click', '.project-link', function(e) {
+            $('#terminal').on('click', '.project-link', function (e) {
                 e.preventDefault();
                 var project = $(this).data('project');
                 openProject(term, project);
@@ -158,4 +183,5 @@
         });
     </script>
 </body>
+
 </html>
