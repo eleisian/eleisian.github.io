@@ -61,12 +61,12 @@
             var term = $('#terminal').terminal(function(command) {
                 if (command === 'ls' || command === 'dir' || command === 'projects') {
                     this.echo("Available projects:");
-                    this.echo("- <a href='#' class='project-link' data-project='Orbital' style='color: white;'>Orbital</a>", { raw: true });
-                    this.echo("- <a href='#' class='project-link' data-project='Gumroads' style='color: white;'>Gumroads</a>", { raw: true });
-                    this.echo("- <a href='#' class='project-link' data-project='Brick-breaker' style='color: white;'>Brick-breaker</a>", { raw: true });
-                    this.echo("- <a href='#' class='project-link' data-project='React-Three-Loading' style='color: white;'>React-Three-Loading</a>", { raw: true });
-                    this.echo("- <a href='#' class='project-link' data-project='ASCII-Renderer' style='color: white;'>ASCII-Renderer</a>", { raw: true });
-                    this.echo("- <a href='#' class='project-link' data-project='Everywhere-is-the-ocean' style='color: white;'>Everywhere-is-the-ocean</a>", { raw: true });
+                    this.echo("- <a href='#' class='project-link' data-project='orbital' style='color: white;'>Orbital</a>", { raw: true });
+                    this.echo("- <a href='#' class='project-link' data-project='gumroads' style='color: white;'>Gumroads</a>", { raw: true });
+                    this.echo("- <a href='#' class='project-link' data-project='brick-breaker' style='color: white;'>Brick-breaker</a>", { raw: true });
+                    this.echo("- <a href='#' class='project-link' data-project='react-three-loading' style='color: white;'>React-Three-Loading</a>", { raw: true });
+                    this.echo("- <a href='#' class='project-link' data-project='ascii-renderer' style='color: white;'>ASCII-Renderer</a>", { raw: true });
+                    this.echo("- <a href='#' class='project-link' data-project='everywhere-is-the-ocean' style='color: white;'>Everywhere-is-the-ocean</a>", { raw: true });
                 } else if (command === 'help') {
                     this.echo("- 'ls': view available projects.");
                     this.echo("- 'about': view information about Emmanuel");
