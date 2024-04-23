@@ -13,7 +13,39 @@
         body {
             background-color: black;
             height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
+
+        #terminal-container {
+            width: 1280px;
+            height: 720px;
+            background-color: blue;
+            border-radius: 2%;
+            overflow: hidden;
+            /* Hide the scrollbar */
+            position: relative;
+            /* Needed for absolute positioning */
+        }
+
+        #terminal-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 10px;
+            /* Adjust this value as needed to match your scrollbar width */
+            background: blue;
+            /* Match the background color */
+            z-index: 1;
+            /* Ensure it's above the scrollbar */
+        }
+        
+
+
 
         #terminal {
             width: 100%;
@@ -27,6 +59,9 @@
             bottom: 0;
             width: 100%;
 
+        }
+        .cmd-cursor{
+            background-color: blue;
         }
 
         .cmd,
@@ -56,8 +91,9 @@
             .ascii-art {
                 font-size: 0.5em;
             }
-            .terminal-wrapper{
-                margin-top:5%;
+
+            .terminal-wrapper {
+                margin-top: 5%;
                 position: relative;
             }
         }
@@ -65,9 +101,10 @@
 </head>
 
 <body>
-    <div id="terminal">
-        <div class="ascii-art">
-<pre>
+    <div id="terminal-container">
+        <div id="terminal">
+            <div class="ascii-art">
+                <pre>
       _      _     _                                     
      | |    (_)   (_)                                    
   ___| | ___ _ ___ _  __ _ _ __     ___ ___  _ __ _ __   
@@ -77,6 +114,7 @@
                                                  | |     
                                                  |_|     
 </pre>
+            </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
