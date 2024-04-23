@@ -166,6 +166,24 @@ body {
     z-index: 2;
 }
 
+#computerBtn {
+    cursor: pointer;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    bottom: 70px;
+    right: 25px;
+    background-color: #8c8c8c66;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
 #darkModeBtn i {
     margin: 0;
 }

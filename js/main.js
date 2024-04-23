@@ -3,7 +3,7 @@
         sectionsColor: ['#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2'], // Set section background colors
         scrollingSpeed: 300, // Set the scrolling speed
     });
-
+    
     // Dark mode toggle function
     function toggleDarkMode() {
         const body = $('body');
