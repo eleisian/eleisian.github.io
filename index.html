@@ -23,7 +23,7 @@
         #terminal-container {
             width: 1280px;
             height: 720px;
-            background-color: blue;
+            background-color: black;
             border-radius: 2%;
             overflow: hidden;
             /* Hide the scrollbar */
@@ -39,7 +39,7 @@
             bottom: 0;
             width: 10px;
             /* Adjust this value as needed to match your scrollbar width */
-            background: blue;
+            background: black;
             /* Match the background color */
             z-index: 1;
             /* Ensure it's above the scrollbar */
@@ -68,7 +68,7 @@
         .terminal-output>:not(.raw) a,
         .terminal-output>:not(.raw) div,
         .terminal-output>:not(.raw) span[data-text]:not(.token):not(.inverted):not(.terminal-inverted):not(.cmd-inverted):not(.terminal-error):not(.emoji) {
-            background-color:blue;
+            background-color:transparent;
         }
 
         /* Center the ASCII art within the terminal */
@@ -80,6 +80,7 @@
             height: 100%;
             width: 100%;
             margin: 0;
+            z-index: 1;
 
         }
 
