@@ -1,226 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Projects</title>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.18.0/css/jquery.terminal.min.css" />
-    <link rel="stylesheet" href="styles.css" />
-    <style>
-        * {}
-
-        body {
-            background-color: black;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        #terminal-container {
-            width: 1280px;
-            height: 720px;
-            background-color: black;
-            border-radius: 2%;
-            overflow: hidden;
-            /* Hide the scrollbar */
-            position: relative;
-            /* Needed for absolute positioning */
-        }
-
-        #terminal-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: 10px;
-            /* Adjust this value as needed to match your scrollbar width */
-            background: black;
-            /* Match the background color */
-            z-index: 1;
-            /* Ensure it's above the scrollbar */
-        }
-        
-
-        #terminal {
-            width: 100%;
-            height: 100%;
-            bottom: 0;
-            overflow-x: hidden;
-        }
-
-        .terminal-wrapper {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-
-        }
-
-
-        .cmd,
-        .cmd div,
-        .cmd span[data-text]:not(.cmd-inverted):not(.token):not(.emoji),
-        .terminal,
-        .terminal-output>:not(.raw) a,
-        .terminal-output>:not(.raw) div,
-        .terminal-output>:not(.raw) span[data-text]:not(.token):not(.inverted):not(.terminal-inverted):not(.cmd-inverted):not(.terminal-error):not(.emoji) {
-            background-color:transparent;
-        }
-
-        /* Center the ASCII art within the terminal */
-        .ascii-art {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            height: 100%;
-            width: 100%;
-            margin: 0;
-
-        }
-
-        @media (max-width: 768px) {
-            .ascii-art {
-                font-size: 0.5em;
-            }
-
-            .terminal-wrapper {
-                margin-top: 5%;
-                position: relative;
-            }
-        }
-    </style>
+    <title>My Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.18.0/css/jquery.terminal.min.css"/>
+    <link rel="preload" href="https://platform.twitter.com/widgets.js" as="script">
 </head>
-
+ 
 <body>
-    <div id="terminal-container">
-        <div id="terminal">
-            <div class="ascii-art">
-                <pre>
-      _      _     _                                     
-     | |    (_)   (_)                                    
-  ___| | ___ _ ___ _  __ _ _ __     ___ ___  _ __ _ __   
- / _ \ |/ _ \ / __| |/ _` | '_ \   / __/ _ \| '__| '_ \  
-|  __/ |  __/ \__ \ | (_| | | | | | (_| (_) | |  | |_) | 
- \___|_|\___|_|___/_|\__,_|_| |_|  \___\___/|_|  | .__(_)
-                                                 | |     
-                                                 |_|     
-</pre>
-            </div>
+    <nav class="navbar fixed-top d-md-none">
+        <div class="container-fluid">
+            <img src="./assets/icons/image-icon.png" class="profile-image" alt="picture of me">
+            <h1>E. Wang</h1>
+        </div>
+    </nav>
+    <div class="d-none d-md-block">
+        <div class="my-container">
+            <img src="./assets/icons/image-icon.png">
+            <h2>Hi, I'm <br>Emmanuel</h2>
+            <p>Software Engineer</p>
+            <p>Technical Artist</p>
+            <p>UI/UX Designer</p>
+            <p>Game Developer</p>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.18.0/js/jquery.terminal.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('a').hover(function (event) {
-                event.preventDefault();
-            });
-            var term = $('#terminal').terminal(function (command) {
-                if (command === 'ls' || command === 'dir' || command === 'projects') {
-                    this.echo("Available projects:");
-                    this.echo("- <a href='' class='project-link' data-project='orbital' style='color: white;'>Orbital</a>", { raw: true });
-                    this.echo("- <a href='' class='project-link' data-project='gumroads' style='color: white;'>Gumroads</a>", { raw: true });
-                    this.echo("- <a href='' class='project-link' data-project='brick-breaker' style='color: white;'>Brick-breaker</a>", { raw: true });
-                    this.echo("- <a href='' class='project-link' data-project='react-three-loading' style='color: white;'>React-three-loading</a>", { raw: true });
-                    this.echo("- <a href='' class='project-link' data-project='ascii-renderer' style='color: white;'>Ascii-renderer</a>", { raw: true });
-                    this.echo("- <a href='' class='project-link' data-project='everywhere-is-the-ocean' style='color: white;'>Everywhere-is-the-ocean</a>", { raw: true });
-                    this.echo("");
-                } else if (command === 'help') {
-                    this.echo("- 'ls': view available projects.");
-                    this.echo("- 'about': view information about Emmanuel");
-                    this.echo("- 'contact': view contact information.");
-                } else if (command === 'about') {
-                    this.echo("");
-                    this.echo("About: ");
-                    this.echo("- I am a recent graduate from the University of Florida studying Digital Arts and Sciences.");
-                    this.echo("- I have interests in full-stack development, game development, technical art, and cybersecurity.");
-                    this.echo("- I am currently seeking opportunities in software development.");
-                    this.echo("- On the weekends I enjoy traveling and creating electronic music.");
-                    this.echo("- I am a master's league Starcraft II player (top 2% of players).");
-                    this.echo("");
-                } else if (command === 'contact') {
-                    this.echo("");
-                    this.echo("Contact Information:");
-                    this.echo("- Email: emmanueltwang@gmail.com");
-                    this.echo("- Phone: +1234567890");
-                    this.echo("");
-                } else {
-                    var cmdParts = command.split(' ');
-                    if (cmdParts[0].toLowerCase() === 'cd' && cmdParts.length === 2) {
-                        var projectName = cmdParts[1].toLowerCase();
-                        openProject(term, projectName);
-                    } else {
-                        this.error("Command not recognized. Type 'help' to see available commands.");
-                    }
-                }
-            }, {
-                greetings: '',
-                prompt: 'guest@eleisiancorp ~ $'
-            });
+        
+<div id="fullpage">
+    <div class="section">
+        <div class="about-container visible" id="about-container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="" onclick="toggleContent('about-container', 'blog-container')">About me</a></li>
+                    <li class="breadcrumb-item"><a href="" onclick="toggleContent('blog-container', 'about-container')">Blog</a></li>
+                </ol>
+            </nav>
+            <p>I am a recent graduate from the University of Florida studying Digital Arts and Sciences. 🐊</p>
+            <p>I have a passion for developing interactive web applications 🌐 and video games 🎮, as well as producing music 🎶 and creating graphic designs 🎨.</p>
+            <p>Outside of work you can find me hiking or taking long drives to see the ocean 🌊, mountains 🏔️, or forests 🌲.</p>
+        </div>
 
-            $('#terminal').on('click', '.project-link', function (e) {
-                e.preventDefault();
-                var project = $(this).data('project');
-                openProject(term, project);
-            });
+        <div class="blog-container" id="blog-container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="" onclick="toggleContent('about-container', 'blog-container')">About me</a></li>
+                    <li class="breadcrumb-item"><a href="" onclick="toggleContent('blog-container', 'about-container')">Blog</a></li>
+                </ol>
+            </nav>
 
-            function openProject(term, projectName) {
-                if (projectName === 'orbital') {
-                    term.echo("");
-                    term.echo("Project: Orbital");
-                    term.echo("↳Description: A space-themed game on the web.");
-                    term.echo("↳Technology Stack: Unity, C#, WebGL, HTML, CSS");
-                    term.echo("↳Link: https://eleisian.github.io/orbital");
-                    term.echo("");
-                } else if (projectName === 'gumroads') {
-                    term.echo("");
-                    term.echo("Project: Gumroads");
-                    term.echo("↳Description: Recreated e-commerce platform for selling digital goods with a carousel feature for window shopping.");
-                    term.echo("↳Technology Stack: HTML, CSS, Typescript, React, Ruby on Rails, Docker, GCP");
-                    term.echo("↳Link: https://gumroads.vercel.app");
-                    term.echo("");
-                } else if (projectName === 'brick-breaker') {
-                    term.echo("");
-                    term.echo("Project: Brick-breaker");
-                    term.echo("↳Description: A classic brick-breaker game created with Flutter and Dart.");
-                    term.echo("↳Technology Stack: Flutter, Dart");
-                    term.echo("↳Link: https://eleisian.github.io/brick-breaker/");
-                    term.echo("");
-                }
-                else if (projectName === 'react-three-loading') {
-                    term.echo("");
-                    term.echo("Project:React-three-loading");
-                    term.echo("↳Description: A proof of concept web application that loads 3D models.");
-                    term.echo("↳Technology Stack: React, React-Three-Fiber, Three.js, Blender, GLTF, FBX, Adobe After Effects");
-                    term.echo("↳Link: https://eleisian.github.io/loading/");
-                    term.echo("");
-                }
-                else if (projectName === 'ascii-renderer') {
-                    term.echo("");
-                    term.echo("Project:ASCII-renderer");
-                    term.echo("↳Description: An ASCII art renderer for 3D models.");
-                    term.echo("↳Technology Stack: React, React-Three-Fiber, GLTF, Three.js");
-                    term.echo("↳Link: https://eleisian.github.io/ascii-renderer/");
-                    term.echo("");
-                }
-                else if (projectName === 'everywhere-is-the-ocean') {
-                    term.echo("");
-                    term.echo("Project:Eveywhere-is-the-ocean");
-                    term.echo("↳Description: A series of loading screens featuring a water shader.");
-                    term.echo("↳Technology Stack: Unity, C#, WebGL, HTML, CSS");
-                    term.echo("↳Link: https://eleisian.github.io/everywhere-is-the-ocean/");
-                    term.echo("");
-                } else {
-                    term.error("Project not found: " + projectName);
-                }
-            }
-        });
-    </script>
+            <br>
+            <!-- Begin blog posts -->
+            <p><strong>04/22/24</strong></p>
+            <p>I find it hilarous how HR or hiring managers confuse hiring talent with finding potential mates or suitors
+            because we live in such a bleak post modern world with a lonliness epidemic and a declining birthrate crisis. </p>
+            <p><strong>04/11/24</strong></p>
+            <p>Kissma Deez Nhuhts</p>
+            <blockquote class="twitter-tweet"><p lang="en" dir="ltr">I applied to 100 jobs using a resume with the name, &quot;Kismma D. Nhuhts&quot; and I got 29 interviews. <br><br>This is what I&#39;ve learned about resumes: <a href="https://t.co/MWuacsClFP">pic.twitter.com/MWuacsClFP</a></p>&mdash; Jerry Lee (@JerryJHLee) <a href="https://twitter.com/JerryJHLee/status/1778484920593055763?ref_src=twsrc%5Etfw">April 11, 2024</a></blockquote>
+            
+            <p><strong>04/07/24</strong></p>
+            <p>Microsoft demands high priority support from volunteers.</p>
+            <p>In other words instead of actually cultivating talent large companies like Microsoft somehow end up with DEI recruiters that only hire within their cultural bounds.</p>
+            <p>A.K.A circlejerk companies are complacent because concave smooth brain hiring managers cannot recognize talent.</p>
+            <p>Solution? Demand free labor from artists while maintaining superiority complex.</p>
+            <p>"I Can't Wait for Society to Collapse So My Ideology Can Rise From the Ashes."</p>
+            <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Media coverage of <a href="https://twitter.com/Microsoft?ref_src=twsrc%5Etfw">@Microsoft</a> <a href="https://twitter.com/MicrosoftTeams?ref_src=twsrc%5Etfw">@MicrosoftTeams</a> demanding &quot;high priority&quot; support from FFmpeg volunteers in <a href="https://twitter.com/verge?ref_src=twsrc%5Etfw">@verge</a> by <a href="https://twitter.com/askhalid?ref_src=twsrc%5Etfw">@askhalid</a> <a href="https://t.co/dncBHIpdsp">https://t.co/dncBHIpdsp</a> 
+              <a href="https://t.co/sDGJe3J8kR">pic.twitter.com/sDGJe3J8kR</a></p>&mdash; FFmpeg (@FFmpeg) <a href="https://twitter.com/FFmpeg/status/1777099508511314098?ref_src=twsrc%5Etfw">April 7, 2024</a></blockquote> 
+            <p><strong>04/07/24</strong></p>
+            <p>Some software engineers have some serious ego issues. This is why A.I. art is so lifeless.</p>
+            <p>We are all headed towards the same place anyways. Just because you have a 'fake email job' means you have a cushier ride to the end.</p>
+            <p>Respect everyone equally.</p>
+            <p><strong>04/02/24</strong></p>
+            <p>No if ands or buts. Yes this is truly an ultimatum and certainly does not inspire dreams.</p>
+            <p>Here is my next 3 months plan:</p>
+            <p>1. I will create a MDX or markdown version of this blog.</p>
+            <p>2. I will master my craft of digital music [it is interesting that all radio signals from inception are projected out into the universe].</p>
+            <p>3. I will complete my tasks of becoming a technical artist [this entails creating 3D scenes with professional lighting and rendering].</p>
+            <p>4. I will create more apps such as a Hirigana and Katakana practice flash card app as well as mouse writing app.</p>
+            <p>5. I will participate in Google's A.I. hackathon on Devpost.</p>
+            <p>6. I will pass my Python and Computer Forensics course with A+.</p>
+            <p><strong>04/01/24</strong></p>
+            <p><iframe width="560" height="315" src="https://www.youtube.com/embed/lNFW5ic6_Jg?si=PeR6qh2dJK5HdVed" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>
+            <p>I have fully decided that I will learn Japanese.</p>
+            <p>I truly believe that Japanese and Korean are shifted audio frames of Chinese.</p>
+            <p>I am Chinese and I believe that we are all papers cut from the same tree.</p>
+            <p>After learning Japanese I will learn Russian and Korean.</p>
+            <p>There is a theory that language is a barrier preventing humanity from becoming a Type I civalization.</p>
+            <p>I think where I belong is at an interesction of music, mathematics, philosophy, behavioral psychology, and communication.</p>
+            <p>I will dedicate the rest of my life to developing a form of communication amongst all living beings.</p>
+            <p>I truly believe that most humans have lost connection with nature and have forgotten how to communicate not only 
+            with each other but with animals as well. It is usually around this time that society collapses. 
+            </p>
+            <p>I believe we are nearing end times of this era. There will be collapse, there will be difficulty.
+            Most people will believe that I am crazy. The dunces will form their confederacy but there is no halting the future.
+            Most third world countries do not face mental health challenges. America is doomed. Americans take pride in being deviants. 
+            Why not just let someone enjoy something? That seems to be the main arguement of those who have strayed from the path. Which path you ask?
+            The path of humanity. Not some deranged version created by some sick person. You might argue that that is human as well. 
+            Then humanity is sickness and we should seek health.
+            </p>
+            <p>It is truly unfortunate that we bar those from seeking health.</p>
+            <p><strong>04/01/24</strong></p>
+            <p>Devin A.I. agent steals my dark mode button from my site.</p>
+            <blockquote class="twitter-tweet"><p lang="en" dir="ltr">I gave Devin (an AI agent) my Netify key &amp; asked it to build a website on how to rebuild civilization from scratch<br><br>It built a site with react quizzes, downloadable preparedness documents &amp; free images. Kind of impressive, actually. Try it, all just Devin: <a href="https://t.co/4pS2Dwl1vb">https://t.co/4pS2Dwl1vb</a> 
+            <a href="https://t.co/FyfNLedWR1">pic.twitter.com/FyfNLedWR1</a></p>&mdash; Ethan Mollick (@emollick) 
+            <a href="https://twitter.com/emollick/status/1774667275439669503?ref_src=twsrc%5Etfw">April 1, 2024</a></blockquote> 
+            <p>In other news, I am working on a better way to present my projects.</p>
+            <p><strong>03/29/24</strong></p>
+            <iframe width="100%" height="265" src="https://clyp.it/s0pjulz4/widget" frameborder="0"></iframe>
+            <iframe width="100%" height="265" src="https://clyp.it/3wfw5mqb/widget" frameborder="0"></iframe>
+            <p>some old music</p>
+            <p><strong>03/28/24</strong></p>
+            <div style="height: 228px; width: 600px;"><iframe src="https://audio.com/embed/audio/1794831147643278?theme=image"
+                style="display:block; border-radius: 6px; border: none; height: 204px; width: 600px;"></iframe>
+                <a href='https://audio.com/restis2g00d' style="text-align: center; display: block; color: #A4ABB6; font-size: 12px; 
+                font-family: sans-serif; line-height: 16px; margin-top: 8px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">@restis2g00d</a></div>
+            <p>Most of the time I am aloof. I think that if I actually tried more to make a difference or make something complete I would be able to create something great.</p>
+            <p>But art comes at a price. It hurts my soul to create and not create at the same time.</p>
+            <p><strong>03/27/24</strong></p>
+            <div style="height: 228px; width: 600px;"><iframe src="https://audio.com/embed/audio/1794657298585527?theme=image"
+                style="display:block; border-radius: 6px; border: none; height: 204px; width: 600px;"></iframe>
+                <a href='https://audio.com/restis2g00d' 
+                style="text-align: center; display: block; color: #A4ABB6; font-size: 12px; 
+                font-family: sans-serif; line-height: 16px; margin-top: 8px; overflow: hidden; white-space: nowrap; 
+                text-overflow: ellipsis;">
+                @restis2g00d</a></div>
+            <p>This is where is stand so far on my mixing and mastering journey.</p>
+            <p><strong>03/26/24</strong></p>
+            <p>"Beware the preachers,
+                beware the knowers,
+                beware those who are always reading books,
+                beware those who either detest poverty
+                or are proud of it,
+                beware those quick to praise,
+                for they need praise in return,
+                beware those who are quick to censor,
+                they are afraid of what they do not know.
+                
+                <p>...</p>
+
+                Not being able to create art,
+                they will not understand art,
+                they will consider their failure as creators
+                only as a failure of the world.
+                
+                Not being able to love fully,
+                they will believe your love incomplete,
+                and then they will hate you,
+                and their hatred will be perfect"</p>
+            <p>- Charles Bukowski "The Genius of the Crowd"</p>
+    
+            <p><strong>03/09/24</strong></p>
+            <p>Recently, I have been working on level design with Unreal Engine.</p>
+            <p>I think it is pretty amazing what the team at Epic is doing specifically with nanites and scene realism.
+            I was particularly inspired these past weeks to create a scene with Unreal to showcase my level design ability.
+            But mostly because I really want to be able to create inspiring works of art with 3D to go along with my music.
+            It is unfortunate that Unreal has sunsetted the ability to build HTML5 projects otherwise I would have uploaded my scene to my website.
+            However, I am still figuring out a workaround.</p>
+            <p>It seems like nowadays cool features are placed behind paywalls or left open to third party organizations to profit off. 
+            I miss the days of the internet when groups of people would build amazing things for others to enjoy.</p>
+            <p>Anyways, if you are reading this please enjoy some level design that I created with Unreal Engine.</p>
+            <div style="display:flex;">
+            <img src="https://i.imgur.com/XeM4u23.png" style="width:50%">
+            <img src="https://i.imgur.com/168bAgL.png" style="width:50%">
+            </div>
+            <p><strong>02/22/24</strong></p>
+            <p>Orbital Dev Log</p>
+            <img src="https://i.imgur.com/C6o3HfJ.png" alt="screenshot of game" style="width: 80%; margin-bottom:5%;">
+            <br>
+            <p>Fixed the invisble walls and created a wave generation system for enemies.</p>
+            <p>The next update will include a score keeping system, a better game over screen, and a tutorial scene.</p>
+            <p>Hoping to design new platforms and enemies to refresh the game's look.</p>
+            <p>Perhaps with enough work, I can actually make a fun game!</p>
+            <p><strong>02/21/24</strong></p>
+            <p>Today I think I made a Google employee mad by building web applications with ChatGPT</p>
+            <p>I think I learn by doing and applying. Along the way I can learn different things.</p>
+            <p>For example, by trying different ways to create a transition animation for this blog page.</p>
+            <p>I learned about DOM wrappers.</p>
+
+            <br>
+            <p><strong>02/21/24</strong></p>
+            <p>This has been giving me life</p>
+            <blockquote class="twitter-tweet">
+                <p lang="zxx" dir="ltr"><a href="https://t.co/bq9o1BBDpe">pic.twitter.com/bq9o1BBDpe</a>
+                </p>&mdash; jue (@worldofjue) 
+                <a href="https://twitter.com/worldofjue/status/1755996146563256792?ref_src=twsrc%5Etfw">February 9, 2024</a>
+            </blockquote>
+
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="projects-container">
+            <h2>Projects</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            Orbital
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            This is a 2D platformer shooter game that includes a random map generator. It was written with C# and compiled with Unity.
+                            You can play it <a href="https://eleisian.github.io/orbital" target="_blank"><code>here</code></a>.
+                        </div>
+                    </div>
+                </div>  
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseThree">
+                        Gumroads
+                      </button>
+                    </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    Recreated Gumroad's discover page and implemented a carousel feature to allow customers to window shop. Created with React, Ruby on Rails, Docker, and GCP.
+                     <a href="https://gumroads.vercel.app" target="_blank"><code>here</code></a>.
+                  </div>
+                </div>
+              </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Brick-breaker
+                      </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse">
+                      <div class="accordion-body">
+                       This project is a flutter web game built with flutter's flame game engine following a tutorial courtesy of google.
+                       Check it out here: <a href="https://eleisian.github.io/brick-breaker/" target="_blank"><code>https://eleisian.github.io/brick-breaker/</code></a>
+                      </div>
+                    </div>
+                </div>
+                              
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                          jQuery-terminal-rpg
+                        </button>
+                      </h2>
+                  <div id="collapseFour" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                      This project is a rock paper scissors computer that you can play in a terminal. It was creating with the jQuery-terminal
+                      library. By inputting your own API code you can also talk to a tuned version of ChatGPT that responds slightly offensively if you 
+                      input wrong commands. You can try it out <a href="https://eleisian.github.io/jquery-terminal-rpg" target="_blank"><code>here</code></a>.
+                    </div>
+                  </div>
+                </div>
+                
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                      Loading Screens
+                    </button>
+                  </h2>
+                  <div id="collapseFive" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                     This project is a proof of concept for creating 3D scenes with the react-three-fiber library. FBX objects were imported and textures were applied. These loading screens were created with Blender and Adobe After Effects.  
+                     Theoretically these loading screens can be linked with a scripting language to be placed within a website or video game.
+                     Check it out here: <a href="https://eleisian.github.io/loading/" target="_blank"><code>https://eleisian.github.io/loading/</code></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseFour">
+                        Ascii-renderer
+                      </button>
+                    </h2>
+                    <div id="collapseSix" class="accordion-collapse collapse">
+                      <div class="accordion-body">
+                       This project was built upon an existing project that I found on <a href="https://codesandbox.io"><code>Codesandbox.io</code></a> Someone had already created an
+                       Ascii-renderer for 3D objects with react-three-fiber. However they did not add a function so that you can import your own GLTF 
+                       objects to the scene. I just created a function to do so. <a href="https://eleisian.github.io/ascii-renderer" target="_blank"><code>https://eleisian.github.io/ascii-renderer</code></a>
+                      </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseFive">
+                        Everywhere is the ocean
+                      </button>
+                    </h2>
+                    <div id="collapseSeven" class="accordion-collapse collapse">
+                      <div class="accordion-body">
+                       This project is a water shader created with procedural Unity nodes. Click on the windmill icon to proceed to the next screen. 
+                       Hopefully you find that each iteration the scene gets better. 
+                       <a href="https://eleisian.github.io/everywhere-is-the-ocean"><code>https://eleisian.github.io/everywhere-is-the-ocean</code></a>
+                      </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <canvas id="threeCanvas"></canvas>
+        <div class="contact-container">
+        <div class="contact-content">
+            <h1><a href="mailto:emmanueltwang@gmail.com">Let's talk</a></h1>
+            <div class="social-icons">
+                <a href="https://github.com/eleisian" target="_blank"><i class="fab fa-github fa-xl"></i></a>
+                <a href="https://twitter.com/restis2g00d" target="_blank"><i class="fab fa-twitter fa-xl"></i></a>
+                <a href="./assets/resume.pdf" target="_blank"><i class="fas fa-file-alt fa-xl"></i></a>
+            </div>            
+        </div>
+        </div>
+    </div>
+    
+</div>
+
+
+<!-- Dark mode toggle button with Font Awesome sun/moon icons -->
+<button id="darkModeBtn">
+    <i class="fas fa-moon"></i>
+</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="./js/cube.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+<script src="./js/main.js"></script>
 </body>
 
 </html>
