@@ -26,8 +26,8 @@ innerWireframe.position.set(0, 0, 0); // Adjust the position as needed
 // Render the scene
 const animate = function () {
     requestAnimationFrame(animate);
-    outerWireframe.rotation.y += 0.01;
-    innerWireframe.rotation.y -= 0.03; // Rotate the inner cube in the opposite direction
+    outerWireframe.rotation.y += 0.0088;
+    innerWireframe.rotation.y -= 0.02; // Rotate the inner cube in the opposite direction
     renderer.render(scene, camera);
 };
 
