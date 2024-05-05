@@ -61,7 +61,6 @@
     }
     // Dark mode button click event
     $('#darkModeBtn').on('click', toggleDarkMode);
-    
     window.addEventListener('load', function () {
     twttr.widgets.load();
   });
