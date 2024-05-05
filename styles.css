@@ -65,6 +65,10 @@ body {
     position: relative;
     z-index: 2;
 }
+.tech-stack{
+    flex-basis: 50%; 
+    list-style-type: disc;
+}
 
 .projects-container h2 {
     color: #222;
@@ -302,6 +306,9 @@ body.dark-mode .navbar {
         margin: 0 auto;
         margin-top: 0%;
         overflow-x: hidden;
+    }
+    .tech-stack{
+        padding: 0 0 1 0rem;
     }
 
     .blog-container.chrome-specific {
