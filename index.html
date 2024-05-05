@@ -35,7 +35,7 @@
     <div class="section">
         <div class="about-container visible" id="about-container">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
+          <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="" onclick="toggleContent('about-container', 'blog-container')">About me</a></li>
                     <li class="breadcrumb-item"><a href="" onclick="toggleContent('blog-container', 'about-container')">Blog</a></li>
                 </ol>
@@ -43,15 +43,23 @@
             <p>I have a passion for developing interactive web applications 🌐 and video games 🎮, as well as producing music 🎶 and creating designs 🎨.</p>
             <p>My goal is to eventually build my own company and provide excellent designs and solutions to problems that extend beyond just software engineering and infrastructure.</p>
             <p>My current stack includes: </p>
-            <ul>
+            <div style="display: flex;">
+              <ul style="flex-basis: 50%; list-style-type: disc;">
               <li>React <span class="iconify" data-icon="logos:react" data-inline="false"></span></li>
-              <li>Node.js <span class="iconify" data-icon="logos:nodejs" data-inline="false"></span></li>
+              <li>Node.js <span class="iconify" data-icon="fa-brands:node" data-inline="false"></span></li>
               <li>Docker <span class="iconify" data-icon="logos:docker-icon" data-inline="false"></span></li>
               <li>PostgreSQL <span class="iconify" data-icon="logos:postgresql" data-inline="false"></span></li>
               <li>Unity <span class="iconify" data-icon="logos:unity" data-inline="false"></span></li>
+              </ul>
+              <ul style="flex-basis: 50%; list-style-type: disc;">
               <li>Blender <span class="iconify" data-icon="logos:blender" data-inline="false"></span></li>
-              <li>Adobe Creative Cloud <span class="iconify" data-icon="cib:adobe-creative-cloud" data-inline="false"></span></li>
-            </ul>
+              <li>Adobe Creative Cloud <span class="iconify" data-icon="uit:adobe-alt" data-inline="false"></span></li>
+              <li>Ruby on Rails <span class="iconify" data-icon="simple-icons:rubyonrails" data-inline="false"></span></li>
+              <li>Google Cloud Console <span class="iconify" data-icon="logos:google-cloud" data-inline="false"></span></li>
+              <li>Python <span class="iconify" data-icon="logos:python" data-inline="false"></span></li>
+              </ul>
+            </div>
+            </div>
         </div>
 
         <div class="blog-container" id="blog-container">
