@@ -50,9 +50,15 @@
         }
     });
 
-    $('.blog-container, .about-container').on('wheel touchmove', function(event) {
+    $('.blog-container').on('wheel touchmove', function(event) {
         event.stopPropagation();
     });
+
+    if (window.innerWidth < 768) {
+        $('.about-container').on('wheel touchmove', function(event) {
+            event.stopPropagation();
+        });
+    }
     // Dark mode button click event
     $('#darkModeBtn').on('click', toggleDarkMode);
     
