@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Projects</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.18.0/css/jquery.terminal.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        * {}
+
+        body {
+            background-color: black;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #terminal-container {
+            width: 1280px;
+            height: 720px;
+            background-color: black;
+            border-radius: 2%;
+            overflow: hidden;
+            /* Hide the scrollbar */
+            position: relative;
+            /* Needed for absolute positioning */
+        }
+
+        #terminal-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 10px;
+            /* Adjust this value as needed to match your scrollbar width */
+            background: black;
+            /* Match the background color */
+            z-index: 1;
+            /* Ensure it's above the scrollbar */
+        }
+        
+
+        #terminal {
+            width: 100%;
+            height: 100%;
+            bottom: 0;
+            overflow-x: hidden;
+        }
+
+        .terminal-wrapper {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+
+        }
+
+
+        .cmd,
+        .cmd div,
+        .cmd span[data-text]:not(.cmd-inverted):not(.token):not(.emoji),
+        .terminal,
+        .terminal-output>:not(.raw) a,
+        .terminal-output>:not(.raw) div,
+        .terminal-output>:not(.raw) span[data-text]:not(.token):not(.inverted):not(.terminal-inverted):not(.cmd-inverted):not(.terminal-error):not(.emoji) {
+            background-color:transparent;
+        }
+
+        /* Center the ASCII art within the terminal */
+        .ascii-art {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+
+        }
+
+        @media (max-width: 768px) {
+            .ascii-art {
+                font-size: 0.5em;
+            }
+
+            .terminal-wrapper {
+                margin-top: 5%;
+                position: relative;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="terminal-container">
+        <div id="terminal">
+            <div class="ascii-art">
+                <pre>
+      _      _     _                                     
+     | |    (_)   (_)                                    
+  ___| | ___ _ ___ _  __ _ _ __     ___ ___  _ __ _ __   
+ / _ \ |/ _ \ / __| |/ _` | '_ \   / __/ _ \| '__| '_ \  
+|  __/ |  __/ \__ \ | (_| | | | | | (_| (_) | |  | |_) | 
+ \___|_|\___|_|___/_|\__,_|_| |_|  \___\___/|_|  | .__(_)
+                                                 | |     
+                                                 |_|     
+</pre>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.18.0/js/jquery.terminal.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('a').hover(function (event) {
+                event.preventDefault();
+            });
+            var term = $('#terminal').terminal(function (command) {
+                if (command === 'ls' || command === 'dir' || command === 'projects') {
+                    this.echo("Available projects:");
+                    this.echo("- <a href='' class='project-link' data-project='orbital' style='color: white;'>Orbital</a>", { raw: true });
+                    this.echo("- <a href='' class='project-link' data-project='gumroads' style='color: white;'>Gumroads</a>", { raw: true });
+                    this.echo("- <a href='' class='project-link' data-project='brick-breaker' style='color: white;'>Brick-breaker</a>", { raw: true });
+                    this.echo("- <a href='' class='project-link' data-project='react-three-loading' style='color: white;'>React-three-loading</a>", { raw: true });
+                    this.echo("- <a href='' class='project-link' data-project='ascii-renderer' style='color: white;'>Ascii-renderer</a>", { raw: true });
+                    this.echo("- <a href='' class='project-link' data-project='everywhere-is-the-ocean' style='color: white;'>Everywhere-is-the-ocean</a>", { raw: true });
+                    this.echo("");
+                } else if (command === 'help') {
+                    this.echo("- 'ls': view available projects.");
+                    this.echo("- 'about': view information about Emmanuel");
+                    this.echo("- 'contact': view contact information.");
+                } else if (command === 'about') {
+                    this.echo("");
+                    this.echo("About: ");
+                    this.echo("- I am a recent graduate from the University of Florida studying Digital Arts and Sciences.");
+                    this.echo("- I have interests in full-stack development, game development, technical art, and cybersecurity.");
+                    this.echo("- I am currently seeking opportunities in software development.");
+                    this.echo("- On the weekends I enjoy traveling and creating electronic music.");
+                    this.echo("- I am a master's league Starcraft II player (top 2% of players).");
+                    this.echo("");
+                } else if (command === 'contact') {
+                    this.echo("");
+                    this.echo("Contact Information:");
+                    this.echo("- Email: emmanueltwang@gmail.com");
+                    this.echo("- Phone: +1234567890");
+                    this.echo("");
+                } else {
+                    var cmdParts = command.split(' ');
+                    if (cmdParts[0].toLowerCase() === 'cd' && cmdParts.length === 2) {
+                        var projectName = cmdParts[1].toLowerCase();
+                        openProject(term, projectName);
+                    } else {
+                        this.error("Command not recognized. Type 'help' to see available commands.");
+                    }
+                }
+            }, {
+                greetings: '',
+                prompt: 'guest@eleisiancorp ~ $'
+            });
+
+            $('#terminal').on('click', '.project-link', function (e) {
+                e.preventDefault();
+                var project = $(this).data('project');
+                openProject(term, project);
+            });
+
+            function openProject(term, projectName) {
+                if (projectName === 'orbital') {
+                    term.echo("");
+                    term.echo("Project: Orbital");
+                    term.echo("↳Description: A space-themed game on the web.");
+                    term.echo("↳Technology Stack: Unity, C#, WebGL, HTML, CSS");
+                    term.echo("↳Link: https://eleisian.github.io/orbital");
+                    term.echo("");
+                } else if (projectName === 'gumroads') {
+                    term.echo("");
+                    term.echo("Project: Gumroads");
+                    term.echo("↳Description: Recreated e-commerce platform for selling digital goods with a carousel feature for window shopping.");
+                    term.echo("↳Technology Stack: HTML, CSS, Typescript, React, Ruby on Rails, Docker, GCP");
+                    term.echo("↳Link: https://gumroads.vercel.app");
+                    term.echo("");
+                } else if (projectName === 'brick-breaker') {
+                    term.echo("");
+                    term.echo("Project: Brick-breaker");
+                    term.echo("↳Description: A classic brick-breaker game created with Flutter and Dart.");
+                    term.echo("↳Technology Stack: Flutter, Dart");
+                    term.echo("↳Link: https://eleisian.github.io/brick-breaker/");
+                    term.echo("");
+                }
+                else if (projectName === 'react-three-loading') {
+                    term.echo("");
+                    term.echo("Project:React-three-loading");
+                    term.echo("↳Description: A proof of concept web application that loads 3D models.");
+                    term.echo("↳Technology Stack: React, React-Three-Fiber, Three.js, Blender, GLTF, FBX, Adobe After Effects");
+                    term.echo("↳Link: https://eleisian.github.io/loading/");
+                    term.echo("");
+                }
+                else if (projectName === 'ascii-renderer') {
+                    term.echo("");
+                    term.echo("Project:ASCII-renderer");
+                    term.echo("↳Description: An ASCII art renderer for 3D models.");
+                    term.echo("↳Technology Stack: React, React-Three-Fiber, GLTF, Three.js");
+                    term.echo("↳Link: https://eleisian.github.io/ascii-renderer/");
+                    term.echo("");
+                }
+                else if (projectName === 'everywhere-is-the-ocean') {
+                    term.echo("");
+                    term.echo("Project:Eveywhere-is-the-ocean");
+                    term.echo("↳Description: A series of loading screens featuring a water shader.");
+                    term.echo("↳Technology Stack: Unity, C#, WebGL, HTML, CSS");
+                    term.echo("↳Link: https://eleisian.github.io/everywhere-is-the-ocean/");
+                    term.echo("");
+                } else {
+                    term.error("Project not found: " + projectName);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
