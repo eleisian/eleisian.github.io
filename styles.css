@@ -78,7 +78,7 @@ body {
 .blog-container {
     position: relative;
     display: none;
-    overflow-y: auto;
+    overflow-y: hidden;
     text-align: left;
     margin-left: 35%;
     max-height: 30%;
@@ -306,7 +306,9 @@ body.dark-mode .navbar {
         margin: 0 auto;
         margin-top: 0%;
         overflow-x: hidden;
+        overflow-y: visible;
     }
+
     .tech-stack{
         padding: 0 0 1 0rem;
     }
