@@ -288,9 +288,6 @@ body.dark-mode .navbar {
     font-size: medium;
 }
 
-.social-icons a:hover {
-    color: #ff00ea;
-}
 
 .dark-mode .about-container,
 .dark-mode .blog-container {
