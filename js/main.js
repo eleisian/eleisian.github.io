@@ -50,7 +50,7 @@
         }
     });
 
-    $('.blog-container').on('wheel touchmove', function(event) {
+    $('.blog-container' && '.projects-container').on('wheel touchmove', function(event) {
         event.stopPropagation();
     });
 

@@ -61,18 +61,80 @@ body {
     text-align: left;
     margin-left: 35%;
     max-width: 50%;
-    max-height: 100%;
+    height: 80vh; /* Set a fixed height relative to the viewport height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Hide horizontal scrolling if content overflows */
     position: relative;
     z-index: 2;
+    background-color: #f8f8f8; /* Add a background color for better visibility */
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #9a9a9a;
+
 }
-.tech-stack{
-    flex-basis: 50%; 
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.grid-item {
+    position: relative;
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    height: 200px;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 20px;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card:hover img {
+    transform: scale(1.1);
+}
+
+.card:hover .card-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tech-stack {
+    flex-basis: 50%;
     list-style-type: disc;
 }
 
 .projects-container h2 {
     color: #222;
+    margin-bottom: 20px;
 }
+
 
 .about-container,
 .blog-container {
@@ -239,14 +301,11 @@ body.dark-mode .navbar {
     color: white;
 }
 
-.dark-mode .accordion-button,
-.dark-mode .accordion-body {
-    color: #ffffff;
+.dark-mode .projects-container {
     background-color: #242424;
-}
-
-.dark-mode .accordion-item {
-    border-color: rgb(86, 179, 219);
+    color: white;
+    border: 1px solid #f1ce89;
+    scrollbar-color: rgba(196, 196, 196, 0.5) transparent;
 }
 
 #threeCanvas {
