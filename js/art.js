@@ -5,14 +5,14 @@ const canvas = document.getElementById('threeCanvas');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-renderer.setSize(200, 200);
+renderer.setSize(1000, 200);
 renderer.setClearColor(0x000000, 0); // Set clear color to transparent
 
 // Create the line material
 let material = new THREE.LineBasicMaterial({ color: 0x000000 }); // Start with black
 
 // Set up the geometry for the line
-const maxPoints = 1000;
+const maxPoints = 420;
 const geometry = new THREE.BufferGeometry();
 const positions = new Float32Array(maxPoints * 3);
 geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -30,11 +30,11 @@ let currentPosition = new THREE.Vector3(0, 0, 0);
 
 // Function to update the position of the line
 function updatePosition() {
-    t += 0.01;
+    t += 0.1;
     const noise = new THREE.Vector3(
-        Math.sin(t * 2.1) + Math.cos(t * 3.2),
-        Math.cos(t * 2.3) + Math.sin(t * 3.5),
-        Math.sin(t * 2.7) + Math.cos(t * 3.1)
+        Math.sin(t * 2.1) + Math.cos(t * 3.3),
+        Math.cos(t * 2.3) + Math.sin(t * 3.7),
+        Math.sin(t * 2.7) + Math.cos(t * 3.2)
     ).normalize();
     currentDirection.lerp(noise, 0.1).normalize();
     const speed = 0.03 + 0.02 * Math.sin(t * 4.3);
@@ -81,8 +81,8 @@ function animate() {
         positions[(maxPoints - 1) * 3 + 2] = point.z;
     }
     line.geometry.attributes.position.needsUpdate = true;
-    line.rotation.x += 0.001;
-    line.rotation.y += 0.002;
+    line.rotation.x += 0.0001;
+    line.rotation.y += 0.0001;
     renderer.render(scene, camera);
 }
 
