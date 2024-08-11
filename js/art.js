@@ -5,7 +5,7 @@ const canvas = document.getElementById('threeCanvas');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-renderer.setSize(1000, 200);
+renderer.setSize(700, 200);
 renderer.setClearColor(0x000000, 0); // Set clear color to transparent
 
 // Create the line material
@@ -93,7 +93,7 @@ animate();
 function onWindowResize() {
     camera.aspect = 1;
     camera.updateProjectionMatrix();
-    renderer.setSize(200, 200);
+    renderer.setSize(700, 200);
 }
 window.addEventListener('resize', onWindowResize, false);
 
