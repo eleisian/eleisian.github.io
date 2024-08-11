@@ -10,6 +10,7 @@
         const darkModeBtn = $('#darkModeBtn');
         const accordion = $('.accordion');
         const breadcrumbNav = $('nav[aria-label="breadcrumb"]');
+        
     
         body.toggleClass('dark-mode');
         darkModeBtn.toggleClass('active');
@@ -26,8 +27,8 @@
     
         // Example Three.js update for dark mode
         const darkModeMaterial = new THREE.LineBasicMaterial({ color: body.hasClass('dark-mode') ? 0xffffff : 0x000000 });
-        outerWireframe.material = darkModeMaterial;
-        innerWireframe.material = darkModeMaterial;
+        line.material = darkModeMaterial;
+
     
         // Additional Three.js updates as needed
     }
