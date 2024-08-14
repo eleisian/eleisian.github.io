@@ -67,9 +67,10 @@ body {
     z-index: 2;
     background-color: var(--bg-color);
     padding: 20px;
-    border-radius: 15px;
+    border-radius: 20px;
     border: 1px solid #9a9a9a;
     transition: background-color 0.5s, color 0.5s;
+    clip-path: inset(0 round 20px);
 }
 
 .tech-stack-container {
