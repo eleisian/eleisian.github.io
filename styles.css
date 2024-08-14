@@ -93,44 +93,56 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
-    height: 100%; /* Ensures the card takes up the full height of the grid item */
-    width: auto;
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
 
 .card img {
     width: 100%;
-    height: auto; /* Fixed height to ensure consistency across all cards */
+    height: 200px; /* Fixed height for consistency */
     object-fit: cover;
     display: block;
     transition: transform 0.3s ease-in-out;
 }
 
 .card-content {
-    flex-grow: 1;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    opacity: 0;
-    transform: translateY(100%);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    pointer-events: none; /* Prevent tab selection */
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 15px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+    max-height: 100%;
+    overflow-y: auto;
 }
 
-.card a {
-    color: white;
-    background-color: #1c8cc0;
-    border-radius: 5px;
-    text-decoration: none;
-    padding: 5px;
+.card:hover .card-content {
+    transform: translateY(0);
+}
+
+.card-content h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+}
+
+.card-content p {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.card-content a {
     display: inline-block;
-    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.2s ease-in-out, filter 0.2s ease-in-out;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    padding: 5px 10px;
+    background-color: #1c8cc0;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9em;
 }
 
 
