@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Emmanuel Wang - Software Engineer, Technical Artist, UI/UX Designer, and Game Developer. Explore my projects and skills.">
     <title>My Website</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.18.0/css/jquery.terminal.min.css"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
- 
 <body>
-    <nav class="navbar fixed-top d-md-none">
+    <nav class="navbar fixed-top d-md-none" aria-label="Main navigation">
         <div class="container-fluid">
-            <img src="./assets/icons/iconimage.png" class="profile-image" alt="picture of me">
+            <img src="./assets/icons/iconimage.png" class="profile-image" alt="Profile picture of Emmanuel Wang">
             <h1>E. Wang</h1>
         </div>
     </nav>
     <div class="d-none d-md-block">
         <div class="my-container">
-            <img src="./assets/icons/iconimage.png">
+            <img src="./assets/icons/iconimage.png" alt="Profile picture of Emmanuel Wang">
             <h2>Hi, I'm <br>Emmanuel</h2>
             <p>Software Engineer</p>
             <p>Technical Artist</p>
@@ -29,52 +29,48 @@
             <p>Game Developer</p>
         </div>
     </div>
-        
-<div id="fullpage">
-    <div class="section">
-        <div class="about-container visible" id="about-container">
-            <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="" onclick="toggleContent('about-container', 'blog-container')">About me</a></li>
-                    <li class="breadcrumb-item"><a href="" onclick="toggleContent('blog-container', 'about-container')">Blog</a></li>
-                </ol>
-            </nav>
-            <p>I have a passion for developing interactive web applications 🌐 and video games 🎮, as well as producing music 🎶 and creating designs 🎨.</p>
-            <p>Everything I do is to make my dream of creating something awesome a reality.</p>
-            <p>My current stack includes: </p>
-            <div style="display: flex;">
-                <ul class="tech-stack">
-                <li>React <span class="iconify" data-icon="logos:react" data-inline="false"></span></li>
-                <li>Node.js <span class="iconify" data-icon="fa-brands:node" data-inline="false"></span></li>
-                <li>Docker <span class="iconify" data-icon="logos:docker-icon" data-inline="false"></span></li>
-                <li>PostgreSQL <span class="iconify" data-icon="logos:postgresql" data-inline="false"></span></li>
-                <li>Ruby on Rails <span class="iconify" data-icon="simple-icons:rubyonrails" data-inline="false"></span></li>
-                <li>Google Cloud Platform <span class="iconify" data-icon="logos:google-cloud" data-inline="false"></span></li>
-              </ul>
-                <ul class="tech-stack">
-                <li>Blender <span class="iconify" data-icon="logos:blender" data-inline="false"></span></li>
-                <li>Adobe Creative Suite <span class="iconify" data-icon="uit:adobe-alt" data-inline="false"></span></li>
-                <li>Unity<span class="iconify" data-icon="mdi:unity" data-inline="false"></span></li>
-                <li>Unreal Engine <span class="iconify" data-icon="cib:unreal-engine" data-inline="false"></span></li>
-                <li>Ableton Live <span class="iconify" data-icon="cbi:abletonlive" data-inline="false"></span></li>
-                <li>Your tech stack 🫡</li>
-              </ul>
-              </ul>
-            </div>
+    <div id="fullpage">
+        <div class="section">
+            <div class="about-container visible" id="about-container">
+                <nav aria-label="Section navigation">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" onclick="toggleContent('about-container', 'blog-container')">About me</a></li>
+                        <li class="breadcrumb-item"><a href="#" onclick="toggleContent('blog-container', 'about-container')">Blog</a></li>
+                    </ol>
+                </nav>
+                <p>I have a passion for developing interactive web applications 🌐 and video games 🎮, as well as producing music 🎶 and creating designs 🎨.</p>
+                <p>Everything I do is to make my dream of creating something awesome a reality.</p>
+                <p>My current stack includes: </p>
+                <div class="tech-stack-container">
+                    <ul class="tech-stack">
+                        <li>React <span class="iconify" data-icon="logos:react"></span></li>
+                        <li>Node.js <span class="iconify" data-icon="fa-brands:node"></span></li>
+                        <li>Docker <span class="iconify" data-icon="logos:docker-icon"></span></li>
+                        <li>PostgreSQL <span class="iconify" data-icon="logos:postgresql"></span></li>
+                        <li>Ruby on Rails <span class="iconify" data-icon="simple-icons:rubyonrails"></span></li>
+                        <li>Google Cloud Platform <span class="iconify" data-icon="logos:google-cloud"></span></li>
+                    </ul>
+                    <ul class="tech-stack">
+                        <li>Blender <span class="iconify" data-icon="logos:blender"></span></li>
+                        <li>Adobe Creative Suite <span class="iconify" data-icon="uit:adobe-alt"></span></li>
+                        <li>Unity<span class="iconify" data-icon="mdi:unity"></span></li>
+                        <li>Unreal Engine <span class="iconify" data-icon="cib:unreal-engine"></span></li>
+                        <li>Ableton Live <span class="iconify" data-icon="cbi:abletonlive"></span></li>
+                        <li>Your tech stack 🫡</li>
+                    </ul>
+                </div>
             </div>
             <div class="blog-container" id="blog-container">
-              <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="" onclick="toggleContent('about-container', 'blog-container')">About me</a></li>
-                      <li class="breadcrumb-item"><a href="" onclick="toggleContent('blog-container', 'about-container')">Blog</a></li>
-                  </ol>
-              </nav>
-  
-              <br>
-              <!-- Begin blog posts -->
-              </div>
-      </div>
-
+                <nav aria-label="Section navigation">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" onclick="toggleContent('about-container', 'blog-container')">About me</a></li>
+                        <li class="breadcrumb-item"><a href="#" onclick="toggleContent('blog-container', 'about-container')">Blog</a></li>
+                    </ol>
+                </nav>
+                <h2>Latest Blog Posts</h2>
+                <!-- Add blog post snippets here -->
+            </div>
+        </div>
 
 
         <div class="section">
@@ -164,37 +160,32 @@
         </div>
     
     
-    <div class="section">
-        <canvas id="threeCanvas"></canvas>
-        <div class="contact-container">
-        <div class="contact-content">
-            <h1><a href="mailto:emmanueltwang@gmail.com">email:</a></h1>
-            <div class="social-icons">
-                <a href="https://github.com/eleisian" target="_blank"><i class="fab fa-github fa-xl"></i></a>
-                <a href="https://twitter.com/restis2g00d" target="_blank"><i class="fab fa-twitter fa-xl"></i></a>
-                <a href="https://www.linkedin.com/in/emmanuel-wang" target="_blank">
-                    <i class="fab fa-linkedin fa-xl"></i>
-                  </a>
-            </div>            
-        </div>
+        <div class="section">
+            <canvas id="threeCanvas"></canvas>
+            <div class="contact-container">
+                <div class="contact-content">
+                    <h1><a href="mailto:emmanueltwang@gmail.com" aria-label="Email Emmanuel Wang">email:</a></h1>
+                    <div class="social-icons">
+                        <a href="https://github.com/eleisian" target="_blank" aria-label="Emmanuel Wang's GitHub profile"><i class="fab fa-github fa-xl"></i></a>
+                        <a href="https://twitter.com/restis2g00d" target="_blank" aria-label="Emmanuel Wang's Twitter profile"><i class="fab fa-twitter fa-xl"></i></a>
+                        <a href="https://www.linkedin.com/in/emmanuel-wang" target="_blank" aria-label="Emmanuel Wang's LinkedIn profile">
+                            <i class="fab fa-linkedin fa-xl"></i>
+                        </a>
+                    </div>            
+                </div>
+            </div>
         </div>
     </div>
-    
-</div>
-
-
-<!-- Dark mode toggle button with Font Awesome sun/moon icons -->
-<button id="darkModeBtn">
-    <i class="fas fa-moon"></i>
-</button>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
-integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="./js/main.js"></script>
-<script src="./js/art.js"></script>
+    <button id="darkModeBtn" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </button>
+    <button onclick="scrollToTop()" id="backToTop" class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/art.js"></script>
 </body>
-
 </html>
