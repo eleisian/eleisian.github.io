@@ -343,6 +343,10 @@ body.dark-mode {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -150%);
+    width: 450px;  /* Match the width of your Three.js scene */
+    height: 100px; /* Match the height of your Three.js scene */
+    border-radius: 20px;
+    overflow: hidden;
 }
 
 #p5-canvas {

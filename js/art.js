@@ -24,21 +24,21 @@ charCanvas.width = 64;
 charCanvas.height = 64;
 const charCtx = charCanvas.getContext('2d');
 
-// Custom color palettes
+// Water-inspired color palettes
 const lightModePalette = [
-    0x8ecae6, // Light Blue
-    0x219ebc, // Teal
-    0x023047, // Dark Blue
-    0xffb703, // Yellow
-    0xfb8500  // Orange
+    0x66C3FF, // Light Blue
+    0x4A90E2, // Sky Blue
+    0x00A3E0, // Azure
+    0x7FCDFF, // Carolina Blue
+    0x4DB6AC  // Teal
 ];
 
 const darkModePalette = [
-    0x390099, // Deep Purple
-    0x9e0059, // Magenta
-    0xff0054, // Pink
-    0xff5400, // Orange
-    0xffbd00  // Yellow
+    0x1A5F7A, // Deep Sea Blue
+    0x002F40, // Midnight Blue
+    0x034F84, // Navy Blue
+    0x465362, // Slate Gray
+    0x1E3A5F  // Dark Cerulean
 ];
 
 let currentPalette = lightModePalette;
@@ -52,8 +52,9 @@ class Grid {
                 const cell = {
                     sprite: this.createSprite(asciiChars[0], x, y),
                     age: 0,
-                    maxAge: 100 + Math.random() * 200,
-                    colorIndex: Math.floor(Math.random() * currentPalette.length)
+                    maxAge: 200 + Math.random() * 300,
+                    colorIndex: Math.floor(Math.random() * currentPalette.length),
+                    rhythm: Math.random() * Math.PI * 2 // For dancer-like rhythm
                 };
                 this.cells.push(cell);
                 scene.add(cell.sprite);
@@ -72,7 +73,7 @@ class Grid {
 
         const texture = new THREE.Texture(charCanvas);
         texture.needsUpdate = true;
-        texture.userData = { char: char }; // Store the character for later use
+        texture.userData = { char: char };
 
         const material = new THREE.SpriteMaterial({ map: texture });
         const sprite = new THREE.Sprite(material);
@@ -85,8 +86,12 @@ class Grid {
         return sprite;
     }
 
-    updateCell(cell) {
+    updateCell(cell, time) {
         cell.age++;
+        
+        // Dancer-like rhythm
+        const rhythmFactor = (Math.sin(time * 0.001 + cell.rhythm) + 1) / 2;
+        
         if (cell.age > cell.maxAge) {
             const newChar = asciiChars[Math.floor(Math.random() * asciiChars.length)];
             const x = Math.floor((cell.sprite.position.x + width/2) / cellSize);
@@ -95,19 +100,34 @@ class Grid {
             cell.sprite = this.createSprite(newChar, x, y);
             scene.add(cell.sprite);
             cell.age = 0;
-            cell.maxAge = 100 + Math.random() * 200;
+            cell.maxAge = 200 + Math.random() * 300;
             cell.colorIndex = (cell.colorIndex + 1) % currentPalette.length;
+            cell.rhythm = Math.random() * Math.PI * 2;
         }
 
-        // Change color based on age and palette
+        // Change color based on age and rhythm
         const t = cell.age / cell.maxAge;
         const color = new THREE.Color(currentPalette[cell.colorIndex]);
-        color.multiplyScalar(0.3 + t * 0.7); // Adjust brightness based on age
+        color.multiplyScalar(0.3 + rhythmFactor * 0.7);
         cell.sprite.material.color = color;
+
+        // Occasionally change character based on rhythm
+        if (Math.random() < 0.01 * rhythmFactor) {
+            const texture = cell.sprite.material.map;
+            const newChar = asciiChars[Math.floor(Math.random() * asciiChars.length)];
+            charCtx.fillStyle = 'white';
+            charCtx.fillRect(0, 0, 64, 64);
+            charCtx.fillStyle = 'black';
+            charCtx.font = '48px Arial';
+            charCtx.textAlign = 'center';
+            charCtx.textBaseline = 'middle';
+            charCtx.fillText(newChar, 32, 32);
+            texture.needsUpdate = true;
+        }
     }
 
-    update() {
-        this.cells.forEach(cell => this.updateCell(cell));
+    update(time) {
+        this.cells.forEach(cell => this.updateCell(cell, time));
     }
 }
 
@@ -118,9 +138,9 @@ const grid = new Grid();
 camera.position.z = 10;
 
 // Animation function
-function animate() {
+function animate(time) {
     requestAnimationFrame(animate);
-    grid.update();
+    grid.update(time);
     renderer.render(scene, camera);
 }
 
@@ -148,8 +168,10 @@ function updateColors(isDarkMode) {
         charCtx.fillText(texture.userData.char, 32, 32);
         texture.needsUpdate = true;
 
-        // Reset cell age to trigger color update
-        cell.age = 0;
+        // Update cell color
+        cell.colorIndex = Math.floor(Math.random() * currentPalette.length);
+        const color = new THREE.Color(currentPalette[cell.colorIndex]);
+        cell.sprite.material.color = color;
     });
 }
 

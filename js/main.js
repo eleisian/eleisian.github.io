@@ -10,27 +10,23 @@
         const darkModeBtn = $('#darkModeBtn');
         const accordion = $('.accordion');
         const breadcrumbNav = $('nav[aria-label="breadcrumb"]');
-        
-    
         body.toggleClass('dark-mode');
         darkModeBtn.toggleClass('active');
-    
+        
         // Update data-bs-theme attribute for accordion
         accordion.attr('data-bs-theme', body.hasClass('dark-mode') ? 'dark' : 'light');
         
         // Update data-bs-theme attribute for breadcrumb
         breadcrumbNav.attr('data-bs-theme', body.hasClass('dark-mode') ? 'dark' : 'light');
-    
+        
         // Update button text
         const buttonText = body.hasClass('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i> ';
         darkModeBtn.html(buttonText);
-    
-        // Example Three.js update for dark mode
-        const darkModeMaterial = new THREE.LineBasicMaterial({ color: body.hasClass('dark-mode') ? 0xffffff : 0x000000 });
-        line.material = darkModeMaterial;
-
-    
-        // Additional Three.js updates as needed
+        
+        // Update Three.js colors
+        if (window.updateThreeJsColors) {
+            window.updateThreeJsColors(body.hasClass('dark-mode'));
+        }
     }
     
     
