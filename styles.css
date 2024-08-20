@@ -342,7 +342,7 @@ body.dark-mode {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -95%);
+    transform: translate(-50%, -150%);
 }
 
 #p5-canvas {
@@ -445,5 +445,10 @@ body.dark-mode {
         margin-right: 20px;
         top: 0;
         transform: rotate(270deg);
+    }
+    #threeCanvas {
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }
