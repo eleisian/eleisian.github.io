@@ -1,9 +1,13 @@
+$(document).ready(function() {
+    // Initialize Fullpage.js
     new fullpage('#fullpage', {
-        navigation: true, // Add navigation dots
-        sectionsColor: ['#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2'], // Set section background colors
-        scrollingSpeed: 300, // Set the scrolling speed
+        navigation: true,
+        sectionsColor: ['#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2'],
+        scrollingSpeed: 300,
+        normalScrollElements: '.blog-container, .projects-container, .about-container',
+        scrollOverflow: true,
     });
-    
+
     // Dark mode toggle function
     function toggleDarkMode() {
         const body = $('body');
@@ -12,49 +16,104 @@
         const breadcrumbNav = $('nav[aria-label="breadcrumb"]');
         body.toggleClass('dark-mode');
         darkModeBtn.toggleClass('active');
-        
-        // Update data-bs-theme attribute for accordion
         accordion.attr('data-bs-theme', body.hasClass('dark-mode') ? 'dark' : 'light');
-        
-        // Update data-bs-theme attribute for breadcrumb
         breadcrumbNav.attr('data-bs-theme', body.hasClass('dark-mode') ? 'dark' : 'light');
-        
-        // Update button text
-        const buttonText = body.hasClass('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i> ';
+        const buttonText = body.hasClass('dark-mode') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         darkModeBtn.html(buttonText);
-        
-        // Update Three.js colors
         if (window.updateThreeJsColors) {
             window.updateThreeJsColors(body.hasClass('dark-mode'));
         }
     }
-    
-    
-    
+
+    // Toggle content visibility function
     function toggleContent(showId, hideId) {
         event.preventDefault();
         var showContainer = $("#" + showId);
         var hideContainer = $("#" + hideId);
-
         hideContainer.removeClass('visible');
         showContainer.addClass('visible');
     }
 
-    $(document).ready(function() {
-        // Check if the browser is Chrome
-        if(/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) {
-            $(".blog-container").addClass("chrome-specific");
+    // Improved scroll handling
+    let scrollOverflowUp = 0;
+    let scrollOverflowDown = 0;
+    const overflowThreshold = 300; // Adjust this value to change the required overflow amount
+    let isChangingSection = false;
+    let touchStartY = 0;
+
+    function handleScroll(event) {
+        if (isChangingSection) {
+            return;
         }
-    });
 
-    $('.blog-container' && '.projects-container').on('wheel touchmove', function(event) {
-        event.stopPropagation();
-    });
+        const $this = $(this);
+        const scrollTop = $this.scrollTop();
+        const scrollHeight = $this.prop('scrollHeight');
+        const containerHeight = $this.innerHeight();
+        let scrollDelta;
 
-    if (window.innerWidth < 768) {
-        $('.about-container').on('wheel touchmove', function(event) {
-            event.stopPropagation();
-        });
+        // Determine scroll delta based on event type
+        if (event.type === 'wheel') {
+            scrollDelta = event.originalEvent.deltaY;
+        } else if (event.type === 'touchmove') {
+            const touch = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
+            scrollDelta = touchStartY - touch.pageY;
+            touchStartY = touch.pageY;
+        }
+
+        // Update the scroll overflow
+        if (scrollDelta > 0) {
+            // Scrolling down
+            if (scrollTop + containerHeight >= scrollHeight) {
+                scrollOverflowDown += Math.abs(scrollDelta);
+                scrollOverflowUp = 0; // Reset upward overflow
+            } else {
+                scrollOverflowDown = 0; // Reset if not at bottom
+            }
+        } else if (scrollDelta < 0) {
+            // Scrolling up
+            if (scrollTop <= 0) {
+                scrollOverflowUp += Math.abs(scrollDelta);
+                scrollOverflowDown = 0; // Reset downward overflow
+            } else {
+                scrollOverflowUp = 0; // Reset if not at top
+            }
+        }
+
+        // Check if overflow threshold is reached
+        if (scrollOverflowDown >= overflowThreshold) {
+            isChangingSection = true;
+            fullpage_api.moveSectionDown();
+            resetScrollState();
+        } else if (scrollOverflowUp >= overflowThreshold) {
+            isChangingSection = true;
+            fullpage_api.moveSectionUp();
+            resetScrollState();
+        }
+
+        // Prevent default scroll behavior when at the boundaries
+        if ((scrollDelta > 0 && scrollTop + containerHeight >= scrollHeight) ||
+            (scrollDelta < 0 && scrollTop <= 0)) {
+            event.preventDefault();
+        }
     }
+
+    function resetScrollState() {
+        setTimeout(() => {
+            isChangingSection = false;
+            scrollOverflowUp = 0;
+            scrollOverflowDown = 0;
+        }, 1000); // Adjust this delay if needed
+    }
+
+    function handleTouchStart(event) {
+        touchStartY = event.originalEvent.touches[0].pageY;
+    }
+
+    // Apply the scroll handlers to the containers
+    $('.blog-container, .projects-container, .about-container').on('wheel touchmove', handleScroll);
+    $('.blog-container, .projects-container, .about-container').on('touchstart', handleTouchStart);
+
     // Dark mode button click event
     $('#darkModeBtn').on('click', toggleDarkMode);
+});
