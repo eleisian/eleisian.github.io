@@ -1,19 +1,10 @@
 $(document).ready(function() {
-    // Check if the device is mobile
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-    // Set up normalScrollElements based on device type
-    let normalScrollElements = '.projects-container';
-    if (isMobile) {
-        normalScrollElements += ', .about-container, .blog-container';
-    }
-
     // Initialize Fullpage.js
     new fullpage('#fullpage', {
         navigation: true,
         sectionsColor: ['#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2'],
-        scrollingSpeed: 500,
-        normalScrollElements: normalScrollElements,
+        scrollingSpeed: 300,
+        normalScrollElements: '.blog-container, .projects-container, .about-container',
         scrollOverflow: true,
     });
 
@@ -46,7 +37,7 @@ $(document).ready(function() {
     // Improved scroll handling
     let scrollOverflowUp = 0;
     let scrollOverflowDown = 0;
-    let overflowThreshold = isMobile ? 100 : 1111; // Adjust this value to change the required overflow amount
+    const overflowThreshold = 300; // Adjust this value to change the required overflow amount
     let isChangingSection = false;
     let touchStartY = 0;
 
@@ -56,16 +47,6 @@ $(document).ready(function() {
         }
 
         const $this = $(this);
-        
-        // Check if this element should have normal scrolling on mobile
-        if (isMobile && (
-            $this.hasClass('projects-container') || 
-            $this.hasClass('about-container') || 
-            $this.hasClass('blog-container')
-        )) {
-            return; // Allow normal scrolling for these elements on mobile
-        }
-
         const scrollTop = $this.scrollTop();
         const scrollHeight = $this.prop('scrollHeight');
         const containerHeight = $this.innerHeight();
