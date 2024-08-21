@@ -1,10 +1,22 @@
+// Function to check if the device is mobile
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 // Get the canvas element
 const canvas = document.getElementById('threeCanvas');
 
 // Set up the scene, camera, and renderer
 const scene = new THREE.Scene();
-const width = 450;
-const height = 100;
+const mobileWidth = 250;
+const mobileHeight = 100;
+const desktopWidth = 450;
+const desktopHeight = 100;
+
+// Set initial width and height based on device type
+let width = isMobile() ? mobileWidth : desktopWidth;
+let height = isMobile() ? mobileHeight : desktopHeight;
+
 const camera = new THREE.OrthographicCamera(-width/2, width/2, height/2, -height/2, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
 renderer.setSize(width, height);
@@ -12,8 +24,8 @@ renderer.setClearColor(0x000000, 0); // Transparent background
 
 // Grid settings
 const cellSize = 25; // Fixed cell size
-const gridWidth = Math.floor(width / cellSize);
-const gridHeight = Math.floor(height / cellSize);
+let gridWidth = Math.floor(width / cellSize);
+let gridHeight = Math.floor(height / cellSize);
 
 // ASCII characters to use
 const asciiChars = ['·', ':', '+', '×', '▢', '▣', '◯', '◉', '█'];
@@ -47,6 +59,10 @@ let currentPalette = lightModePalette;
 class Grid {
     constructor() {
         this.cells = [];
+        this.initCells();
+    }
+
+    initCells() {
         for (let x = 0; x < gridWidth; x++) {
             for (let y = 0; y < gridHeight; y++) {
                 const cell = {
@@ -129,13 +145,35 @@ class Grid {
     update(time) {
         this.cells.forEach(cell => this.updateCell(cell, time));
     }
+
+    resize(newWidth, newHeight) {
+        // Remove all existing sprites
+        this.cells.forEach(cell => scene.remove(cell.sprite));
+        
+        // Update grid dimensions
+        width = newWidth;
+        height = newHeight;
+        gridWidth = Math.floor(width / cellSize);
+        gridHeight = Math.floor(height / cellSize);
+
+        // Reinitialize cells
+        this.cells = [];
+        this.initCells();
+
+        // Update camera
+        camera.left = -width / 2;
+        camera.right = width / 2;
+        camera.top = height / 2;
+        camera.bottom = -height / 2;
+        camera.updateProjectionMatrix();
+    }
 }
 
 // Create grid
 const grid = new Grid();
 
 // Set camera position
-camera.position.z = 10;
+camera.position.z = 100;
 
 // Animation function
 function animate(time) {
@@ -149,7 +187,10 @@ animate();
 
 // Handle window resizing
 function onWindowResize() {
-    renderer.setSize(width, height);
+    const newWidth = isMobile() ? mobileWidth : desktopWidth;
+    const newHeight = isMobile() ? mobileHeight : desktopHeight;
+    renderer.setSize(newWidth, newHeight);
+    grid.resize(newWidth, newHeight);
 }
 window.addEventListener('resize', onWindowResize, false);
 
@@ -177,3 +218,6 @@ function updateColors(isDarkMode) {
 
 // Expose updateColors function to global scope
 window.updateThreeJsColors = updateColors;
+
+// Call onWindowResize initially to set the correct size
+onWindowResize();

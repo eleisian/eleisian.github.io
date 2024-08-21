@@ -398,7 +398,7 @@ body.dark-mode {
     .projects-container {
         margin: 0 auto;
         max-width: 90%;
-        max-height: 600px;
+        max-height: 500px;
     }
 
     .grid-container {
@@ -453,6 +453,8 @@ body.dark-mode {
     #threeCanvas {
         top: 30%;
         left: 50%;
+        width: 250px;  /* Match the width of your Three.js scene */
+        height: 100px; /* Match the height of your Three.js scene */
         transform: translate(-50%, -50%);
     }
 }
