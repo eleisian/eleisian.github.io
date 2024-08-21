@@ -76,13 +76,13 @@ body {
 .tech-stack-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Add some space between columns */
+    gap: 20px;
 }
 
 .tech-stack {
-    flex-basis: calc(50% - 10px); /* Adjust for the gap */
+    flex-basis: calc(50% - 10px);
     list-style-type: disc;
-    padding-left: 20px; /* Add some padding for the list bullets */
+    padding-left: 20px;
 }
 
 .projects-container h2 {
@@ -130,7 +130,9 @@ body {
 }
 
 .card:hover .card-content,
-.card:focus-within .card-content {
+.card:focus-within .card-content,
+.card.active .card-content,
+.card-content.show {
     transform: translateY(0);
 }
 
@@ -270,7 +272,6 @@ body {
     transition: background-color 0.5s, color 0.5s;
 }
 
-
 /* Dark Mode */
 body.dark-mode {
     --text-color: var(--dark-text-color);
@@ -308,7 +309,6 @@ body.dark-mode {
     border-color: #555;
 }
 
-/* Optional: Adjust the card content link color for better visibility */
 .dark-mode .card-content a {
     background-color: var(--primary-color);
     color: var(--dark-text-color);
@@ -321,7 +321,6 @@ body.dark-mode {
 .dark-mode .breadcrumb-item + .breadcrumb-item::before {
     color: var(--dark-text-color);
 }
-
 
 .social-icons a {
     color: #1f1f1f;
@@ -343,8 +342,8 @@ body.dark-mode {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -150%);
-    width: 450px;  /* Match the width of your Three.js scene */
-    height: 100px; /* Match the height of your Three.js scene */
+    width: 450px;
+    height: 100px;
     border-radius: 20px;
     overflow: hidden;
 }
@@ -453,8 +452,24 @@ body.dark-mode {
     #threeCanvas {
         top: 30%;
         left: 50%;
-        width: 250px;  /* Match the width of your Three.js scene */
-        height: 100px; /* Match the height of your Three.js scene */
+        width: 250px;
+        height: 100px;
         transform: translate(-50%, -50%);
+    }
+}
+
+/* Add a media query for touch devices */
+@media (hover: none) {
+    .card-content {
+        transform: translateY(100%);
+    }
+
+    .card:hover .card-content {
+        transform: translateY(100%);
+    }
+
+    .card.active .card-content,
+    .card-content.show {
+        transform: translateY(0);
     }
 }

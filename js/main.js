@@ -12,7 +12,7 @@ $(document).ready(function() {
     new fullpage('#fullpage', {
         navigation: true,
         sectionsColor: ['#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2'],
-        scrollingSpeed: 500,
+        scrollingSpeed: 300,
         normalScrollElements: normalScrollElements,
         scrollOverflow: true,
     });
