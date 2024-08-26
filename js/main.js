@@ -33,8 +33,7 @@ $(document).ready(function() {
     }
 
     // Toggle content visibility function
-    function toggleContent(event, showId, hideId) {
-        event.preventDefault();
+    window.toggleContent = function(showId, hideId) {
         var showContainer = $("#" + showId);
         var hideContainer = $("#" + hideId);
         hideContainer.removeClass('visible');
@@ -44,7 +43,8 @@ $(document).ready(function() {
     // Improved scroll handling
     let scrollOverflowUp = 0;
     let scrollOverflowDown = 0;
-    const overflowThreshold = 1000; // Adjust this value to change the required overflow amount
+    const desktopOverflowThreshold = 1000;
+    const mobileOverflowThreshold = 200; // Lower threshold for mobile devices
     let isChangingSection = false;
     let touchStartY = 0;
 
@@ -58,6 +58,10 @@ $(document).ready(function() {
         const scrollHeight = $this.prop('scrollHeight');
         const containerHeight = $this.innerHeight();
         let scrollDelta;
+        
+        // Improved mobile detection
+        const isMobile = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(navigator.userAgent) || 'ontouchstart' in window;
+        const overflowThreshold = isMobile ? mobileOverflowThreshold : desktopOverflowThreshold;
 
         // Determine scroll delta based on event type
         if (event.type === 'wheel') {

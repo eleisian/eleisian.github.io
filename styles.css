@@ -178,7 +178,7 @@ body {
 .about-container,
 .blog-container {
     position: relative;
-    display: none;
+    display: none; /* Hide by default */
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
@@ -222,8 +222,7 @@ body {
 
 .visible {
     animation: expandHeight 1s ease;
-    display: flex;
-    flex-direction: column;
+    display: block; /* Show when the 'visible' class is applied */
     max-height: 60%;
 }
 
@@ -442,7 +441,7 @@ body.dark-mode {
     .projects-container {
         margin: 0 auto;
         max-width: 90%;
-        max-height: 600px;
+        max-height: 555px;
     }
 
     .grid-container {

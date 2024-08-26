@@ -66,6 +66,10 @@ let currentPalette = lightModePalette;
 // Grid class
 class Grid {
     constructor() {
+        this.createCells();
+    }
+
+    createCells() {
         this.cells = [];
         for (let x = 0; x < gridWidth; x++) {
             for (let y = 0; y < gridHeight; y++) {
@@ -80,6 +84,13 @@ class Grid {
                 scene.add(cell.sprite);
             }
         }
+    }
+
+    updateGridSize() {
+        // Remove existing cells
+        this.cells.forEach(cell => scene.remove(cell.sprite));
+        // Create new cells with updated dimensions
+        this.createCells();
     }
 
     createSprite(char, x, y) {
@@ -178,9 +189,8 @@ function onWindowResize() {
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
     
-    // Recreate the grid with new dimensions
-    scene.remove(...grid.cells.map(cell => cell.sprite));
-    grid = new Grid();
+    // Update the existing grid with new dimensions
+    grid.updateGridSize();
 }
 window.addEventListener('resize', onWindowResize, false);
 
