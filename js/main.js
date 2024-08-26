@@ -71,7 +71,7 @@ $(document).ready(function() {
         // Update the scroll overflow
         if (scrollDelta > 0) {
             // Scrolling down
-            if (scrollTop + containerHeight >= scrollHeight) {
+            if (scrollTop + containerHeight >= scrollHeight - 1) { // Allow for small rounding errors
                 scrollOverflowDown += Math.abs(scrollDelta);
                 scrollOverflowUp = 0; // Reset upward overflow
             } else {
@@ -79,7 +79,7 @@ $(document).ready(function() {
             }
         } else if (scrollDelta < 0) {
             // Scrolling up
-            if (scrollTop <= 0) {
+            if (scrollTop <= 1) { // Allow for small rounding errors
                 scrollOverflowUp += Math.abs(scrollDelta);
                 scrollOverflowDown = 0; // Reset downward overflow
             } else {
@@ -98,11 +98,7 @@ $(document).ready(function() {
             resetScrollState();
         }
 
-        // Prevent default scroll behavior when at the boundaries
-        if ((scrollDelta > 0 && scrollTop + containerHeight >= scrollHeight) ||
-            (scrollDelta < 0 && scrollTop <= 0)) {
-            event.preventDefault();
-        }
+        // Don't prevent default scroll behavior
     }
 
     function resetScrollState() {
@@ -118,8 +114,8 @@ $(document).ready(function() {
     }
 
     // Apply the scroll handlers to the containers
-    $('.blog-container, .projects-container, .about-container').on('wheel touchmove', handleScroll);
-    $('.blog-container, .projects-container, .about-container').on('touchstart', handleTouchStart);
+    $('.blog-container, .projects-container, .about-container, .contact-container').on('wheel touchmove', handleScroll);
+    $('.blog-container, .projects-container, .about-container, .contact-container').on('touchstart', handleTouchStart);
 
     // Dark mode button click event
     $('#darkModeBtn').on('click', toggleDarkMode);
