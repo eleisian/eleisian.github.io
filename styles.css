@@ -358,10 +358,18 @@ body.dark-mode {
 
 
 .social-icons a {
-    color: #1f1f1f;
+    color: var(--text-color);
     text-decoration: none;
-    transition: color 0.5s;
+    transition: color 0.3s;
     font-size: medium;
+}
+
+.social-icons a:hover {
+    color: var(--primary-color);
+}
+
+.dark-mode .social-icons a:hover {
+    color: #3aa7e8; /* A lighter blue for better contrast in dark mode */
 }
 
 .dark-mode .about-container,
