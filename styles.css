@@ -71,6 +71,8 @@ body {
     border: 1px solid #9a9a9a;
     transition: background-color 0.5s, color 0.5s;
     clip-path: inset(0 round 20px);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .tech-stack-container {
@@ -193,6 +195,8 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: background-color 0.5s, color 0.5s;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 /* Styles for Webkit browsers (Chrome, Safari, etc.) */
@@ -234,8 +238,12 @@ body {
 }
 
 @keyframes expandHeight {
-    from { max-height: 30%; }
-    to { max-height: 60% }
+    from { 
+        opacity: 0;
+    }
+    to { 
+        opacity: 1;
+    }
 }
 
 .contact-container {
@@ -246,6 +254,8 @@ body {
     justify-content: center;
     flex-direction: row;
     width: auto;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .contact-content h1 {
@@ -371,6 +381,8 @@ body.dark-mode {
     height: 100px; /* Match the height of your Three.js scene */
     border-radius: 20px;
     overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 #p5-canvas {
@@ -479,4 +491,12 @@ body.dark-mode {
         left: 50%;
         transform: translate(-50%, -50%);
     }
+}
+
+.fade-in {
+    opacity: 1;
+}
+
+#threeCanvas.fade-in {
+    opacity: 1;
 }

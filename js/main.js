@@ -4,8 +4,15 @@ $(document).ready(function() {
         navigation: true,
         sectionsColor: ['#f2f2f2', '#f2f2f2', '#f2f2f2', '#f2f2f2'],
         scrollingSpeed: 300,
-        normalScrollElements: '.blog-container, .projects-container, .about-container',
+        normalScrollElements: '.projects-container, .about-container',
         scrollOverflow: true,
+        onLeave: function(origin, destination, direction) {
+            // Remove fade-in class from all containers when leaving a section
+            $('.about-container, .blog-container, .projects-container, .contact-container, #threeCanvas').removeClass('fade-in');
+        },
+        afterLoad: function(origin, destination, direction) {
+            fadeInContainers(destination.index);
+        }
     });
 
     // Dark mode toggle function
@@ -116,4 +123,22 @@ $(document).ready(function() {
 
     // Dark mode button click event
     $('#darkModeBtn').on('click', toggleDarkMode);
+
+    // Update the fadeInContainers function
+    function fadeInContainers(sectionIndex) {
+        switch(sectionIndex) {
+            case 0:
+                $('.about-container, .blog-container').addClass('fade-in');
+                break;
+            case 1:
+                $('.projects-container').addClass('fade-in');
+                break;
+            case 2:
+                $('.contact-container, #threeCanvas').addClass('fade-in');
+                break;
+        }
+    }
+
+    // Remove the setTimeout call for fadeInContainers
+    // setTimeout(fadeInContainers, 100);
 });
