@@ -177,7 +177,10 @@ body {
 .blog-container {
     position: relative;
     display: none;
-    overflow-y: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
     text-align: left;
     margin-left: 35%;
     max-height: 30%;
@@ -190,7 +193,27 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: background-color 0.5s, color 0.5s;
-    scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+}
+
+/* Styles for Webkit browsers (Chrome, Safari, etc.) */
+.about-container::-webkit-scrollbar,
+.blog-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.about-container::-webkit-scrollbar-thumb,
+.blog-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+}
+
+/* Ensure visibility on mobile landscape */
+@media (max-width: 896px) and (orientation: landscape) {
+    .about-container,
+    .blog-container {
+        max-height: 70vh;
+        overflow-y: scroll;
+    }
 }
 
 .visible {
@@ -222,6 +245,7 @@ body {
     text-align: center;
     justify-content: center;
     flex-direction: row;
+    width: auto;
 }
 
 .contact-content h1 {

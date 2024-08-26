@@ -26,7 +26,7 @@ $(document).ready(function() {
     }
 
     // Toggle content visibility function
-    function toggleContent(showId, hideId) {
+    function toggleContent(event, showId, hideId) {
         event.preventDefault();
         var showContainer = $("#" + showId);
         var hideContainer = $("#" + hideId);
@@ -37,7 +37,7 @@ $(document).ready(function() {
     // Improved scroll handling
     let scrollOverflowUp = 0;
     let scrollOverflowDown = 0;
-    const overflowThreshold = 300; // Adjust this value to change the required overflow amount
+    const overflowThreshold = 1000; // Adjust this value to change the required overflow amount
     let isChangingSection = false;
     let touchStartY = 0;
 
@@ -103,7 +103,7 @@ $(document).ready(function() {
             isChangingSection = false;
             scrollOverflowUp = 0;
             scrollOverflowDown = 0;
-        }, 1000); // Adjust this delay if needed
+        }, 0); // Adjust this delay if needed
     }
 
     function handleTouchStart(event) {
