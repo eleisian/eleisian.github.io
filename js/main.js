@@ -8,7 +8,7 @@ $(document).ready(function() {
         scrollOverflow: true,
         onLeave: function(origin, destination, direction) {
             // Remove fade-in class from all containers when leaving a section
-            $('.about-container, .blog-container, .projects-container, .contact-container, #threeCanvas').removeClass('fade-in');
+            $('.about-container, .blog-container, .blog-post, .projects-container, .contact-container, #threeCanvas').removeClass('fade-in');
         },
         afterLoad: function(origin, destination, direction) {
             fadeInContainers(destination.index);
@@ -32,18 +32,33 @@ $(document).ready(function() {
         }
     }
 
-    // Toggle content visibility function
+    // Update the toggleContent function
     window.toggleContent = function(showId, hideId) {
-        var showContainer = $("#" + showId);
-        var hideContainer = $("#" + hideId);
-        hideContainer.removeClass('visible');
-        showContainer.addClass('visible');
+        const showContainer = document.getElementById(showId);
+        const hideContainer = document.getElementById(hideId);
+
+        // Remove fade-in class and hide the container
+        hideContainer.classList.remove('fade-in');
+        hideContainer.style.display = 'none';
+
+        // Show the container
+        showContainer.style.display = 'block';
+        
+        // Force a reflow before adding the fade-in class
+        void showContainer.offsetWidth;
+
+        // Add fade-in class
+        showContainer.classList.add('fade-in');
+
+        if (showId === 'blog-container') {
+            loadBlogPosts();
+        }
     }
 
     // Improved scroll handling
     let scrollOverflowUp = 0;
     let scrollOverflowDown = 0;
-    const desktopOverflowThreshold = 1000;
+    const desktopOverflowThreshold = 3000;
     const mobileOverflowThreshold = 200; // Lower threshold for mobile devices
     let isChangingSection = false;
     let touchStartY = 0;
@@ -72,23 +87,22 @@ $(document).ready(function() {
             touchStartY = touch.pageY;
         }
 
-        // Update the scroll overflow
-        if (scrollDelta > 0) {
-            // Scrolling down
-            if (scrollTop + containerHeight >= scrollHeight - 1) { // Allow for small rounding errors
+        // Check if the container is scrollable
+        const isScrollable = scrollHeight > containerHeight;
+
+        // Update the scroll overflow only if the container is not scrollable or at the edges
+        if (!isScrollable || (scrollDelta > 0 && scrollTop + containerHeight >= scrollHeight - 1) || (scrollDelta < 0 && scrollTop <= 1)) {
+            if (scrollDelta > 0) {
                 scrollOverflowDown += Math.abs(scrollDelta);
-                scrollOverflowUp = 0; // Reset upward overflow
-            } else {
-                scrollOverflowDown = 0; // Reset if not at bottom
-            }
-        } else if (scrollDelta < 0) {
-            // Scrolling up
-            if (scrollTop <= 1) { // Allow for small rounding errors
+                scrollOverflowUp = 0;
+            } else if (scrollDelta < 0) {
                 scrollOverflowUp += Math.abs(scrollDelta);
-                scrollOverflowDown = 0; // Reset downward overflow
-            } else {
-                scrollOverflowUp = 0; // Reset if not at top
+                scrollOverflowDown = 0;
             }
+        } else {
+            // Reset overflow counters if scrolling within the container
+            scrollOverflowDown = 0;
+            scrollOverflowUp = 0;
         }
 
         // Check if overflow threshold is reached
@@ -102,7 +116,10 @@ $(document).ready(function() {
             resetScrollState();
         }
 
-        // Don't prevent default scroll behavior
+        // Prevent default only if changing section
+        if (isChangingSection) {
+            event.preventDefault();
+        }
     }
 
     function resetScrollState() {
@@ -118,8 +135,8 @@ $(document).ready(function() {
     }
 
     // Apply the scroll handlers to the containers
-    $('.blog-container, .projects-container, .about-container, .contact-container').on('wheel touchmove', handleScroll);
-    $('.blog-container, .projects-container, .about-container, .contact-container').on('touchstart', handleTouchStart);
+    $('.blog-container, .projects-container, .about-container, .contact-container, .blog-post').on('wheel touchmove', handleScroll);
+    $('.blog-container, .projects-container, .about-container, .contact-container, .blog-post').on('touchstart', handleTouchStart);
 
     // Dark mode button click event
     $('#darkModeBtn').on('click', toggleDarkMode);
@@ -129,6 +146,9 @@ $(document).ready(function() {
         switch(sectionIndex) {
             case 0:
                 $('.about-container, .blog-container').addClass('fade-in');
+                setTimeout(() => {
+                    $('.blog-post, .blog-content').addClass('fade-in');
+                }, 100); // Slight delay for blog posts and content
                 break;
             case 1:
                 $('.projects-container').addClass('fade-in');
@@ -141,4 +161,51 @@ $(document).ready(function() {
 
     // Remove the setTimeout call for fadeInContainers
     // setTimeout(fadeInContainers, 100);
+
+    // Load blog posts function
+    async function loadBlogPosts() {
+        try {
+            const response = await fetch('blog-posts.json');
+            const posts = await response.json();
+            const blogPostsContainer = document.getElementById('blog-posts');
+            blogPostsContainer.innerHTML = '';
+
+            for (const post of posts) {
+                const postElement = document.createElement('div');
+                postElement.className = 'blog-post';
+                
+                const contentResponse = await fetch(post.contentFile);
+                const content = await contentResponse.text();
+                
+                postElement.innerHTML = `
+                    <h3>${post.title}</h3>
+                    <div class="blog-content">${marked.parse(content)}</div>
+                `;
+                blogPostsContainer.appendChild(postElement);
+            }
+
+            // Force a reflow before adding the fade-in class
+            void blogPostsContainer.offsetWidth;
+
+            // Add fade-in class to blog posts after they're loaded
+            $('.blog-post, .blog-content').addClass('fade-in');
+        } catch (error) {
+            console.error('Error loading blog posts:', error);
+        }
+    }
+
+    async function loadBlogContent(contentFile) {
+        try {
+            const response = await fetch(contentFile);
+            const content = await response.text();
+            const blogPostsContainer = document.getElementById('blog-posts');
+            blogPostsContainer.innerHTML = marked.parse(content);
+        } catch (error) {
+            console.error('Error loading blog content:', error);
+        }
+    }
+
+    // Call this function when the page loads
+    document.addEventListener('DOMContentLoaded', loadBlogPosts);
+
 });

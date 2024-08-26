@@ -176,6 +176,18 @@ body {
 }
 
 .about-container,
+.blog-container,
+.blog-post,
+.blog-content {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade-in {
+    opacity: 1;
+}
+
+.about-container,
 .blog-container {
     position: relative;
     display: none; /* Hide by default */
@@ -185,7 +197,7 @@ body {
     scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
     text-align: left;
     margin-left: 35%;
-    max-height: 30%;
+    max-height: 60vh; /* Increase the max-height */
     max-width: 50%;
     z-index: 2;
     padding: 20px;
@@ -194,9 +206,7 @@ body {
     color: var(--text-color);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.5s, color 0.5s;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    transition: background-color 0.5s, color 0.5s, opacity 0.5s ease-in-out;
 }
 
 /* Styles for Webkit browsers (Chrome, Safari, etc.) */
@@ -506,4 +516,35 @@ body.dark-mode {
 
 #threeCanvas.fade-in {
     opacity: 1;
+}
+
+
+/* Add these styles to your existing styles.css file */
+
+.blog-post {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--bg-color);
+    border: 1px solid;
+    border-radius: 5px;
+    overflow-y: auto;
+    max-height: calc(60vh - 40px); /* Adjust based on .blog-container's max-height and padding */
+    opacity: 0; /* Start with opacity 0 */
+    transition: opacity 0.5s ease-in-out; /* Add transition */
+}
+.dark-mode .blog-post {
+    border: 1px solid #f1ce89;
+}
+
+.blog-post h3 {
+    margin-top: 0;
+    color: var(--text-color);
+    
+}
+.blog-post.fade-in {
+    opacity: 1;
+}
+
+.blog-content {
+    margin-top: 15px;
 }
