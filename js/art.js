@@ -1,23 +1,11 @@
 // Get the canvas element
+document.addEventListener('DOMContentLoaded', function() {
 const canvas = document.getElementById('threeCanvas');
 
 // Set up the scene, camera, and renderer
 const scene = new THREE.Scene();
-let width, height;
-
-// Function to set dimensions based on screen size
-function setDimensions() {
-    if (window.innerWidth <= 768) { // Mobile breakpoint
-        width = window.innerWidth;
-        height = 100; // Smaller height for mobile
-    } else {
-        width = 450;
-        height = 100;
-    }
-}
-
-setDimensions();
-
+const width = 550;
+const height = 50;
 const camera = new THREE.OrthographicCamera(-width/2, width/2, height/2, -height/2, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
 renderer.setSize(width, height);
@@ -25,15 +13,8 @@ renderer.setClearColor(0x000000, 0); // Transparent background
 
 // Grid settings
 const cellSize = 25; // Fixed cell size
-let gridWidth, gridHeight;
-
-// Function to update grid dimensions
-function updateGridDimensions() {
-    gridWidth = Math.floor(width / cellSize);
-    gridHeight = Math.floor(height / cellSize);
-}
-
-updateGridDimensions();
+const gridWidth = Math.floor(width / cellSize);
+const gridHeight = Math.floor(height / cellSize);
 
 // ASCII characters to use
 const asciiChars = ['·', ':', '+', '×', '▢', '▣', '◯', '◉', '█'];
@@ -66,10 +47,6 @@ let currentPalette = lightModePalette;
 // Grid class
 class Grid {
     constructor() {
-        this.createCells();
-    }
-
-    createCells() {
         this.cells = [];
         for (let x = 0; x < gridWidth; x++) {
             for (let y = 0; y < gridHeight; y++) {
@@ -84,13 +61,6 @@ class Grid {
                 scene.add(cell.sprite);
             }
         }
-    }
-
-    updateGridSize() {
-        // Remove existing cells
-        this.cells.forEach(cell => scene.remove(cell.sprite));
-        // Create new cells with updated dimensions
-        this.createCells();
     }
 
     createSprite(char, x, y) {
@@ -180,17 +150,7 @@ animate();
 
 // Handle window resizing
 function onWindowResize() {
-    setDimensions();
-    updateGridDimensions();
-    camera.left = -width / 2;
-    camera.right = width / 2;
-    camera.top = height / 2;
-    camera.bottom = -height / 2;
-    camera.updateProjectionMatrix();
     renderer.setSize(width, height);
-    
-    // Update the existing grid with new dimensions
-    grid.updateGridSize();
 }
 window.addEventListener('resize', onWindowResize, false);
 
@@ -218,3 +178,4 @@ function updateColors(isDarkMode) {
 
 // Expose updateColors function to global scope
 window.updateThreeJsColors = updateColors;
+});

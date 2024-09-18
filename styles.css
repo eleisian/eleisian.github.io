@@ -15,7 +15,29 @@
     --color-sky: #4a6d7c; /* Blue-green sky */
     --max-width: 1200px; /* Adjust this value as needed */
 }
+header {
+    position: relative;
+    margin-bottom: 0; /* Remove bottom margin */
+    min-height: 150px; /* Adjust this value based on your needs */
+    display: flex; /* Make header a flex container */
+    justify-content: space-between; /* Space between header-content and canvas */
+    align-items: center; /* Vertically center the content */
+    padding: 20px 0; /* Add some vertical padding */
+}
 
+.header-content {
+    flex: 1; /* Allow it to grow and shrink */
+    max-width: calc(100% - 470px); /* Adjust based on your canvas width */
+}
+
+#threeCanvas {
+    position: absolute;
+    top: 50%; /* Position the top edge at 50% of the header's height */
+    right: 0;
+    transform: translateY(-50%); /* Move the canvas up by half its own height */
+    width: 450px; /* Match the width in your Three.js script */
+    height: 100px; /* Match the height in your Three.js script */
+}
 body {
     font-family: var(--font-primary);
     font-size: 15px;
@@ -28,11 +50,22 @@ body {
 }
 
 header {
-    margin-bottom: 40px;
+    position: relative;
+    margin-bottom: 0; /* Remove bottom margin */
+    min-height: 150px; /* Adjust this value based on your needs */
+    display: flex; /* Make header a flex container */
+    justify-content: space-between; /* Space between header-content and canvas */
+    align-items: center; /* Vertically center the content */
+    padding: 20px 0; /* Add some vertical padding */
+}
+
+.header-content {
+    flex: 1; /* Allow it to grow and shrink */
+    max-width: calc(100% - 470px); /* Adjust based on your canvas width */
 }
 
 h1 {
-    margin-bottom: 10px;
+    margin:0px;
     font-size: 2.5em;
     color: transparent;
     background: linear-gradient(to bottom, #b0e0e6, #4a6d7c); /* Lighter blue at the top */
@@ -45,9 +78,10 @@ h1 {
 
 h2 {
     border-bottom: 2px solid var(--color-accent);
-    padding-bottom: 10px;
-    margin-bottom: 20px;
 }
+ p{
+    margin: 0;
+ }
 
 ul {
     list-style-type: none;
