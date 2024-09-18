@@ -4,9 +4,9 @@ const canvas = document.getElementById('threeCanvas');
 
 // Set up the scene, camera, and renderer
 const scene = new THREE.Scene();
-let width = 550;
-let height = 50;
-let camera = new THREE.OrthographicCamera(-width/2, width/2, height/2, -height/2, 0.1, 1000);
+const width = 550;
+const height = 50;
+const camera = new THREE.OrthographicCamera(-width/2, width/2, height/2, -height/2, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
 renderer.setSize(width, height);
 renderer.setClearColor(0x000000, 0); // Transparent background
@@ -17,7 +17,7 @@ const gridWidth = Math.floor(width / cellSize);
 const gridHeight = Math.floor(height / cellSize);
 
 // ASCII characters to use
-const asciiChars = ['', ':', '+', '×', '▢', '▣', '◯', '◉', '█'];
+const asciiChars = ['·', ':', '+', '×', '▢', '▣', '◯', '◉', '█'];
 
 // Create canvas for sprite texture
 const charCanvas = document.createElement('canvas');
@@ -130,43 +130,6 @@ class Grid {
     update(time) {
         this.cells.forEach(cell => this.updateCell(cell, time));
     }
-
-    updateGrid(newWidth, newHeight) {
-        const newGridWidth = Math.floor(newWidth / cellSize);
-        const newGridHeight = Math.floor(newHeight / cellSize);
-
-        // Remove extra cells
-        while (this.cells.length > newGridWidth * newGridHeight) {
-            const cell = this.cells.pop();
-            scene.remove(cell.sprite);
-        }
-
-        // Add new cells if needed
-        while (this.cells.length < newGridWidth * newGridHeight) {
-            const x = this.cells.length % newGridWidth;
-            const y = Math.floor(this.cells.length / newGridWidth);
-            const cell = {
-                sprite: this.createSprite(asciiChars[0], x, y),
-                age: 0,
-                maxAge: 200 + Math.random() * 300,
-                colorIndex: Math.floor(Math.random() * currentPalette.length),
-                rhythm: Math.random() * Math.PI * 2
-            };
-            this.cells.push(cell);
-            scene.add(cell.sprite);
-        }
-
-        // Update positions of all cells
-        this.cells.forEach((cell, index) => {
-            const x = index % newGridWidth;
-            const y = Math.floor(index / newGridWidth);
-            cell.sprite.position.set(
-                (x - newGridWidth / 2 + 0.5) * cellSize,
-                (y - newGridHeight / 2 + 0.5) * cellSize,
-                0
-            );
-        });
-    }
 }
 
 // Create grid
@@ -187,26 +150,9 @@ animate();
 
 // Handle window resizing
 function onWindowResize() {
-    const headerWidth = document.querySelector('header').offsetWidth;
-    width = Math.min(550, headerWidth);
-    height = Math.floor(width / 11); // Maintain aspect ratio
-
-    camera.left = -width / 2;
-    camera.right = width / 2;
-    camera.top = height / 2;
-    camera.bottom = -height / 2;
-    camera.updateProjectionMatrix();
-
     renderer.setSize(width, height);
-
-    // Update grid
-    grid.updateGrid(width, height);
 }
-
-// Expose updateColors function to global scope
-window.updateThreeJsColors = updateColors;
 window.addEventListener('resize', onWindowResize, false);
-onWindowResize(); // Call once to set initial size
 
 // Function to update colors based on dark mode
 function updateColors(isDarkMode) {
