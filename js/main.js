@@ -33,24 +33,28 @@ $(document).ready(function() {
     }
 
     // Update the toggleContent function
-    window.toggleContent = function(showId, hideId) {
-        const showContainer = document.getElementById(showId);
-        const hideContainer = document.getElementById(hideId);
+    window.toggleContent = function(showClass, hideClass) {
+        const showContainers = document.getElementsByClassName(showClass);
+        const hideContainers = document.getElementsByClassName(hideClass);
 
-        // Remove fade-in class and hide the container
-        hideContainer.classList.remove('fade-in');
-        hideContainer.style.display = 'none';
+        // Hide all containers with the hideClass
+        for (let container of hideContainers) {
+            container.classList.remove('fade-in');
+            container.style.display = 'none';
+        }
 
-        // Show the container
-        showContainer.style.display = 'block';
-        
-        // Force a reflow before adding the fade-in class
-        void showContainer.offsetWidth;
+        // Show all containers with the showClass
+        for (let container of showContainers) {
+            container.style.display = 'block';
+            
+            // Force a reflow before adding the fade-in class
+            void container.offsetWidth;
 
-        // Add fade-in class
-        showContainer.classList.add('fade-in');
+            // Add fade-in class
+            container.classList.add('fade-in');
+        }
 
-        if (showId === 'blog-container') {
+        if (showClass === 'blog-container') {
             loadBlogPosts();
         }
     }
@@ -135,8 +139,8 @@ $(document).ready(function() {
     }
 
     // Apply the scroll handlers to the containers
-    $('.blog-container, .projects-container, .about-container, .contact-container, .blog-post').on('wheel touchmove', handleScroll);
-    $('.blog-container, .projects-container, .about-container, .contact-container, .blog-post').on('touchstart', handleTouchStart);
+    $(document).on('wheel touchmove', '.blog-container, .projects-container, .about-container, .contact-container, .blog-post', handleScroll);
+    $(document).on('touchstart', '.blog-container, .projects-container, .about-container, .contact-container, .blog-post', handleTouchStart);
 
     // Dark mode button click event
     $('#darkModeBtn').on('click', toggleDarkMode);
@@ -189,6 +193,13 @@ $(document).ready(function() {
 
             // Add fade-in class to blog posts after they're loaded
             $('.blog-post, .blog-content').addClass('fade-in');
+
+            // Reattach scroll handlers to the newly loaded content
+            $('.blog-post, .blog-content').each(function() {
+                $(this).on('wheel touchmove', handleScroll);
+                $(this).on('touchstart', handleTouchStart);
+            });
+
         } catch (error) {
             console.error('Error loading blog posts:', error);
         }
