@@ -17,7 +17,7 @@ const gridWidth = Math.floor(width / cellSize);
 const gridHeight = Math.floor(height / cellSize);
 
 // ASCII characters to use
-const asciiChars = ['·', ':', '+', '×', '▢', '▣', '◯', '◉', '█'];
+const asciiChars = ['', ':', '+', '×', '▢', '▣', '◯', '◉', '█'];
 
 // Create canvas for sprite texture
 const charCanvas = document.createElement('canvas');
