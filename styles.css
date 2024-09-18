@@ -16,12 +16,12 @@
     --max-width: 1200px; /* Adjust this value as needed */
 }
 header {
-    position: relative;
-    margin-bottom: 0; /* Remove bottom margin */ /* Adjust this value based on your needs */
+    position: relative;/* Remove bottom margin */ /* Adjust this value based on your needs */
     display: flex; /* Make header a flex container */
     justify-content: space-between; /* Space between header-content and canvas */
     align-items: center; /* Vertically center the content */
     padding: 20px 0;
+    margin-top: 25px;
     flex-wrap: wrap;
 }
 
