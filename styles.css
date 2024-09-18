@@ -17,26 +17,37 @@
 }
 header {
     position: relative;
-    margin-bottom: 0; /* Remove bottom margin */
-    min-height: 150px; /* Adjust this value based on your needs */
+    margin-bottom: 0; /* Remove bottom margin */ /* Adjust this value based on your needs */
     display: flex; /* Make header a flex container */
     justify-content: space-between; /* Space between header-content and canvas */
     align-items: center; /* Vertically center the content */
-    padding: 20px 0; /* Add some vertical padding */
+    padding: 20px 0;
+    flex-wrap: wrap;
 }
 
 .header-content {
     flex: 1; /* Allow it to grow and shrink */
-    max-width: calc(100% - 470px); /* Adjust based on your canvas width */
+    max-width: 100%; /* Adjust based on your canvas width */
+    margin-bottom: 20px;
 }
 
 #threeCanvas {
-    position: absolute;
-    top: 50%; /* Position the top edge at 50% of the header's height */
-    right: 0;
-    transform: translateY(-50%); /* Move the canvas up by half its own height */
-    width: 450px; /* Match the width in your Three.js script */
-    height: 100px; /* Match the height in your Three.js script */
+    max-width: 100%;
+    height: auto;
+}
+
+@media (min-width: 768px) {
+    .header-content {
+        max-width: calc(100% - 570px);
+        margin-bottom: 0;
+    }
+
+    #threeCanvas {
+        position: absolute;
+        top: 50%; /* Position the top edge at 50% of the header's height */
+        right: 0;
+        transform: translateY(-50%); /* Move the canvas up by half its own height */
+    }
 }
 body {
     font-family: var(--font-primary);
@@ -49,20 +60,6 @@ body {
     padding: 15px;
 }
 
-header {
-    position: relative;
-    margin-bottom: 0; /* Remove bottom margin */
-    min-height: 150px; /* Adjust this value based on your needs */
-    display: flex; /* Make header a flex container */
-    justify-content: space-between; /* Space between header-content and canvas */
-    align-items: center; /* Vertically center the content */
-    padding: 20px 0; /* Add some vertical padding */
-}
-
-.header-content {
-    flex: 1; /* Allow it to grow and shrink */
-    max-width: calc(100% - 470px); /* Adjust based on your canvas width */
-}
 
 h1 {
     margin:0px;
@@ -77,6 +74,7 @@ h1 {
 }
 
 h2 {
+    padding-bottom: 20px;
     border-bottom: 2px solid var(--color-accent);
 }
  p{
