@@ -13,6 +13,7 @@
     --color-shadow: rgba(0, 0, 0, 0.5);
     --color-highlight: #e9c46a; /* Dry yellow */
     --color-sky: #4a6d7c; /* Blue-green sky */
+    --max-width: 1200px; /* Adjust this value as needed */
 }
 
 body {
@@ -21,13 +22,12 @@ body {
     line-height: 1.6;
     color: var(--color-text);
     background-color: var(--color-background);
-    max-width: 800px;
+    max-width: var(--max-width); /* Use the new variable */
     margin: 0 auto;
     padding: 15px;
 }
 
 header {
-    text-align: center;
     margin-bottom: 40px;
 }
 
