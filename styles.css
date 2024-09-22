@@ -15,12 +15,13 @@
     --color-sky: #4a6d7c; /* Blue-green sky */
     --max-width: 1200px; /* Adjust this value as needed */
 }
+
 header {
-    position: relative;/* Remove bottom margin */ /* Adjust this value based on your needs */
+    position: relative; /* Remove bottom margin */ 
     display: flex; /* Make header a flex container */
     justify-content: space-between; /* Space between header-content and canvas */
     align-items: center; /* Vertically center the content */
-    padding: 20px 0;
+    padding: 20px 10px; /* Reduced horizontal padding for mobile */
     margin-top: 25px;
     flex-wrap: wrap;
 }
@@ -36,6 +37,26 @@ header {
     height: auto;
 }
 
+/* Enhanced Mobile Header Layout */
+@media (max-width: 767px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-content {
+        max-width: 100%;
+        margin-bottom: 15px;
+    }
+
+    #threeCanvas {
+        position: static;
+        transform: none;
+        width: 100%;
+        height: auto;
+    }
+}
+
 @media (min-width: 768px) {
     .header-content {
         max-width: calc(100% - 570px);
@@ -48,7 +69,17 @@ header {
         right: 0;
         transform: translateY(-50%); /* Move the canvas up by half its own height */
     }
+
+    /* Add reduced padding for desktop */
+    header {
+        padding: 10px 5px; /* Reduced padding on desktop */
+    }
+
+    body {
+        padding: 10px 20px; /* Minimal padding on desktop */
+    }
 }
+
 body {
     font-family: var(--font-primary);
     font-size: 15px;
@@ -60,9 +91,8 @@ body {
     padding: 15px;
 }
 
-
 h1 {
-    margin:0px;
+    margin: 0px;
     font-size: 2.5em;
     color: transparent;
     background: linear-gradient(to bottom, #b0e0e6, #4a6d7c); /* Lighter blue at the top */
@@ -71,15 +101,28 @@ h1 {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 1;
+    padding: 0;
+}
+
+/* Responsive Heading Sizes */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
 }
 
 h2 {
     padding-bottom: 20px;
     border-bottom: 2px solid var(--color-accent);
 }
- p{
+
+p {
     margin: 0;
- }
+}
 
 ul {
     list-style-type: none;
@@ -124,6 +167,26 @@ a:hover {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 15px;
+}
+
+/* Adjust project cards for smaller screens */
+@media (max-width: 480px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .project-card {
+        padding: 10px;
+    }
+
+    .project-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .project-card p {
+        font-size: 1rem;
+    }
 }
 
 .project-card {
@@ -202,4 +265,34 @@ a:hover {
     flex-basis: calc(50% - 10px);
     display: flex;
     flex-direction: column;
+}
+
+/* Additional Mobile Enhancements */
+@media (max-width: 600px) {
+    header { 
+        margin: 0;
+        padding: 0;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2em;
+        padding: 0;
+    }
+
+    h2 {
+        font-size: 1.5em;
+        padding: 0;
+    }
+
+    body {
+        padding: 10px;
+    }
 }
