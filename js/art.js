@@ -37,20 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const charCtx = charCanvas.getContext('2d');
 
     // Water-inspired color palettes
-    const lightModePalette = [
-        0x66C3FF, // Light Blue
-        0x4A90E2, // Sky Blue
-        0x00A3E0, // Azure
-        0x7FCDFF, // Carolina Blue
-        0x4DB6AC  // Teal
-    ];
-
+    const lightModePalette = ['rgba(0, 0, 0, 0)']; // Clear (fully transparent)
+    
     const darkModePalette = [
-        0x1A5F7A, // Deep Sea Blue
-        0x002F40, // Midnight Blue
-        0x034F84, // Navy Blue
-        0x465362, // Slate Gray
-        0x1E3A5F  // Dark Cerulean
+        0x8b0000, // Dark Red
+        0x556b2f, // Dark Olive Green
+        0x4682b4, // Steel Blue
+        0xcd853f, // Peru
+        0x708090  // Slate Gray
     ];
 
     let currentPalette = lightModePalette;
@@ -87,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
             texture.needsUpdate = true;
             texture.userData = { char: char };
 
-            const material = new THREE.SpriteMaterial({ map: texture });
+            const material = new THREE.SpriteMaterial({ map: texture, transparent: true });
             const sprite = new THREE.Sprite(material);
             sprite.scale.set(cellSize, cellSize, 1);
             sprite.position.set(
@@ -112,17 +106,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 cell.sprite = this.createSprite(newChar, x, y);
                 scene.add(cell.sprite);
                 cell.age = 0;
-                cell.maxAge = 200 + Math.random() * 300;
+                cell.maxAge = 200 + Math.random() * 500;
                 cell.colorIndex = (cell.colorIndex + 1) % currentPalette.length;
                 cell.rhythm = Math.random() * Math.PI * 2;
             }
 
+            // Always use the single transparent color
+            const colorString = lightModePalette[0];
+            const color = new THREE.Color();
+            color.setStyle(colorString);
+            
             // Change color based on age and rhythm
             const t = cell.age / cell.maxAge;
-            const color = new THREE.Color(currentPalette[cell.colorIndex]);
-            color.multiplyScalar(0.3 + rhythmFactor * 0.7);
-            cell.sprite.material.color = color;
-
+            
             // Occasionally change character based on rhythm
             if (Math.random() < 0.01 * rhythmFactor) {
                 const texture = cell.sprite.material.map;
@@ -136,6 +132,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 charCtx.fillText(newChar, 32, 32);
                 texture.needsUpdate = true;
             }
+            const alpha = 1 - t; // Fade to transparent
+            cell.sprite.material.opacity = alpha * (0.3 + rhythmFactor * 0.7);
         }
 
         update(time) {

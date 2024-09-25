@@ -4,16 +4,16 @@
 :root {
     --font-primary: 'Roboto Mono', monospace;
     --font-secondary: 'Ubuntu', sans-serif;
-    --color-text: #e0e0e0;
-    --color-background: #1a2421; /* Dark green-brown */
-    --color-accent: #4a7c59; /* Muted green */
-    --color-link: #8ab17d; /* Lighter green */
-    --color-card-bg: #2c3531; /* Darker green-brown */
-    --color-card-border: #45523d; /* Muted green-brown */
-    --color-shadow: rgba(0, 0, 0, 0.5);
-    --color-highlight: #e9c46a; /* Dry yellow */
-    --color-sky: #4a6d7c; /* Blue-green sky */
-    --max-width: 1200px; /* Adjust this value as needed */
+    --color-text: #333333; /* Darker text for better readability */
+    --color-background: #fdfdfd; /* Softer background */
+    --color-accent: #ff6f61; /* Warm accent color */
+    --color-link: #000000;
+    --color-card-bg: #ffffff00;
+    --color-card-border: #e0e0e0;
+    --color-shadow: rgba(0, 0, 0, 0.1);
+    --color-highlight: #ffcc80;
+    --color-sky: #d3f8ff;
+    --max-width: 1200px;
 }
 
 header {
@@ -22,7 +22,6 @@ header {
     justify-content: space-between; /* Space between header-content and canvas */
     align-items: center; /* Vertically center the content */
     padding: 20px 10px; /* Reduced horizontal padding for mobile */
-    margin-top: 25px;
     flex-wrap: wrap;
 }
 
@@ -88,15 +87,29 @@ body {
     background-color: var(--color-background);
     max-width: var(--max-width); /* Use the new variable */
     margin: 0 auto;
-    padding: 15px;
+    padding: 50px;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(to right, var(--color-background) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--color-background) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.1;
+    z-index: -1;
+    pointer-events: none;
 }
 
 h1 {
     margin: 0px;
     font-size: 2.5em;
-    color: transparent;
-    background: linear-gradient(to bottom, #b0e0e6, #4a6d7c); /* Lighter blue at the top */
-    background-clip: text;
+    color: var(--color-link);
     -webkit-background-clip: text;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -116,7 +129,6 @@ h1 {
 }
 
 h2 {
-    padding-bottom: 20px;
     border-bottom: 2px solid var(--color-accent);
 }
 
@@ -296,3 +308,4 @@ a:hover {
         padding: 10px;
     }
 }
+
