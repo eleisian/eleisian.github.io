@@ -269,8 +269,8 @@ a:hover {
 /* Remove the body transition as it's not necessary for this change */
 
 .profile-pic {
-    width: 100px; /* Adjust size as needed */
-    height: 100px; /* Should be the same as width for a perfect circle */
+    width: 8rem; /* Adjust size as needed */
+    height: 8rem; /* Should be the same as width for a perfect circle */
     border-radius: 50%; /* This makes the image circular */
     object-fit: cover; /* This ensures the image fills the circular container */
     margin-right: 15px; /* Add some space between the image and the name */
