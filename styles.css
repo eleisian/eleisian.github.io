@@ -117,6 +117,9 @@ a:hover {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 15px;
 }
+.project-card{
+    height:100px;
+}
 
 /* Adjust project cards for smaller screens */
 @media (max-width: 480px) {
