@@ -1,6 +1,7 @@
 // Get the canvas element
 document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('threeCanvas');
+    const ctx = canvas.getContext('2d');
 
     // Grid settings
     const cellSize = 25; // Fixed cell size
@@ -8,20 +9,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to calculate responsive width and height
     function calculateDimensions() {
         const isMobile = window.innerWidth < 600;
-        const width = isMobile ? window.innerWidth * 0.9 : 550; // Increased to 90% on mobile
-        const height = isMobile ? 2 * cellSize : 50; // Ensure two rows on mobile
+        const width = isMobile ? window.innerWidth * 0.9 : 550;
+        const height = isMobile ? 2 * cellSize : 50;
         return { width, height };
     }
 
     // Initial dimensions
     let { width, height } = calculateDimensions();
-
-    // Set up the scene, camera, and renderer
-    const scene = new THREE.Scene();
-    const camera = new THREE.OrthographicCamera(-width/2, width/2, height/2, -height/2, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-    renderer.setSize(width, height);
-    renderer.setClearColor(0x000000, 0); // Transparent background
+    canvas.width = width;
+    canvas.height = height;
 
     // Grid dimensions
     let gridWidth = Math.floor(width / cellSize);
@@ -30,21 +26,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // ASCII characters to use
     const asciiChars = ['·', ':', '+', '×', '▢', '▣', '◯', '◉', '█'];
 
-    // Create canvas for sprite texture
-    const charCanvas = document.createElement('canvas');
-    charCanvas.width = 64;
-    charCanvas.height = 64;
-    const charCtx = charCanvas.getContext('2d');
-
     // Water-inspired color palettes
-    const lightModePalette = ['rgba(0, 0, 0, 0)']; // Clear (fully transparent)
+    const lightModePalette = ['rgba(0, 0, 0, 1)']; // Fully opaque black for characters
     
     const darkModePalette = [
-        0x8b0000, // Dark Red
-        0x556b2f, // Dark Olive Green
-        0x4682b4, // Steel Blue
-        0xcd853f, // Peru
-        0x708090  // Slate Gray
+        'rgba(139, 0, 0, 1)',    // Dark Red
+        'rgba(85, 107, 47, 1)',  // Dark Olive Green
+        'rgba(70, 130, 180, 1)', // Steel Blue
+        'rgba(205, 133, 63, 1)', // Peru
+        'rgba(112, 128, 144, 1)' // Slate Gray
     ];
 
     let currentPalette = lightModePalette;
@@ -56,114 +46,81 @@ document.addEventListener('DOMContentLoaded', function() {
             for (let x = 0; x < gridWidth; x++) {
                 for (let y = 0; y < gridHeight; y++) {
                     const cell = {
-                        sprite: this.createSprite(asciiChars[0], x, y),
+                        char: asciiChars[0],
+                        x: x * cellSize,
+                        y: y * cellSize,
                         age: 0,
                         maxAge: 200 + Math.random() * 300,
                         colorIndex: Math.floor(Math.random() * currentPalette.length),
-                        rhythm: Math.random() * Math.PI * 2 // For dancer-like rhythm
+                        rhythm: Math.random() * Math.PI * 2,
+                        opacity: 0 // Start with fully transparent background
                     };
                     this.cells.push(cell);
-                    scene.add(cell.sprite);
                 }
             }
-        }
-
-        createSprite(char, x, y) {
-            charCtx.fillStyle = 'white';
-            charCtx.fillRect(0, 0, 64, 64);
-            charCtx.fillStyle = 'black';
-            charCtx.font = '48px Arial';
-            charCtx.textAlign = 'center';
-            charCtx.textBaseline = 'middle';
-            charCtx.fillText(char, 32, 32);
-
-            const texture = new THREE.Texture(charCanvas);
-            texture.needsUpdate = true;
-            texture.userData = { char: char };
-
-            const material = new THREE.SpriteMaterial({ map: texture, transparent: true });
-            const sprite = new THREE.Sprite(material);
-            sprite.scale.set(cellSize, cellSize, 1);
-            sprite.position.set(
-                (x - gridWidth / 2 + 0.5) * cellSize,
-                (y - gridHeight / 2 + 0.5) * cellSize,
-                0
-            );
-            return sprite;
         }
 
         updateCell(cell, time) {
             cell.age++;
             
-            // Dancer-like rhythm
             const rhythmFactor = (Math.sin(time * 0.001 + cell.rhythm) + 1) / 2;
             
             if (cell.age > cell.maxAge) {
-                const newChar = asciiChars[Math.floor(Math.random() * asciiChars.length)];
-                const x = Math.floor((cell.sprite.position.x + width/2) / cellSize);
-                const y = Math.floor((cell.sprite.position.y + height/2) / cellSize);
-                scene.remove(cell.sprite);
-                cell.sprite = this.createSprite(newChar, x, y);
-                scene.add(cell.sprite);
+                cell.char = asciiChars[Math.floor(Math.random() * asciiChars.length)];
                 cell.age = 0;
                 cell.maxAge = 200 + Math.random() * 500;
                 cell.colorIndex = (cell.colorIndex + 1) % currentPalette.length;
                 cell.rhythm = Math.random() * Math.PI * 2;
             }
 
-            // Always use the single transparent color
-            const colorString = lightModePalette[0];
-            const color = new THREE.Color();
-            color.setStyle(colorString);
-            
-            // Change color based on age and rhythm
-            const t = cell.age / cell.maxAge;
-            
-            // Occasionally change character based on rhythm
             if (Math.random() < 0.01 * rhythmFactor) {
-                const texture = cell.sprite.material.map;
-                const newChar = asciiChars[Math.floor(Math.random() * asciiChars.length)];
-                charCtx.fillStyle = 'white';
-                charCtx.fillRect(0, 0, 64, 64);
-                charCtx.fillStyle = 'black';
-                charCtx.font = '48px Arial';
-                charCtx.textAlign = 'center';
-                charCtx.textBaseline = 'middle';
-                charCtx.fillText(newChar, 32, 32);
-                texture.needsUpdate = true;
+                cell.char = asciiChars[Math.floor(Math.random() * asciiChars.length)];
             }
-            const alpha = 1 - t; // Fade to transparent
-            cell.sprite.material.opacity = alpha * (0.3 + rhythmFactor * 0.7);
+
+            const t = cell.age / cell.maxAge;
+            cell.opacity = (1 - t) * (0.3 + rhythmFactor * 0.7);
         }
 
         update(time) {
             this.cells.forEach(cell => this.updateCell(cell, time));
         }
 
-        // Optional: Method to recreate the grid on resize
-        recreateGrid() {
-            // Remove existing sprites
-            this.cells.forEach(cell => {
-                scene.remove(cell.sprite);
-            });
-            this.cells = [];
+        draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.font = `${cellSize * 0.8}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
 
-            // Recalculate grid dimensions
+            this.cells.forEach(cell => {
+                // Draw white background with fading opacity
+                ctx.fillStyle = `rgba(255, 255, 255, ${cell.opacity})`;
+                ctx.fillRect(cell.x, cell.y, cellSize, cellSize);
+                
+                // Draw ASCII character with full opacity
+                const color = currentPalette[cell.colorIndex];
+                ctx.fillStyle = color.replace(/[\d.]+\)$/g, `${cell.opacity})`);
+                ctx.fillText(cell.char, cell.x + cellSize / 2, cell.y + cellSize / 2);
+            });
+        }
+
+        recreateGrid() {
             gridWidth = Math.floor(width / cellSize);
             gridHeight = Math.floor(height / cellSize);
-
-            // Recreate cells
+            this.cells = [];
             for (let x = 0; x < gridWidth; x++) {
                 for (let y = 0; y < gridHeight; y++) {
                     const cell = {
-                        sprite: this.createSprite(asciiChars[0], x, y),
+                        char: asciiChars[0],
+                        x: x * cellSize,
+                        y: y * cellSize,
                         age: 0,
                         maxAge: 200 + Math.random() * 300,
                         colorIndex: Math.floor(Math.random() * currentPalette.length),
-                        rhythm: Math.random() * Math.PI * 2 // For dancer-like rhythm
+                        rhythm: Math.random() * Math.PI * 2,
+                        opacity: 1
                     };
                     this.cells.push(cell);
-                    scene.add(cell.sprite);
                 }
             }
         }
@@ -172,14 +129,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Create grid
     const grid = new Grid();
 
-    // Set camera position
-    camera.position.z = 10;
-
     // Animation function
     function animate(time) {
         requestAnimationFrame(animate);
         grid.update(time);
-        renderer.render(scene, camera);
+        grid.draw();
     }
 
     // Start the animation
@@ -187,22 +141,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle window resizing
     function onWindowResize() {
-        // Recalculate dimensions
         const dimensions = calculateDimensions();
         width = dimensions.width;
         height = dimensions.height;
-
-        // Update renderer size
-        renderer.setSize(width, height);
-
-        // Update camera parameters
-        camera.left = -width / 2;
-        camera.right = width / 2;
-        camera.top = height / 2;
-        camera.bottom = -height / 2;
-        camera.updateProjectionMatrix();
-
-        // Recreate the grid with new dimensions
+        canvas.width = width;
+        canvas.height = height;
         grid.recreateGrid();
     }
 
@@ -216,22 +159,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to update colors based on dark mode
     function updateColors(isDarkMode) {
         currentPalette = isDarkMode ? darkModePalette : lightModePalette;
-        
         grid.cells.forEach(cell => {
-            const texture = cell.sprite.material.map;
-            charCtx.fillStyle = isDarkMode ? 'black' : 'white';
-            charCtx.fillRect(0, 0, 64, 64);
-            charCtx.fillStyle = isDarkMode ? 'white' : 'black';
-            charCtx.font = '48px Arial';
-            charCtx.textAlign = 'center';
-            charCtx.textBaseline = 'middle';
-            charCtx.fillText(texture.userData.char, 32, 32);
-            texture.needsUpdate = true;
-
-            // Update cell color
             cell.colorIndex = Math.floor(Math.random() * currentPalette.length);
-            const color = new THREE.Color(currentPalette[cell.colorIndex]);
-            cell.sprite.material.color = color;
         });
     }
 
