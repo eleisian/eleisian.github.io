@@ -1,9 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 
-
 :root {
     --font-primary: 'Roboto Slab', monospace;
-    --font-secondary: 'Ubuntu', sans-serif;
     --color-text: #333333; /* Darker text for better readability */
     --color-background: #fdfdfd; /* Softer background */
     --color-accent: #ff6f61; /* Warm accent color */
