@@ -44,7 +44,8 @@ class Background {
         const color1 = computedStyle.getPropertyValue('--color-background').trim();
         const color2 = computedStyle.getPropertyValue('--color-sky').trim();
         
-        const gradient = this.ctx.createLinearGradient(0, 0, this.canvas.width, this.canvas.height);
+        // Change the gradient to vertical
+        const gradient = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
         gradient.addColorStop(0, color1);
         gradient.addColorStop(1, color2);
         
