@@ -3,14 +3,14 @@
 :root {
     --font-primary: 'Roboto Slab', monospace;
     --color-text: #333333; /* Darker text for better readability */
-    --color-background: #fdfdfd; /* Softer background */
-    --color-accent: #c1c1c1; /* Warm accent color */
+    --color-background: #F8FBF8; /* Softer background */
+    --color-accent: #F3F3F2; /* Warm accent color */
     --color-link: #000000;
     --color-card-bg: #ffffff00;
     --color-card-border: #e0e0e0;
     --color-shadow: rgba(0, 0, 0, 0.1);
-    --color-highlight: #ffcc80;
-    --color-sky: #cef7ff;
+    --color-highlight: #F7FCFE;
+    --color-sky: #fffffc;
     --max-width: 1200px;
 }
 
