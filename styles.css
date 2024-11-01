@@ -98,11 +98,13 @@ a:hover {
     display: flex;
     justify-content: space-between;
     gap: 40px;
+    min-height: 300px;
 }
 
 #skills,
 #projects {
     flex-basis: calc(50% - 20px);
+    height: 100%;
 }
 
 .skills-list {
@@ -112,39 +114,17 @@ a:hover {
 
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-}
-.project-card{
-    height:100px;
-}
-
-/* Adjust project cards for smaller screens */
-@media (max-width: 480px) {
-    .project-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .project-card {
-        padding: 10px;
-    }
-
-    .project-card h3 {
-        font-size: 1.2rem;
-    }
-
-    .project-card p {
-        font-size: 1rem;
-    }
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
 }
 
 .project-card {
+    padding: 0.75rem;
+    height: 70px;
     position: relative;
     background-color: var(--color-card-bg);
     border: 1px solid var(--color-card-border);
-    border-radius: 5px; /* Ensure the card has a border radius */
-    padding: 15px;
+    border-radius: 5px;
     cursor: pointer;
     transition: box-shadow 0.3s ease;
 }
@@ -161,23 +141,21 @@ a:hover {
     transform: translate(0, 0);
     transition: transform 0.2s, opacity 0.2s;
     opacity: 0;
-    border-radius: 5px; /* Match the card's border radius */
+    border-radius: 5px;
 }
 
 .project-card:hover::before {
     opacity: 1;
 }
 
-
 .project-card h3 {
+    margin: 0 0 0.5rem 0;
     font-size: 1rem;
-    margin-top: 0;
-    margin-bottom: 10px;
 }
 
 .project-card p {
-    font-size: 0.9rem;
-    margin-bottom: 10px;
+    margin: 0;
+    font-size: 0.875rem;
 }
 
 .project-link {
@@ -205,12 +183,20 @@ a:hover {
     display: flex;
     justify-content: space-between;
     gap: 20px;
+    height: 100%;
 }
 
 .skills-list {
     flex-basis: calc(50% - 10px);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.skills-list li {
+    margin-bottom: 0;
+    padding: 5px 0;
 }
 
 /* Additional Mobile Enhancements */
