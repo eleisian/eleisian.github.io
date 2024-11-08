@@ -437,6 +437,7 @@ a:hover {
 /* Simplified Carousel Styles */
 .carousel-container {
     position: relative;
+    border-radius: 10px;
     width: 100%;
     height: 200px;
     background: var(--color-accent);
