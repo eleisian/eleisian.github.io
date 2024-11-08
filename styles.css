@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --font-primary: 'Roboto Slab', monospace;
+    --font-primary: 'Poppins', sans-serif;
     --color-text: #333333; /* Darker text for better readability */
     --color-background: #FFFFFC; /* Softer background */
     --color-accent: #F3F3F2; /* Warm accent color */
@@ -24,7 +24,7 @@ header {
 
 body {
     font-family: var(--font-primary);
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.6;
     color: var(--color-text);
     background-color: var(--color-background);
@@ -117,7 +117,7 @@ a:hover {
 
 .project-card {
     padding: 0.75rem;
-    height: 70px;
+    height: 100px;
     position: relative;
     background-color: var(--color-card-bg);
     border: 1px solid var(--color-card-border);
@@ -147,16 +147,16 @@ a:hover {
 
 .project-card h3 {
     margin: 0 0 0.5rem 0;
-    font-size: 1rem;
+    font-size: 18px;
 }
 
 .project-card p {
     margin: 0;
-    font-size: 0.875rem;
+    font-size: 18px;
 }
 
 .project-link {
-    font-size: 0.8rem;
+    font-size: 18px;
     color: var(--color-link);
     text-decoration: none;
 }
