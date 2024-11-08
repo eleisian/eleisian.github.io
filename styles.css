@@ -446,11 +446,18 @@ a:hover {
     -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
     scrollbar-width: none;     /* Hide scrollbar for Firefox */
 }
-
 /* Hide scrollbar for Chrome, Safari and Opera */
 .carousel-container::-webkit-scrollbar {
     display: none;
 }
+
+
+@media (max-width: 768px) {
+    .carousel-container {
+       margin-top: 1rem;
+    }
+}
+
 
 .carousel {
     display: flex;
