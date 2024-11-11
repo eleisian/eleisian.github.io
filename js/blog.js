@@ -1,24 +1,17 @@
-import { MarkdownLoader } from './markdownLoader.js';
-
-const blogPosts = [
-    "/blog/murphyslaw.md",
-    "/blog/situationships.md",
-    "/blog/thenewworld.md"
-];
-
-export default blogPosts;
+import { BlogRenderer } from './markdownLoader.js';
+import { blogPosts } from '../blog/blogPosts.js';
 
 class BlogHandler {
     constructor() {
-        this.markdownLoader = new MarkdownLoader();
+        this.blogRenderer = new BlogRenderer();
         this.initialize();
     }
 
-    async initialize() {
+    initialize() {
         const blogGrid = document.querySelector('.blog-grid');
         if (blogGrid) {
-            await this.markdownLoader.loadMarkdownFiles();
-            this.markdownLoader.renderBlogPosts(blogGrid);
+            this.blogRenderer.initialize(blogPosts);
+            this.blogRenderer.renderBlogPosts(blogGrid);
         }
     }
 }
