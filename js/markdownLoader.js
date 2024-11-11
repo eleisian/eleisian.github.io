@@ -1,9 +1,9 @@
-import { blogPosts } from './blog.js';
+import blogPosts from './blog.js';
 
 export class MarkdownLoader {
     constructor() {
         this.blogPosts = [];
-        this.currentSort = 'newest'; // Default sort
+        this.currentSort = 'newest';
     }
 
     parseFrontmatter(content) {
@@ -37,7 +37,8 @@ export class MarkdownLoader {
     async loadMarkdownFiles() {
         try {
             const markdownPromises = blogPosts.map(async (filename) => {
-                const response = await fetch(filename);
+                const cleanPath = filename.replace(/^\./, '');
+                const response = await fetch(cleanPath);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }

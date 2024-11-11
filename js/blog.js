@@ -1,10 +1,12 @@
 import { MarkdownLoader } from './markdownLoader.js';
 
-export const blogPosts = [
-    "./blog/murphyslaw.md",
-    "./blog/situationships.md",
-    "./blog/thenewworld.md"
+const blogPosts = [
+    "/blog/murphyslaw.md",
+    "/blog/situationships.md",
+    "/blog/thenewworld.md"
 ];
+
+export default blogPosts;
 
 class BlogHandler {
     constructor() {
