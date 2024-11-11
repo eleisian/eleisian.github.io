@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="js/background.js"></script>
-    <script src="js/art.js"></script>
+    <script src="js/background.js" defer></script>
+    <script src="js/art.js" defer></script>
+    <script src="js/router.js" defer></script>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
 </head>
@@ -24,6 +25,13 @@
                     <h1><span class="iconify" data-icon="arcticons:treecard"></span>emmanuel wang</h1>
                     <small>software engineer and designer</small>
                 </div>
+                <nav class="header-nav">
+                    <ul>
+                        <li><a href="#" data-page="home">Home</a></li>
+                        <li><a href="#" data-page="skills">Skills</a></li>
+                        <li><a href="#" data-page="projects">Projects</a></li>
+                    </ul>
+                </nav>
             </div>
             <canvas id="threeCanvas"></canvas>
         </header>
@@ -61,57 +69,10 @@
                 pretty much my entire life. I picked up music production in college and I am now learning nvim, studying
                 computer science, and working in general contracting to expand my engineering skills, all with the aim
                 of advancing my expertise.
-                Please bepatient with me as I update this site.
+                Please be patient with me as I update this site.
             </p>
         </section>
-        <div class="two-column-layout">
-            <section id="skills">
-                <h2>Skills</h2>
-                <div class="nested-two-column-layout">
-                    <ul class="skills-list">
-                        <li><span class="iconify" data-icon="geo:ui-earth-west"></span> User Experience Design</li>
-                        <li><span class="iconify" data-icon="carbon:ibm-deployable-architecture"></span> Solution
-                            Architecture</li>
-                        <li><span class="iconify" data-icon="carbon:ai-status"></span> Prompt Engineering</li>
-                        <li><span class="iconify" data-icon="clarity:ci-cd-line"></span> DevOps CI/CD </li>
-                        <li><span class="iconify" data-icon="tabler:stack-2-filled"></span> Full Stack Development</li>
-                    </ul>
-                    <ul class="skills-list">
-                        <li><span class="iconify" data-icon="arcticons:coding-python"></span> Python</li>
-                        <li><span class="iconify" data-icon="simple-icons:react"></span> React</li>
-                        <li><span class="iconify" data-icon="mdi:aws"></span> AWS</li>
-                        <li><span class="iconify" data-icon="devicon-plain:docker"></span> Docker</li>
-                        <li><span class="iconify" data-icon="mdi:kubernetes"></span> Kubernetes</li>
-                    </ul>
-                </div>
-            </section>
-
-            <section id="projects">
-                <h2>Projects</h2>
-                <div class="project-grid">
-                    <a href="https://the-kindred-solution.vercel.app/" class="project-card" target="_blank"
-                        rel="noopener noreferrer">
-                        <h3>Project Kindred</h3>
-                        <p>For Google's case competition.</p>
-                    </a>
-                    <a href="https://dw-photo.vercel.app/" class="project-card" target="_blank"
-                        rel="noopener noreferrer">
-                        <h3>DW-photo</h3>
-                        <p>A photo portfolio for my brother.</p>
-                    </a>
-                    <a href="https://eleisian.github.io/ascii-renderer" class="project-card" target="_blank"
-                        rel="noopener noreferrer">
-                        <h3>ASCII Renderer</h3>
-                        <p>A real-time ASCII art renderer.</p>
-                    </a>
-                    <a href="https://eleisian.github.io/loading" class="project-card" target="_blank"
-                        rel="noopener noreferrer">
-                        <h3>Loading</h3>
-                        <p>A loading screen in a loading screen.</p>
-                    </a>
-                </div>
-            </section>
-        </div>
+        
         <div class="social-links">
             <a href="mailto:emmanueltwang@gmail.com">
                 <span class="iconify" data-icon="mdi:email"></span>
