@@ -27,6 +27,11 @@ the world needs new people.`
     {
         title: "one hundred more, ten thousand more",
         date: "2024-11-10",
-        content: `Всё гениальное просто! Everything ingenious is simple!`
+        content: `Всё гениальное просто! Everything ingenious is simple!
+
+<audio controls>
+    <source src="../assets/freeze.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>`
     }
 ]; 
