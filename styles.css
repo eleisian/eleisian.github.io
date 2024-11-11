@@ -463,7 +463,7 @@ a:hover {
     }
 
     .header-nav ul {
-        justify-content: center;
+        justify-content: left;
     }
 }
 
