@@ -118,6 +118,12 @@ class Router {
           main.appendChild(newSection);
       }
       
+      // Reinitialize the background
+      if (window.background) {
+          window.background.destroy();
+      }
+      window.background = new Background();
+      
       // Trigger animation after a brief delay
       requestAnimationFrame(() => {
           const sections = document.querySelectorAll('.page-transition');
