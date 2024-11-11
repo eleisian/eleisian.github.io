@@ -1,9 +1,9 @@
 import { MarkdownLoader } from './markdownLoader.js';
 
 export const blogPosts = [
-    "murphyslaw.md",
-    "situationships.md",
-    "thenewworld.md"
+    "./blog/murphyslaw.md",
+    "./blog/situationships.md",
+    "./blog/thenewworld.md"
 ];
 
 class BlogHandler {

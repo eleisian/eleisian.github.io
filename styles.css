@@ -633,20 +633,9 @@ section {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .blog-controls {
-        justify-content: flex-start;  /* On mobile, align left */
-    }
-    
+    .blog-controls,
     .sort-controls {
-        flex-direction: row;  /* Keep horizontal on mobile */
-        align-items: center;
-        gap: 0.5rem;
-        padding-top: 1rem;
-        width: auto;  /* Remove full width */
-    }
-
-    .sort-select {
-        width: auto;  /* Remove full width */
+        display: none;  /* Hide both blog-controls and sort-controls on mobile */
     }
 }
 

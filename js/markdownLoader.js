@@ -37,75 +37,114 @@ export class MarkdownLoader {
     async loadMarkdownFiles() {
         try {
             const markdownPromises = blogPosts.map(async (filename) => {
-                const response = await fetch(`/blog/${filename}`);
-                const rawContent = await response.text();
-                const { metadata, content } = this.parseFrontmatter(rawContent);
+                const response = await fetch(filename);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const content = await response.text();
                 
-                const title = metadata.title || filename.replace('.md', '')
-                    .split('-')
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(' ');
-                
-                const date = metadata.date ? new Date(metadata.date) : new Date();
-                const preview = content.split('\n')[0];
+                // Parse frontmatter and content
+                const { metadata, content: bodyContent } = this.parseFrontMatter(content);
                 
                 return {
-                    title,
-                    preview,
-                    content,
-                    date,
-                    filename
+                    filename,
+                    metadata,
+                    content: bodyContent
                 };
             });
 
             this.blogPosts = await Promise.all(markdownPromises);
-            this.blogPosts.sort((a, b) => b.date - a.date);
-            return this.blogPosts;
+            this.blogPosts.sort((a, b) => new Date(b.metadata.date) - new Date(a.metadata.date));
         } catch (error) {
             console.error('Error loading markdown files:', error);
-            return [];
         }
+    }
+
+    parseFrontMatter(markdown) {
+        const frontMatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
+        const match = markdown.match(frontMatterRegex);
+        
+        if (!match) {
+            return {
+                metadata: {},
+                content: markdown
+            };
+        }
+
+        const frontMatter = match[1];
+        const content = match[2];
+
+        // Parse front matter
+        const metadata = {};
+        frontMatter.split('\n').forEach(line => {
+            const [key, value] = line.split(':').map(str => str.trim());
+            if (key && value) {
+                metadata[key] = value;
+            }
+        });
+
+        return { metadata, content };
     }
 
     sortPosts(order = 'newest') {
         this.currentSort = order;
         this.blogPosts.sort((a, b) => {
+            const dateA = new Date(a.metadata.date);
+            const dateB = new Date(b.metadata.date);
             return order === 'newest' 
-                ? b.date - a.date 
-                : a.date - b.date;
+                ? dateB - dateA 
+                : dateA - dateB;
         });
     }
 
     renderBlogPosts(container) {
-        container.innerHTML = `
-            <div class="blog-controls">
-                <div class="sort-controls">
-                    <label>Sort by:</label>
-                    <select class="sort-select">
-                        <option value="newest" ${this.currentSort === 'newest' ? 'selected' : ''}>Newest First</option>
-                        <option value="oldest" ${this.currentSort === 'oldest' ? 'selected' : ''}>Oldest First</option>
-                    </select>
-                </div>
-            </div>
-            ${this.blogPosts.map(post => `
-                <article class="blog-post">
-                    <h2>${post.title}</h2>
-                    <time datetime="${post.date.toISOString()}">${post.date.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    })}</time>
-                    <div class="content">
-                        ${marked.parse(post.content)}
-                    </div>
-                    <hr class="post-divider">
-                </article>
-            `).join('')}`;
+        container.innerHTML = ''; // Clear existing content
+        
+        // Add sorting controls
+        const controls = document.createElement('div');
+        controls.className = 'blog-controls';
+        controls.innerHTML = `
+            <select class="sort-select">
+                <option value="newest" ${this.currentSort === 'newest' ? 'selected' : ''}>Newest First</option>
+                <option value="oldest" ${this.currentSort === 'oldest' ? 'selected' : ''}>Oldest First</option>
+            </select>
+        `;
+        container.appendChild(controls);
 
-        const sortSelect = container.querySelector('.sort-select');
+        // Add event listener for sort select
+        const sortSelect = controls.querySelector('.sort-select');
         sortSelect.addEventListener('change', (e) => {
             this.sortPosts(e.target.value);
             this.renderBlogPosts(container);
+        });
+        
+        this.blogPosts.forEach((post, index) => {
+            const article = document.createElement('article');
+            article.className = 'blog-post';
+            
+            const date = new Date(post.metadata.date);
+            const formattedDate = date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            article.innerHTML = `
+                <h2>${post.metadata.title}</h2>
+                <time datetime="${post.metadata.date}">${formattedDate}</time>
+                <div class="content">
+                    ${marked.parse(post.content)}
+                </div>
+            `;
+            
+            container.appendChild(article);
+            
+            // Add divider if not the last post
+            if (index < this.blogPosts.length - 1) {
+                const divider = document.createElement('hr');
+                divider.className = 'post-divider';
+                container.appendChild(divider);
+            }
         });
     }
 } 
