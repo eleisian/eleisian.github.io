@@ -10,7 +10,8 @@ class Router {
               'about': homeTemplate.content.querySelector('#about')?.innerHTML
           },
           skills: '',
-          projects: ''
+          projects: '',
+          blog: ''
       };
 
       // Remove the template after storing content
@@ -19,7 +20,8 @@ class Router {
       // Load templates first, then handle initial route
       Promise.all([
           this.loadTemplate('skills', 'templates/skills.html'),
-          this.loadTemplate('projects', 'templates/projects.html')
+          this.loadTemplate('projects', 'templates/projects.html'),
+          this.loadTemplate('blog', 'templates/blog.html')
       ]).then(() => {
           // Add check for empty path and update URL if needed
           if (window.location.hash === '') {

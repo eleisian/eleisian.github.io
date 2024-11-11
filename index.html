@@ -11,7 +11,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="js/background.js" defer></script>
     <script src="js/art.js" defer></script>
-    <script src="js/router.js" defer></script>
+    <script src="js/router.js" type="module"></script>
+    <script src="js/markdownLoader.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <style>
         /* Add this to hide content until router is ready */
@@ -19,6 +21,9 @@
             display: none;
         }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
 </head>
 
@@ -37,6 +42,7 @@
                         <li><a href="#home" data-page="home">Home</a></li>
                         <li><a href="#skills" data-page="skills">Skills</a></li>
                         <li><a href="#projects" data-page="projects">Projects</a></li>
+                        <li><a href="#blog" data-page="blog">Blog</a></li>
                     </ul>
                 </nav>
             </div>
@@ -82,6 +88,7 @@
             </section>
         </template>
     </main>
+    <script src="js/blog.js" type="module"></script>
 </body>
 
 </html>
