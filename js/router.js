@@ -1,30 +1,34 @@
 class Router {
     constructor() {
-        // Store initial content
         const mainContent = document.querySelector('main');
+        
+        // Store initial content from template
+        const homeTemplate = document.querySelector('#home-template');
         this.routes = {
             home: {
-                'visual-work': mainContent.querySelector('#visual-work')?.innerHTML,
-                'about': mainContent.querySelector('#about')?.innerHTML
+                'visual-work': homeTemplate.content.querySelector('#visual-work')?.innerHTML,
+                'about': homeTemplate.content.querySelector('#about')?.innerHTML
             },
             skills: '',
             projects: ''
         };
+
+        // Remove the template after storing content
+        homeTemplate.remove();
         
-        // Load templates
-        this.loadTemplate('skills', 'templates/skills.html');
-        this.loadTemplate('projects', 'templates/projects.html');
-        
-        // Setup event listeners
-        this.setupEventListeners();
-        
-        // Handle initial route based on URL hash
-        const initialPage = window.location.hash.slice(1) || 'home';
-        if (initialPage === 'home') {
-            history.replaceState({ page: 'home' }, '', '#home');
-        } else {
+        // Load templates first, then handle initial route
+        Promise.all([
+            this.loadTemplate('skills', 'templates/skills.html'),
+            this.loadTemplate('projects', 'templates/projects.html')
+        ]).then(() => {
+            const initialPage = window.location.hash.slice(1) || 'home';
             this.navigate(initialPage, true);
-        }
+            // Mark router as ready after initial navigation
+            mainContent.classList.remove('loading');
+            mainContent.classList.add('router-ready');
+        });
+        
+        this.setupEventListeners();
     }
 
     async loadTemplate(routeName, path) {
@@ -36,18 +40,26 @@ class Router {
             // Extract only the section content
             const sectionContent = tempDiv.querySelector('section').innerHTML;
             this.routes[routeName] = sectionContent;
+            return sectionContent;  // Return the content for Promise.all
         } catch (error) {
             console.error(`Error loading template ${path}:`, error);
+            return null;
         }
     }
 
     setupEventListeners() {
         document.addEventListener('click', (e) => {
-            if (e.target.matches('[data-page]')) {
+            const link = e.target.closest('[data-page]');
+            if (link) {
                 e.preventDefault();
-                const page = e.target.getAttribute('data-page');
+                const page = link.getAttribute('data-page');
                 this.navigate(page);
             }
+        });
+
+        window.addEventListener('hashchange', (e) => {
+            const page = window.location.hash.slice(1) || 'home';
+            this.navigate(page, true);
         });
 
         // Handle browser back/forward buttons
@@ -59,52 +71,56 @@ class Router {
     }
 
     navigate(page, isPopState = false) {
-        if (this.routes[page]) {
-            const main = document.querySelector('main');
-            const header = main.querySelector('header');
-            
-            // Clear all sections after header
-            main.innerHTML = '';
-            main.appendChild(header);
+        // Add check for template loading
+        if (!this.routes[page] && page !== 'home') {
+            console.warn(`Route ${page} not loaded yet`);
+            return;
+        }
+        
+        const main = document.querySelector('main');
+        const header = main.querySelector('header');
+        
+        // Clear all sections after header
+        main.innerHTML = '';
+        main.appendChild(header);
 
-            if (page === 'home') {
-                // Add visual-work section
-                if (this.routes.home['visual-work']) {
-                    const visualSection = document.createElement('section');
-                    visualSection.id = 'visual-work';
-                    visualSection.innerHTML = this.routes.home['visual-work'];
-                    visualSection.classList.add('page-transition');
-                    main.appendChild(visualSection);
-                }
-                
-                // Add about section
-                if (this.routes.home['about']) {
-                    const aboutSection = document.createElement('section');
-                    aboutSection.id = 'about';
-                    aboutSection.innerHTML = this.routes.home['about'];
-                    aboutSection.classList.add('page-transition');
-                    main.appendChild(aboutSection);
-                }
-            } else {
-                // Add the page-specific section with transition
-                const newSection = document.createElement('section');
-                newSection.id = page;
-                newSection.innerHTML = this.routes[page];
-                newSection.classList.add('page-transition');
-                main.appendChild(newSection);
+        if (page === 'home') {
+            // Add visual-work section
+            if (this.routes.home['visual-work']) {
+                const visualSection = document.createElement('section');
+                visualSection.id = 'visual-work';
+                visualSection.innerHTML = this.routes.home['visual-work'];
+                visualSection.classList.add('page-transition');
+                main.appendChild(visualSection);
             }
             
-            // Trigger animation after a brief delay
-            requestAnimationFrame(() => {
-                const sections = document.querySelectorAll('.page-transition');
-                sections.forEach(section => {
-                    section.classList.add('visible');
-                });
+            // Add about section
+            if (this.routes.home['about']) {
+                const aboutSection = document.createElement('section');
+                aboutSection.id = 'about';
+                aboutSection.innerHTML = this.routes.home['about'];
+                aboutSection.classList.add('page-transition');
+                main.appendChild(aboutSection);
+            }
+        } else {
+            // Add the page-specific section with transition
+            const newSection = document.createElement('section');
+            newSection.id = page;
+            newSection.innerHTML = this.routes[page];
+            newSection.classList.add('page-transition');
+            main.appendChild(newSection);
+        }
+        
+        // Trigger animation after a brief delay
+        requestAnimationFrame(() => {
+            const sections = document.querySelectorAll('.page-transition');
+            sections.forEach(section => {
+                section.classList.add('visible');
             });
-            
-            if (!isPopState) {
-                history.pushState({ page }, '', `#${page}`);
-            }
+        });
+        
+        if (!isPopState) {
+            history.pushState({ page }, '', `#${page}`);
         }
     }
 }

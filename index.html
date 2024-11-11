@@ -13,11 +13,17 @@
     <script src="js/art.js" defer></script>
     <script src="js/router.js" defer></script>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <style>
+        /* Add this to hide content until router is ready */
+        main:not(.router-ready) > section {
+            display: none;
+        }
+    </style>
 
 </head>
 
 <body>
-    <main>
+    <main class="loading">
         <header>
             <div class="header-content">
                 <div class="profile">
@@ -27,57 +33,53 @@
                 </div>
                 <nav class="header-nav">
                     <ul>
-                        <li><a href="#" data-page="home">Home</a></li>
-                        <li><a href="#" data-page="skills">Skills</a></li>
-                        <li><a href="#" data-page="projects">Projects</a></li>
+                        <li><a href="#home" data-page="home">Home</a></li>
+                        <li><a href="#skills" data-page="skills">Skills</a></li>
+                        <li><a href="#projects" data-page="projects">Projects</a></li>
                     </ul>
                 </nav>
             </div>
             <canvas id="threeCanvas"></canvas>
         </header>
-        <section id="visual-work">
-            <div class="carousel-container">
-                <div class="carousel">
-                    <div class="carousel-slide">
-                        <img src="https://pbs.twimg.com/media/Gb1ky9sbwAA-KeZ.jpg" alt="Visual Project 4">
+        <template id="home-template">
+            <section id="visual-work">
+                <div class="carousel-container">
+                    <div class="carousel">
+                        <div class="carousel-slide">
+                            <img src="https://pbs.twimg.com/media/Gb1ky9sbwAA-KeZ.jpg" alt="Visual Project 4">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://pbs.twimg.com/media/Flr1pAyX0AItdCA.jpg" alt="Visual Project 6">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://pbs.twimg.com/media/Gb1kqcAacAAV9qZ.jpg" alt="Visual Project 2">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://pbs.twimg.com/media/Gat5dntbIAAMCUa.jpg" alt="Visual Project 1">
+                        </div>
+                        <!-- Add more slides as needed -->
                     </div>
-                    <div class="carousel-slide">
-                        <img src="https://pbs.twimg.com/media/Flr1pAyX0AItdCA.jpg" alt="Visual Project 6">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="https://pbs.twimg.com/media/Gb1kqcAacAAV9qZ.jpg" alt="Visual Project 2">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="https://pbs.twimg.com/media/Gat5dntbIAAMCUa.jpg" alt="Visual Project 1">
-                    </div>
-                    <!-- Add more slides as needed -->
                 </div>
-            </div>
-        </section>
-        <section id="about">
-            <h2>About Me</h2>
-            <p>
-                Coming from a game development background, I've always been passionate about building worlds and
-                creating immersive level designs. In my free time, I develop games as a way to combine my love for
-                creative storytelling with technical problem-solving. Currently, I'm transitioning from web development
-                to exploring real software applications beyond the typical web stack, with a focus on systems
-                programming and sustainable tech solutions. I have experience with React, TypeScript, and Python,
-                combined with experience in deployment setup on AWS with Kubernetes. I'm especially interested in
-                leveraging AI to develop resource-conscious, high-performance applications, from machine learning-driven
-                analytics to streamlined backend systems that optimize resource use. I create my designs
-                programmatically and can use the Adobe CC to create assets. I have been animating and creating art
-                pretty much my entire life. I picked up music production in college and I am now learning nvim, studying
-                computer science, and working in general contracting to expand my engineering skills, all with the aim
-                of advancing my expertise.
-                Please be patient with me as I update this site.
-            </p>
-        </section>
-        
-        <div class="social-links">
-            <a href="mailto:emmanueltwang@gmail.com">
-                <span class="iconify" data-icon="mdi:email"></span>
-            </a>
-        </div>
+            </section>
+            <section id="about">
+                <h2>About Me</h2>
+                <p>
+                    Coming from a game development background, I've always been passionate about building worlds and
+                    creating immersive level designs. In my free time, I develop games as a way to combine my love for
+                    creative storytelling with technical problem-solving. Currently, I'm transitioning from web development
+                    to exploring real software applications beyond the typical web stack, with a focus on systems
+                    programming and sustainable tech solutions. I have experience with React, TypeScript, and Python,
+                    combined with experience in deployment setup on AWS with Kubernetes. I'm especially interested in
+                    leveraging AI to develop resource-conscious, high-performance applications, from machine learning-driven
+                    analytics to streamlined backend systems that optimize resource use. I create my designs
+                    programmatically and can use the Adobe CC to create assets. I have been animating and creating art
+                    pretty much my entire life. I picked up music production in college and I am now learning nvim, studying
+                    computer science, and working in general contracting to expand my engineering skills, all with the aim
+                    of advancing my expertise.
+                    Please be patient with me as I update this site.
+                </p>
+            </section>
+        </template>
     </main>
 </body>
 
