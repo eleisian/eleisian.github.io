@@ -52,7 +52,7 @@ export class BlogRenderer {
                 <h2>${post.title}</h2>
                 <time datetime="${post.date}">${formattedDate}</time>
                 <div class="content">
-                    ${marked.parse(post.content)}
+                    ${post.content.split('\n').map(line => `<p>${line}</p>`).join('')}
                 </div>
             `;
             

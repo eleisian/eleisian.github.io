@@ -1,4 +1,4 @@
-import { BlogRenderer } from './markdownLoader.js';
+import { BlogRenderer } from './blogRenderer.js';
 import { blogPosts } from '../blog/blogPosts.js';
 
 class BlogHandler {

@@ -1,6 +1,6 @@
-// Get the canvas element
 document.addEventListener('DOMContentLoaded', function() {
     const canvas = document.getElementById('threeCanvas');
+    // Exit early if canvas doesn't exist on this page
     const ctx = canvas.getContext('2d');
 
     // Grid settings
