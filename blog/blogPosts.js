@@ -7,13 +7,6 @@ export const blogPosts = [
 Let it end. Allow it to escape from your grasp. If it is meant to be yours, it will find its way back to you. Choose peace. Give yourself permission to breathe a little easier in its absence. Resist the urge to try to control the outcome. All we can do is do our best.`
     },
     {
-        title: "situationships",
-        date: "2024-03-10",
-        content: `I'm building an anonymous text board for dealing with your feelings.
-
-The idea is that you can post your feelings...`
-    },
-    {
         title: "the new world",
         date: "2024-11-08",
         content: `the world is hungry for new ideas.
