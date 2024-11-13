@@ -1,5 +1,4 @@
 import { BlogRenderer } from './blogRenderer.js';
-import { blogPosts } from '../blog/blogPosts.js';
 
 class BlogHandler {
     constructor() {
@@ -10,8 +9,18 @@ class BlogHandler {
     initialize() {
         const blogGrid = document.querySelector('.blog-grid');
         if (blogGrid) {
-            this.blogRenderer.initialize(blogPosts);
-            this.blogRenderer.renderBlogPosts(blogGrid);
+            fetch(`../blog/blogPosts.js?v=${Date.now()}`)
+                .then(response => response.text())
+                .then(text => {
+                    const cleanedText = text.replace('export const blogPosts =', 'const blogPosts =');
+                    const posts = new Function(`
+                        ${cleanedText}
+                        return blogPosts;
+                    `)();
+                    
+                    this.blogRenderer.initialize(posts);
+                    this.blogRenderer.renderBlogPosts(blogGrid);
+                });
         }
     }
 }
