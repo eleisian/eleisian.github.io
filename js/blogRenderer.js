@@ -48,11 +48,15 @@ export class BlogRenderer {
                 day: 'numeric'
             });
 
+            const contentHtml = post.content.includes('<audio') 
+                ? post.content  // If content contains audio tag, use it as-is
+                : post.content.split('\n').map(line => `<p>${line}</p>`).join(''); // Otherwise, wrap in p tags
+
             article.innerHTML = `
                 <h2>${post.title}</h2>
                 <time datetime="${post.date}">${formattedDate}</time>
                 <div class="content">
-                    ${post.content.split('\n').map(line => `<p>${line}</p>`).join('')}
+                    ${contentHtml}
                 </div>
             `;
             
