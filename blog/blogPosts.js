@@ -31,5 +31,12 @@ the world needs new people.`
         date: "2024-11-11",
         content: `I am the captain of this ship. Everyone around me has to be doing well before I claim the treasures of the earth. 
         Because you can't get rich without getting your people rich first.`
+    },
+    {
+        title: "until the two hearts become one",
+        date: "2024-11-12",
+        content: `I'm learning to be kinder to myself. I'm learning to be kinder to others. I'm learning to be kinder to the world.
+        I'm learning to be kinder to the future. I'm trying to be aware of a presence that is greater than myself. I'm trying to not just talk alone in the dark. 
+        I want others to be able to hear my heart and not my words.`
     }
 ]; 
