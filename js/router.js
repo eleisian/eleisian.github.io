@@ -80,6 +80,15 @@ class Router {
   }
 
   navigate(page, isPopState = false) {
+      // Add animation trigger at the start of navigation
+      const profilePicContainer = document.querySelector('.profile-pic-container');
+      profilePicContainer.classList.add('animate');
+      
+      // Remove animation class after it completes
+      profilePicContainer.addEventListener('animationend', () => {
+          profilePicContainer.classList.remove('animate');
+      }, { once: true });  // Remove listener after it fires once
+      
       // Add check for template loading
       if (!this.routes[page] && page !== 'home') {
           console.warn(`Route ${page} not loaded yet`);

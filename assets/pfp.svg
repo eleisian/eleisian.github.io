@@ -1,0 +1,43 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100" height="100" fill="#FFFFFC" />
+
+  <!-- Dot 1 with trail -->
+  <circle id="dot1" cx="70" cy="30" r="10" fill="black">
+    <animateTransform 
+      attributeName="transform"
+      type="rotate"
+      from="0 50 50"
+      to="360 50 50"
+      dur="2s"
+      repeatCount="1"
+      begin="indefinite"
+    />
+    <animate 
+      attributeName="opacity"
+      values="1;0.2;1" 
+      dur="2s" 
+      repeatCount="1"
+      begin="indefinite"
+    />
+  </circle>
+
+  <!-- Dot 2 with trail -->
+  <circle id="dot2" cx="30" cy="70" r="10" fill="black">
+    <animateTransform 
+      attributeName="transform"
+      type="rotate"
+      from="0 50 50"
+      to="360 50 50"
+      dur="2s"
+      repeatCount="5"
+      begin="indefinite"
+    />
+    <animate 
+      attributeName="opacity"
+      values="1;0.2;1" 
+      dur="2s" 
+      repeatCount="5"
+      begin="indefinite"
+    />
+  </circle>
+</svg>
