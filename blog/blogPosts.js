@@ -7,17 +7,6 @@ export const blogPosts = [
 Let it end. Allow it to escape from your grasp. If it is meant to be yours, it will find its way back to you. Choose peace. Give yourself permission to breathe a little easier in its absence. Resist the urge to try to control the outcome. All we can do is do our best.`
     },
     {
-        title: "the new world",
-        date: "2024-11-08",
-        content: `the world is hungry for new ideas.
-those who can create new ideas will be the ones who can create new worlds.
-those who can't create new ideas will feed off of the ideas of others.
-it seems like everyone nowadays is just trying to break down the strong.
-the world needs new ideas.
-the world needs new worlds.
-the world needs new people.`
-    },
-    {
         title: "one hundred more, ten thousand more",
         date: "2024-11-10",
         content: `Всё гениальное просто!`
