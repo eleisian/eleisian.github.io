@@ -80,6 +80,15 @@ class Router {
   }
 
   navigate(page, isPopState = false) {
+      // Update active tab
+      document.querySelectorAll('.header-nav a').forEach(link => {
+          if (link.getAttribute('data-page') === page) {
+              link.classList.add('active');
+          } else {
+              link.classList.remove('active');
+          }
+      });
+      
       // Add animation trigger at the start of navigation
       const profilePicContainer = document.querySelector('.profile-pic-container');
       profilePicContainer.classList.add('animate');
