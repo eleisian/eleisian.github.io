@@ -6,7 +6,7 @@ class Knob {
     this.element = element;
     this.min = options.min || 0;
     this.max = options.max || 100;
-    this.value = options.value || 50;
+    this.value = typeof options.value === 'number' ? options.value : 50;
     this.onChange = options.onChange || (() => {});
     this.unit = options.unit || "";
 
@@ -16,6 +16,7 @@ class Knob {
 
     this.setup();
     this.updateRotation();
+    this.updateValue();
   }
 
   setup() {
@@ -161,7 +162,7 @@ masterWetGain.connect(audioContext.destination);
 
 // Define sound controls at the top level
 const soundControls = {
-  attack: 0.025,
+  attack: 0.00,
   decay: 0.918,
   sustain: 0.32,
   release: 0.12,
@@ -597,7 +598,7 @@ document.addEventListener("DOMContentLoaded", function () {
       attack: new Knob(knobElements.attack, {
         min: 0,
         max: 100,
-        value: 25,
+        value: 0,
         unit: "ms",
         onChange: (value) => {
           soundControls.attack = value / 1000;
