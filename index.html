@@ -53,6 +53,55 @@
                 </nav>
             </div>
             <canvas id="threeCanvas"></canvas>
+            <!-- Add sound controls here, after the canvas -->
+            <div id="sound-controls" class="sound-controls hidden">
+                <div class="control-group">
+                    <div class="knob-wrapper">
+                        <div class="knob" id="attack-knob">
+                            <div class="knob-dot"></div>
+                        </div>
+                        <label>Attack</label>
+                        <span class="value">25ms</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="knob-wrapper">
+                        <div class="knob" id="decay-knob">
+                            <div class="knob-dot"></div>
+                        </div>
+                        <label>Decay</label>
+                        <span class="value">918ms</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="knob-wrapper">
+                        <div class="knob" id="sustain-knob">
+                            <div class="knob-dot"></div>
+                        </div>
+                        <label>Sustain</label>
+                        <span class="value">32%</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="knob-wrapper">
+                        <div class="knob" id="release-knob">
+                            <div class="knob-dot"></div>
+                        </div>
+                        <label>Release</label>
+                        <span class="value">12ms</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="knob-wrapper">
+                        <div class="knob" id="reverb-knob">
+                            <div class="knob-dot"></div>
+                        </div>
+                        <label>Reverb</label>
+                        <span class="value">100%</span>
+                    </div>
+                </div>
+                <button class="close-btn">×</button>
+            </div>
         </header>
         <template id="home-template">
             <section id="visual-work">
