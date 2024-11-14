@@ -8,8 +8,7 @@ export const blogPosts = [
     {
         title: "captain of the ship",
         date: "2024-11-11",
-        content: `I am the captain of this ship. Everyone around me has to be doing well before I claim the treasures of the earth. 
-        Because you can't get rich without getting your people rich first.`
+        content: `I am the captain of the ship.`
     },
     {
         title: "until the two hearts become one",
