@@ -351,13 +351,14 @@ a:hover {
     overflow-y: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    scroll-padding-left: 0px;
+    scroll-padding-left: 55px;
 }
 
 .carousel {
     display: flex;
     height: 100%;
     gap: 0;
+    transform: translateX(-55px);
 }
 
 .carousel-slide {
