@@ -129,8 +129,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // Function to calculate responsive width and height
   function calculateDimensions() {
     return {
-      width: 22 * cellSize, // Fixed 22 columns
-      height: 2 * cellSize, // Fixed 2 rows
+      width: 16 * cellSize,  // Changed from 22 to 16 columns
+      height: 2 * cellSize,  // Keep 2 rows
     };
   }
 
@@ -140,8 +140,8 @@ document.addEventListener("DOMContentLoaded", function () {
   canvas.height = height;
 
   // Grid dimensions
-  let gridWidth = 22; // Fixed width
-  let gridHeight = 2; // Fixed height
+  let gridWidth = 16;  // Changed from 22 to 16
+  let gridHeight = 2;  // Keep 2 rows
 
   // ASCII characters to use
   const asciiChars = ["·", ":", "+", "×", "▢", "▣", "◯", "◉", "█"];
@@ -162,23 +162,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // Define notes back down an octave (C4)
   const notes = [
     261.62, // C4
-    261.62, // C4
-    293.66, // D4
     329.62, // E4
-    329.62, // E4
-    392.0, // G4
-    440.0, // A4
     261.62, // C4
-    261.62, // C4
-    261.62, // C4
-    293.66, // D4
-    329.62, // E4
     329.62, // E4
     349.22, // F4
     329.62, // E4
     261.62, // C4
-  ];
-
+    329.62, // E4
+];
   // Grid class
   class Grid {
     constructor() {
@@ -429,3 +420,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
