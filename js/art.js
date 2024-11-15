@@ -1,139 +1,3 @@
-// Add this at the top of the file, after class Knob definition
-let isDraggingKnob = false;
-
-class Knob {
-  constructor(element, options) {
-    this.element = element;
-    this.min = options.min || 0;
-    this.max = options.max || 100;
-    this.value = typeof options.value === 'number' ? options.value : 50;
-    this.onChange = options.onChange || (() => {});
-    this.unit = options.unit || "";
-
-    this.isDragging = false;
-    this.startY = 0;
-    this.startValue = this.value;
-
-    this.setup();
-    this.updateRotation();
-    this.updateValue();
-  }
-
-  setup() {
-    const preventSelection = () => {
-      document.body.style.userSelect = 'none';
-      document.body.style.webkitUserSelect = 'none';
-      document.body.style.mozUserSelect = 'none';
-      document.body.style.msUserSelect = 'none';
-    };
-
-    const restoreSelection = () => {
-      document.body.style.userSelect = '';
-      document.body.style.webkitUserSelect = '';
-      document.body.style.mozUserSelect = '';
-      document.body.style.msUserSelect = '';
-    };
-
-    const handleTouchMove = (e) => {
-      if (!this.isDragging) return;
-      e.preventDefault();
-      isDraggingKnob = true;
-      preventSelection();
-      const touch = e.touches[0];
-      const deltaY = this.startY - touch.clientY;
-      const sensitivity = 0.5;
-      const range = this.max - this.min;
-      const deltaValue = ((deltaY * sensitivity) / 100) * range;
-
-      let newValue = this.startValue + deltaValue;
-      newValue = Math.max(this.min, Math.min(this.max, newValue));
-
-      if (this.value !== newValue) {
-        this.value = newValue;
-        this.updateRotation();
-        this.updateValue();
-        this.onChange(this.value);
-      }
-    };
-
-    const handleTouchEnd = () => {
-      if (!this.isDragging) return;
-      this.isDragging = false;
-      setTimeout(() => {
-        isDraggingKnob = false;
-        restoreSelection();
-      }, 10);
-      document.removeEventListener("touchmove", handleTouchMove);
-      document.removeEventListener("touchend", handleTouchEnd);
-    };
-
-    const handleMouseMove = (e) => {
-      if (!this.isDragging) return;
-      e.preventDefault();
-      isDraggingKnob = true;
-      preventSelection();
-      const deltaY = this.startY - e.clientY;
-      const sensitivity = 0.5;
-      const range = this.max - this.min;
-      const deltaValue = ((deltaY * sensitivity) / 100) * range;
-
-      let newValue = this.startValue + deltaValue;
-      newValue = Math.max(this.min, Math.min(this.max, newValue));
-
-      if (this.value !== newValue) {
-        this.value = newValue;
-        this.updateRotation();
-        this.updateValue();
-        this.onChange(this.value);
-      }
-    };
-
-    const handleMouseUp = () => {
-      if (!this.isDragging) return;
-      this.isDragging = false;
-      setTimeout(() => {
-        isDraggingKnob = false;
-        restoreSelection();
-      }, 10);
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-    };
-
-    this.element.addEventListener("mousedown", (e) => {
-      e.preventDefault();
-      this.isDragging = true;
-      this.startY = e.clientY;
-      this.startValue = this.value;
-      preventSelection();
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-    });
-
-    this.element.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      this.isDragging = true;
-      this.startY = e.touches[0].clientY;
-      this.startValue = this.value;
-      preventSelection();
-      document.addEventListener("touchmove", handleTouchMove);
-      document.addEventListener("touchend", handleTouchEnd);
-    });
-  }
-
-  updateRotation() {
-    const rotation =
-      ((this.value - this.min) / (this.max - this.min)) * 270 - 135;
-    this.element.style.transform = `rotate(${rotation}deg)`;
-  }
-
-  updateValue() {
-    const valueDisplay = this.element.parentElement.querySelector(".value");
-    if (valueDisplay) {
-      valueDisplay.textContent = `${Math.round(this.value)}${this.unit}`;
-    }
-  }
-}
-
 // Create a single shared AudioContext at the top level
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -163,8 +27,8 @@ masterWetGain.connect(audioContext.destination);
 // Define sound controls at the top level
 const soundControls = {
   attack: 0.00,
-  decay: 0.918,
-  sustain: 0.32,
+  decay: 0.5,
+  sustain: 0.2,
   release: 0.12,
   reverb: 1,
 };
@@ -315,11 +179,6 @@ document.addEventListener("DOMContentLoaded", function () {
     261.62, // C4
   ];
 
-  function showControls() {
-    const controls = document.getElementById("sound-controls");
-    controls.classList.remove("hidden");
-  }
-
   // Grid class
   class Grid {
     constructor() {
@@ -462,9 +321,6 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
           this.cells.forEach((cell) => (cell.isActive = false));
         }, 200);
-
-        // Show controls at click position
-        showControls();
       }
     }
   }
@@ -572,74 +428,4 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
-
-  // Initialize sound controls
-  const closeBtn = document.querySelector(".close-btn");
-  const controls = document.getElementById("sound-controls");
-
-  if (closeBtn && controls) {
-    closeBtn.addEventListener("click", () => {
-      controls.classList.add("hidden");
-    });
-  }
-
-  // Initialize all knobs
-  const knobElements = {
-    attack: document.getElementById("attack-knob"),
-    decay: document.getElementById("decay-knob"),
-    sustain: document.getElementById("sustain-knob"),
-    release: document.getElementById("release-knob"),
-    reverb: document.getElementById("reverb-knob"),
-  };
-
-  // Check if all elements exist before initializing
-  if (Object.values(knobElements).every((element) => element)) {
-    const knobs = {
-      attack: new Knob(knobElements.attack, {
-        min: 0,
-        max: 100,
-        value: 0,
-        unit: "ms",
-        onChange: (value) => {
-          soundControls.attack = value / 1000;
-        },
-      }),
-      decay: new Knob(knobElements.decay, {
-        min: 100,
-        max: 2000,
-        value: 918,
-        unit: "ms",
-        onChange: (value) => {
-          soundControls.decay = value / 1000;
-        },
-      }),
-      sustain: new Knob(knobElements.sustain, {
-        min: 0,
-        max: 100,
-        value: 32,
-        unit: "%",
-        onChange: (value) => {
-          soundControls.sustain = value / 100;
-        },
-      }),
-      release: new Knob(knobElements.release, {
-        min: 0,
-        max: 100,
-        value: 12,
-        unit: "ms",
-        onChange: (value) => {
-          soundControls.release = value / 1000;
-        },
-      }),
-      reverb: new Knob(knobElements.reverb, {
-        min: 0,
-        max: 100,
-        value: 100,
-        unit: "%",
-        onChange: (value) => {
-          soundControls.reverb = value / 100;
-        },
-      }),
-    };
-  }
 });
