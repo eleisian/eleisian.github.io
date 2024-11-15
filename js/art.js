@@ -27,10 +27,10 @@ masterWetGain.connect(audioContext.destination);
 // Define sound controls at the top level
 const soundControls = {
   attack: 0.00,
-  decay: 0.5,
-  sustain: 0.2,
+  decay: 0.22,
+  sustain: 0.0,
   release: 0.12,
-  reverb: 1,
+  reverb: 0.7,
 };
 
 // Add impulse response creation and loading
