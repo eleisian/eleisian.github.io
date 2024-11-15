@@ -21,22 +21,6 @@ export class BlogRenderer {
     renderBlogPosts(container) {
         container.innerHTML = '';
         
-        const controls = document.createElement('div');
-        controls.className = 'blog-controls';
-        controls.innerHTML = `
-            <select class="sort-select">
-                <option value="newest" ${this.currentSort === 'newest' ? 'selected' : ''}>Newest First</option>
-                <option value="oldest" ${this.currentSort === 'oldest' ? 'selected' : ''}>Oldest First</option>
-            </select>
-        `;
-
-        controls.querySelector('.sort-select').addEventListener('change', (e) => {
-            this.sortPosts(e.target.value);
-            this.renderBlogPosts(container);
-        });
-
-        container.appendChild(controls);
-
         this.blogPosts.forEach((post, index) => {
             const article = document.createElement('article');
             article.className = 'blog-post';

@@ -234,7 +234,7 @@ a:hover {
 .header-nav {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 0;
 }
 
 .header-nav ul {
@@ -435,40 +435,6 @@ a:hover {
     border: none;
     border-top: 1px solid var(--color-border);
     width: 100%;
-}
-
-/* Blog Controls */
-.blog-controls {
-    display: flex;
-    justify-content: flex-end;
-    border-bottom: 1px solid var(--color-border);
-}
-
-.sort-controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-family: "Inter", sans-serif;
-}
-
-.sort-controls label {
-    font-size: 0.9rem;
-}
-
-.sort-select {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--color-border);
-    border-radius: 4px;
-    background-color: var(--color-background);
-    color: var(--color-text);
-    font-family: "Inter", sans-serif;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: border-color 0.2s ease;
-}
-
-.sort-select:focus {
-    outline: none;
 }
 
 /* Sound Controls */
@@ -679,7 +645,7 @@ section {
 
     #threeCanvas {
         position: static;
-        transform: none;
+
         width: 100%;
         height: auto;
     }
