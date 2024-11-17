@@ -2,6 +2,7 @@ export class BlogRenderer {
     constructor() {
         this.blogPosts = [];
         this.currentSort = 'newest';
+        this.loadTwitterWidget();
     }
 
     initialize(posts) {
@@ -18,6 +19,16 @@ export class BlogRenderer {
         });
     }
 
+    loadTwitterWidget() {
+        if (!window.twttr) {
+            const script = document.createElement('script');
+            script.src = "https://platform.twitter.com/widgets.js";
+            script.async = true;
+            script.charset = "utf-8";
+            document.head.appendChild(script);
+        }
+    }
+
     renderBlogPosts(container) {
         container.innerHTML = '';
         
@@ -32,9 +43,9 @@ export class BlogRenderer {
                 day: 'numeric'
             });
 
-            const contentHtml = post.content.includes('<audio') 
-                ? post.content  // If content contains audio tag, use it as-is
-                : post.content.split('\n').map(line => `<p>${line}</p>`).join(''); // Otherwise, wrap in p tags
+            const contentHtml = post.content.includes('twitter-tweet') 
+                ? post.content  // Keep tweet HTML as-is
+                : post.content.split('\n').map(line => `<p>${line}</p>`).join('');
 
             article.innerHTML = `
                 <h2>${post.title}</h2>
@@ -45,6 +56,10 @@ export class BlogRenderer {
             `;
             
             container.appendChild(article);
+
+            if (post.content.includes('twitter-tweet') && window.twttr) {
+                window.twttr.widgets.load(article);
+            }
             
             if (index < this.blogPosts.length - 1) {
                 const divider = document.createElement('hr');
