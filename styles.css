@@ -137,7 +137,9 @@ a:hover {
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    animation: float-in 1s ease-out forwards;
+    animation: 
+        float-in 1s ease-out forwards,
+        section-float 6s ease-in-out infinite 1s;
     opacity: 0;
 }
 
@@ -150,7 +152,9 @@ a:hover {
     padding: 5px 0;
     position: relative;
     transform: translateY(20px);
-    animation: wave-in 0.5s ease-out forwards;
+    animation: 
+        wave-in 0.5s ease-out forwards,
+        text-float 3s ease-in-out infinite 0.5s;
     opacity: 0;
 }
 
@@ -228,6 +232,8 @@ a:hover {
     border-radius: 5px;
     cursor: pointer;
     transition: box-shadow 0.3s ease;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
 .project-card::before {
@@ -237,18 +243,52 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--color-highlight);
-    z-index: -1;
-    transform: translate(0, 0);
-    transition:
-        transform 0.2s,
-        opacity 0.2s;
+    background: radial-gradient(
+        circle at var(--x, 50%) var(--y, 50%),
+        rgba(187, 246, 255, 0.15) 0%,
+        transparent 25%
+    ),
+    radial-gradient(
+        circle at calc(var(--x, 50%) + 20%) calc(var(--y, 50%) - 20%),
+        rgba(187, 246, 255, 0.12) 0%,
+        transparent 30%
+    ),
+    radial-gradient(
+        circle at calc(var(--x, 50%) - 20%) calc(var(--y, 50%) + 20%),
+        rgba(187, 246, 255, 0.1) 0%,
+        transparent 35%
+    );
     opacity: 0;
-    border-radius: 5px;
+    transition: opacity 0.3s ease;
+    animation: caustics 8s infinite linear;
+    mix-blend-mode: screen;
 }
 
 .project-card:hover::before {
-    opacity: 0;
+    opacity: 1;
+}
+
+@keyframes caustics {
+    0% {
+        --x: 20%;
+        --y: 30%;
+    }
+    25% {
+        --x: 80%;
+        --y: 20%;
+    }
+    50% {
+        --x: 70%;
+        --y: 80%;
+    }
+    75% {
+        --x: 30%;
+        --y: 70%;
+    }
+    100% {
+        --x: 20%;
+        --y: 30%;
+    }
 }
 
 .project-card h3 {
@@ -269,6 +309,10 @@ a:hover {
 
 .project-link:hover {
     text-decoration: underline;
+}
+
+.project-card::after {
+    display: none;
 }
 
 /* Profile */
@@ -486,6 +530,31 @@ a:hover {
     font-family: "Merriweather", serif;
     line-height: 1.8;
     font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.blog-post::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at var(--x, 50%) var(--y, 50%),
+        rgba(187, 246, 255, 0.08) 0%,
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.blog-post:hover::before {
+    opacity: 1;
+    --x: var(--mouse-x, 50%);
+    --y: var(--mouse-y, 50%);
 }
 
 .blog-post h2 {
@@ -495,6 +564,7 @@ a:hover {
     padding: 0;
     font-family: "Inter", sans-serif;
     color: var(--color-text);
+    position: relative;
 }
 
 .blog-post time {
@@ -832,14 +902,18 @@ section {
     }
 }
 
-/* About Section Animation */
+/* About Section Animation - Updated */
 #about {
-    animation: fade-slide-up 0.8s ease-out forwards;
+    animation: 
+        fade-slide-up 0.8s ease-out forwards,
+        section-float 6s ease-in-out infinite 0.8s;
     opacity: 0;
 }
 
 #about > p {
-    animation: fade-slide-up 0.8s ease-out forwards;
+    animation: 
+        fade-slide-up 0.8s ease-out forwards,
+        text-float 3s ease-in-out infinite 0.8s;
     opacity: 0;
 }
 
@@ -922,3 +996,68 @@ section {
 .bubble:nth-child(8) { animation-delay: 0.2s; }
 .bubble:nth-child(9) { animation-delay: 0.3s; }
 .bubble:nth-child(10) { animation-delay: 0.5s; }
+
+/* Bubble Animation for Projects and Blog */
+.project-card:hover::before,
+.blog-post:hover::before {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    left: var(--bubble-left, 50%);
+    width: 20px;
+    height: 20px;
+    background: rgba(187, 246, 255, 0.2);
+    border-radius: 50%;
+    animation: bubble-rise 2s ease-out forwards;
+}
+
+/* Generate multiple bubbles with different positions */
+.project-card:hover::before { --bubble-left: 20%; }
+.project-card:hover::after { --bubble-left: 80%; }
+
+@keyframes bubble-rise {
+    0% {
+        transform: scale(0) translateY(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1) translateY(-50px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(0.5) translateY(-100px);
+        opacity: 0;
+    }
+}
+
+/* Underwater text effect for headings */
+.project-card h3,
+.blog-post h2 {
+    position: relative;
+    animation: text-float 3s ease-in-out infinite;
+}
+
+@keyframes text-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Add subtle wave animation to the entire sections */
+#projects,
+#blog {
+    position: relative;
+    animation: section-float 6s ease-in-out infinite;
+}
+
+@keyframes section-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
