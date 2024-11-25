@@ -83,9 +83,6 @@ class Router {
   navigate(page, isPopState = false) {
       console.log('Navigation started to page:', page); // Debug log
       
-      // Create bubbles animation - moved to the start of navigation
-      this.createBubbles();
-      
       // Update active tab
       document.querySelectorAll('.header-nav a').forEach(link => {
           if (link.getAttribute('data-page') === page) {
@@ -144,11 +141,15 @@ class Router {
           main.appendChild(newSection);
       }
       
-      // Reinitialize the background
-      if (window.background) {
+      // Reinitialize the background only if it exists and has a destroy method
+      if (window.background && typeof window.background.destroy === 'function') {
           window.background.destroy();
+          window.background = new Background();
       }
-      window.background = new Background();
+      
+      // Force layout recalculation to prevent extra space
+      main.style.minHeight = 'auto';
+      main.style.height = 'auto';
       
       // Trigger animation after a brief delay
       requestAnimationFrame(() => {
@@ -161,35 +162,6 @@ class Router {
       if (!isPopState) {
           history.pushState({ page }, '', `#${page}`);
       }
-
-      this.createBubbles();
-  }
-
-  createBubbles() {
-      console.log('Creating bubbles...'); // Debug log
-      
-      const bubbleContainer = document.createElement('div');
-      bubbleContainer.className = 'bubble-container';
-      document.body.appendChild(bubbleContainer);
-
-      // Back to original: random number of bubbles (between 8-12)
-      const bubbleCount = Math.floor(Math.random() * 5) + 8;
-      
-      // Create exactly 5 bubbles for testing
-      for (let i = 0; i < bubbleCount; i++) {
-          const bubble = document.createElement('div');
-          bubble.className = 'bubble';
-          bubble.style.width = '50px';
-          bubble.style.height = '50px';
-          bubble.style.left = `${i * 20}%`;
-          bubbleContainer.appendChild(bubble);
-      }
-
-      // Remove bubble container after animation
-      setTimeout(() => {
-          bubbleContainer.remove();
-          console.log('Bubbles removed'); // Debug log
-      }, 3000);
   }
 }
 
