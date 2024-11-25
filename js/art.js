@@ -177,8 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Create the note mapping grid
       for (let x = 0; x < gridWidth; x++) {
-        // Ensure we start with the first note (C3) for the first column
-        const noteIndex = x % notes.length; // This ensures we wrap around if we have more columns than notes
+        const noteIndex = x % notes.length;
         for (let y = 0; y < gridHeight; y++) {
           const cell = {
             char: asciiChars[0],
@@ -189,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
             colorIndex: Math.floor(Math.random() * currentPalette.length),
             rhythm: Math.random() * Math.PI * 2,
             opacity: 0,
-            note: notes[noteIndex], // This will now start with the first note (C3) for x=0
+            note: notes[noteIndex],
             isActive: false,
           };
           this.cells.push(cell);
@@ -215,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const t = cell.age / cell.maxAge;
-      cell.opacity = (1 - t) * (0.3 + rhythmFactor * 0.7);
+      cell.opacity = Math.max(0, cell.opacity - 0.01);
     }
 
     update(time) {
@@ -303,7 +302,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const cell = this.cells[index];
         // Visual feedback
         cell.char = asciiChars[Math.floor(Math.random() * asciiChars.length)];
-        cell.opacity = 1;
+        cell.opacity = 0.7;
 
         // Play sound using the column-based note
         playNote(noteToPlay);
@@ -313,6 +312,22 @@ document.addEventListener("DOMContentLoaded", function () {
           this.cells.forEach((cell) => (cell.isActive = false));
         }, 200);
       }
+    }
+
+    // Update mousemove handler
+    handleMouseMove(mouseX, mouseY) {
+      const x = Math.floor(mouseX / cellSize);
+      const y = Math.floor(mouseY / cellSize);
+
+      this.cells.forEach((cell) => {
+        const cellX = Math.floor(cell.x / cellSize);
+        const cellY = Math.floor(cell.y / cellSize);
+        if (cellX === x && cellY === y) {
+          cell.opacity = Math.min(cell.opacity + 0.1, 0.5);
+        } else {
+          cell.opacity = Math.max(cell.opacity - 0.05, 0);
+        }
+      });
     }
   }
 
@@ -413,7 +428,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const cellX = Math.floor(cell.x / cellSize);
       const cellY = Math.floor(cell.y / cellSize);
       if (cellX === x && cellY === y) {
-        cell.opacity = Math.min(cell.opacity + 0.1, 1);
+        cell.opacity = Math.min(cell.opacity + 0.1, 0.5);
       } else {
         cell.opacity = Math.max(cell.opacity - 0.05, 0);
       }

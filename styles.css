@@ -4,15 +4,15 @@
 /* Variables */
 :root {
     --font-primary: "Poppins", sans-serif;
-    --color-text: #333333;
-    --color-background: #fffffc;
-    --color-accent: #f3f3f2;
+    --color-text: #000000;
+    --color-background: #f8f8b6;
+    --color-accent: #5d5d5d;
     --color-link: #000000;
     --color-card-bg: #ffffff00;
-    --color-card-border: #e0e0e0;
+    --color-card-border: #5d5d5d;
     --color-shadow: rgba(0, 0, 0, 0.1);
-    --color-highlight: #f7fcfe;
-    --color-sky: #e7e7eb;
+    --color-highlight: #aaaaaa;
+    --color-sky: #ffe9bb;
     --max-width: 1200px;
 }
 
@@ -256,7 +256,7 @@ a:hover {
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
-    background: var(--color-background);
+    background: #ffffff93;
     border: 1px solid var(--color-card-border);
     border-bottom: none;
     border-radius: 8px 8px 0 0;
@@ -266,13 +266,12 @@ a:hover {
 }
 
 .header-nav a:hover {
-    background: var(--color-accent);
+    background: #ffffff42;
     text-decoration: none;
     opacity: 0.9;
 }
 
 .header-nav a.active {
-    background: var(--color-accent);
     border-bottom: none;
     z-index: 2;
     opacity: 1;
@@ -327,7 +326,6 @@ a:hover {
     border-radius: 10px;
     width: 100%;
     height: 200px;
-    background: var(--color-accent);
     overflow-x: auto;
     overflow-y: hidden;
     -ms-overflow-style: none;
