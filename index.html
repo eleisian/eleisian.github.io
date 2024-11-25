@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="styles.css?v=<?php echo time(); ?>">
     <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="js/background.js?v=1.0.3" defer></script>
-    <script src="js/art.js?v=1.0.3" defer></script>
-    <script src="js/router.js?v=1.0.3" type="module"></script>
-    <script src="js/blogRenderer.js?v=1.0.3" type="module"></script>
-    <link rel="icon" href="/favicon.ico?v=1.0.3" type="image/x-icon">
+    <script src="js/background.js?v=1.0.4" defer></script>
+    <script src="js/art.js?v=1.0.4" defer></script>
+    <script src="js/router.js?v=1.0.4" type="module"></script>
+    <script src="js/blogRenderer.js?v=1.0.4" type="module"></script>
+    <link rel="icon" href="/favicon.ico?v=1.0.4" type="image/x-icon">
     <style>
         /* Add this to hide content until router is ready */
         main:not(.router-ready)>section {
@@ -47,6 +47,7 @@
                     </div>
                     <h1><span class="iconify" data-icon="arcticons:treecard"></span>emmanuel wang</h1>
                     <small>software engineer and designer</small>
+                    <canvas id="threeCanvas"></canvas>
                 </div>
                 <nav class="header-nav">
                     <ul>
@@ -57,7 +58,6 @@
                     </ul>
                 </nav>
             </div>
-            <canvas id="threeCanvas"></canvas>
         </header>
         <template id="home-template">
             <section id="visual-work">

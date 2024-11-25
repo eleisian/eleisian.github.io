@@ -121,7 +121,7 @@ document.addEventListener(
 // Main initialization
 document.addEventListener("DOMContentLoaded", function () {
   const canvas = document.getElementById("threeCanvas");
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d", { alpha: true });
 
   // Grid settings
   const cellSize = 25; // Fixed cell size
@@ -147,15 +147,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const asciiChars = ["·", ":", "+", "×", "▢", "▣", "◯", "◉", "█"];
 
   // Water-inspired color palettes
-  const lightModePalette = ["rgba(0, 0, 0, 1)"]; // Fully opaque black for characters
-
-  const darkModePalette = [
-    "rgba(139, 0, 0, 1)", // Dark Red
-    "rgba(85, 107, 47, 1)", // Dark Olive Green
-    "rgba(70, 130, 180, 1)", // Steel Blue
-    "rgba(205, 133, 63, 1)", // Peru
-    "rgba(112, 128, 144, 1)", // Slate Gray
-  ];
+  const lightModePalette = ["rgba(0, 0, 0, 1)"]; // Keep only black
+  const darkModePalette = ["rgba(0, 0, 0, 1)"]; // Also black for dark mode
 
   let currentPalette = lightModePalette;
 
@@ -177,7 +170,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Create the note mapping grid
       for (let x = 0; x < gridWidth; x++) {
-        const noteIndex = x % notes.length;
+        // Ensure we start with the first note (C3) for the first column
+        const noteIndex = x % notes.length; // This ensures we wrap around if we have more columns than notes
         for (let y = 0; y < gridHeight; y++) {
           const cell = {
             char: asciiChars[0],
@@ -188,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
             colorIndex: Math.floor(Math.random() * currentPalette.length),
             rhythm: Math.random() * Math.PI * 2,
             opacity: 0,
-            note: notes[noteIndex],
+            note: notes[noteIndex], // This will now start with the first note (C3) for x=0
             isActive: false,
           };
           this.cells.push(cell);
@@ -214,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const t = cell.age / cell.maxAge;
-      cell.opacity = Math.max(0, cell.opacity - 0.01);
+      cell.opacity = (1 - t) * (0.3 + rhythmFactor * 0.7);
     }
 
     update(time) {
@@ -222,6 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     draw() {
+      // Clear with transparent background
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       ctx.font = `${cellSize * 0.8}px Arial`;
@@ -229,25 +224,13 @@ document.addEventListener("DOMContentLoaded", function () {
       ctx.textBaseline = "middle";
 
       this.cells.forEach((cell) => {
-        // First draw the white background and character
-        if (cell.isActive) {
-          ctx.shadowColor = "rgba(0, 0, 0, 0.5)";
-          ctx.shadowBlur = 10;
-        } else {
-          ctx.shadowColor = "transparent";
-          ctx.shadowBlur = 0;
-        }
-
-        ctx.fillStyle = `rgba(255, 255, 255, ${cell.opacity})`;
-        ctx.fillRect(cell.x, cell.y, cellSize, cellSize);
-
-        const color = currentPalette[cell.colorIndex];
-        ctx.fillStyle = color.replace(/[\d.]+\)$/g, `${cell.opacity})`);
+        // Only draw the ASCII character, no background
+        ctx.fillStyle = `rgba(0, 0, 0, ${cell.opacity})`;
         ctx.fillText(cell.char, cell.x + cellSize / 2, cell.y + cellSize / 2);
 
-        // Then draw the sky blue highlight on top if active
+        // Optional: make highlight more subtle or remove if desired
         if (cell.isActive) {
-          ctx.fillStyle = "rgba(135, 206, 235, 0.3)";
+          ctx.fillStyle = "rgba(135, 206, 235, 0.2)";
           ctx.fillRect(cell.x, cell.y, cellSize, cellSize);
         }
       });
@@ -302,7 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const cell = this.cells[index];
         // Visual feedback
         cell.char = asciiChars[Math.floor(Math.random() * asciiChars.length)];
-        cell.opacity = 0.7;
+        cell.opacity = 1;
 
         // Play sound using the column-based note
         playNote(noteToPlay);
@@ -312,22 +295,6 @@ document.addEventListener("DOMContentLoaded", function () {
           this.cells.forEach((cell) => (cell.isActive = false));
         }, 200);
       }
-    }
-
-    // Update mousemove handler
-    handleMouseMove(mouseX, mouseY) {
-      const x = Math.floor(mouseX / cellSize);
-      const y = Math.floor(mouseY / cellSize);
-
-      this.cells.forEach((cell) => {
-        const cellX = Math.floor(cell.x / cellSize);
-        const cellY = Math.floor(cell.y / cellSize);
-        if (cellX === x && cellY === y) {
-          cell.opacity = Math.min(cell.opacity + 0.1, 0.5);
-        } else {
-          cell.opacity = Math.max(cell.opacity - 0.05, 0);
-        }
-      });
     }
   }
 
@@ -428,11 +395,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const cellX = Math.floor(cell.x / cellSize);
       const cellY = Math.floor(cell.y / cellSize);
       if (cellX === x && cellY === y) {
-        cell.opacity = Math.min(cell.opacity + 0.1, 0.5);
+        cell.opacity = Math.min(cell.opacity + 0.1, 1);
       } else {
         cell.opacity = Math.max(cell.opacity - 0.05, 0);
       }
     });
   });
 });
-
