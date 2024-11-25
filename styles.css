@@ -5,14 +5,15 @@
 :root {
     --font-primary: "Poppins", sans-serif;
     --color-text: #000000;
-    --color-background: #f8f8b6;
+    --color-background: #0080ff;
     --color-accent: #000000;
     --color-link: #000000;
     --color-card-bg: #ffffff00;
     --color-card-border: #000000;
     --color-shadow: rgba(0, 0, 0, 0.1);
     --color-highlight: #000000;
-    --color-sky: #ffe9bb;
+    --color-sky: #bbf6ff;
+    
     --max-width: 1200px;
 }
 
