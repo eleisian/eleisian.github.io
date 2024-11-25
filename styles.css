@@ -748,7 +748,7 @@ section {
     #threeCanvas {
         order: 2;
         position: static;
-        align-self: center;
+        align-self: flex-start;
     }
 
     .social-links {
