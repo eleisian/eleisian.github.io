@@ -6,10 +6,10 @@
     --font-primary: "Poppins", sans-serif;
     --color-text: #000000;
     --color-background: #f8f8b6;
-    --color-accent: #5d5d5d;
+    --color-accent: #b4b1b1;
     --color-link: #000000;
     --color-card-bg: #ffffff00;
-    --color-card-border: #5d5d5d;
+    --color-card-border: #949494;
     --color-shadow: rgba(0, 0, 0, 0.1);
     --color-highlight: #aaaaaa;
     --color-sky: #ffe9bb;
@@ -179,7 +179,7 @@ a:hover {
 }
 
 .project-card:hover::before {
-    opacity: 1;
+    opacity: 0;
 }
 
 .project-card h3 {
