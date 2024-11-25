@@ -166,45 +166,30 @@ class Router {
   }
 
   createBubbles() {
+      console.log('Creating bubbles...'); // Debug log
+      
       const bubbleContainer = document.createElement('div');
       bubbleContainer.className = 'bubble-container';
       document.body.appendChild(bubbleContainer);
 
-      // Create random number of bubbles (between 8-12)
+      // Back to original: random number of bubbles (between 8-12)
       const bubbleCount = Math.floor(Math.random() * 5) + 8;
       
+      // Create exactly 5 bubbles for testing
       for (let i = 0; i < bubbleCount; i++) {
           const bubble = document.createElement('div');
           bubble.className = 'bubble';
-          
-          // Random size between 20px and 80px
-          const size = Math.random() * 60 + 20;
-          
-          // Random horizontal position
-          const left = Math.random() * 100;
-          
-          // Random horizontal drift for floating animation
-          const xDrift = (Math.random() - 0.5) * 100;
-          
-          // Random animation duration between 3 and 6 seconds
-          const duration = 3 + Math.random() * 3;
-          
-          bubble.style.cssText = `
-              width: ${size}px;
-              height: ${size}px;
-              left: ${left}%;
-              --x-drift: ${xDrift}px;
-              animation-duration: ${duration}s;
-              animation-delay: ${Math.random() * 0.5}s;
-          `;
-          
+          bubble.style.width = '50px';
+          bubble.style.height = '50px';
+          bubble.style.left = `${i * 20}%`;
           bubbleContainer.appendChild(bubble);
       }
 
-      // Remove bubble container after longest possible animation
+      // Remove bubble container after animation
       setTimeout(() => {
           bubbleContainer.remove();
-      }, 6500); // 6 seconds + 500ms buffer
+          console.log('Bubbles removed'); // Debug log
+      }, 3000);
   }
 }
 
