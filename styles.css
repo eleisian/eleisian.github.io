@@ -6,12 +6,12 @@
     --font-primary: "Poppins", sans-serif;
     --color-text: #000000;
     --color-background: #f8f8b6;
-    --color-accent: #b4b1b1;
+    --color-accent: #000000;
     --color-link: #000000;
     --color-card-bg: #ffffff00;
     --color-card-border: #949494;
     --color-shadow: rgba(0, 0, 0, 0.1);
-    --color-highlight: #aaaaaa;
+    --color-highlight: #000000;
     --color-sky: #ffe9bb;
     --max-width: 1200px;
 }
@@ -270,7 +270,7 @@ a:hover {
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
-    background: #ffffff93;
+    background: #ffffff00;
     border: 1px solid var(--color-card-border);
     border-bottom: none;
     border-radius: 8px 8px 0 0;
@@ -344,6 +344,7 @@ a:hover {
     overflow-y: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    margin-top: 10px;
     scroll-padding-left: 55px;
 }
 
@@ -587,7 +588,9 @@ a:hover {
 
 section {
     will-change: opacity, transform;
+    margin-top: 10px;
 }
+
 
 /* Media Queries */
 @media (min-width: 768px) {
