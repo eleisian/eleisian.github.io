@@ -1,5 +1,6 @@
 class Router {
   constructor() {
+      console.log('Router initialized'); // Debug log
       const mainContent = document.querySelector('main');
       
       // Store initial content from template
@@ -80,6 +81,11 @@ class Router {
   }
 
   navigate(page, isPopState = false) {
+      console.log('Navigation started to page:', page); // Debug log
+      
+      // Create bubbles animation - moved to the start of navigation
+      this.createBubbles();
+      
       // Update active tab
       document.querySelectorAll('.header-nav a').forEach(link => {
           if (link.getAttribute('data-page') === page) {
@@ -155,10 +161,55 @@ class Router {
       if (!isPopState) {
           history.pushState({ page }, '', `#${page}`);
       }
+
+      this.createBubbles();
+  }
+
+  createBubbles() {
+      const bubbleContainer = document.createElement('div');
+      bubbleContainer.className = 'bubble-container';
+      document.body.appendChild(bubbleContainer);
+
+      // Create random number of bubbles (between 8-12)
+      const bubbleCount = Math.floor(Math.random() * 5) + 8;
+      
+      for (let i = 0; i < bubbleCount; i++) {
+          const bubble = document.createElement('div');
+          bubble.className = 'bubble';
+          
+          // Random size between 20px and 80px
+          const size = Math.random() * 60 + 20;
+          
+          // Random horizontal position
+          const left = Math.random() * 100;
+          
+          // Random horizontal drift for floating animation
+          const xDrift = (Math.random() - 0.5) * 100;
+          
+          // Random animation duration between 3 and 6 seconds
+          const duration = 3 + Math.random() * 3;
+          
+          bubble.style.cssText = `
+              width: ${size}px;
+              height: ${size}px;
+              left: ${left}%;
+              --x-drift: ${xDrift}px;
+              animation-duration: ${duration}s;
+              animation-delay: ${Math.random() * 0.5}s;
+          `;
+          
+          bubbleContainer.appendChild(bubble);
+      }
+
+      // Remove bubble container after longest possible animation
+      setTimeout(() => {
+          bubbleContainer.remove();
+      }, 6500); // 6 seconds + 500ms buffer
   }
 }
 
 // Initialize router when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  window.router = new Router();
+    console.log('DOM loaded, initializing router...'); // Debug log
+    window.router = new Router();
 }); 
