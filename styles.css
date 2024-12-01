@@ -936,14 +936,14 @@ section {
 .carousel-btn {
     background: var(--color-background);
     border: none;
-    width: 30px;
-    height: 30px;
+    padding: 0 0.5rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: opacity 0.2s ease;
     font-size: 1.2rem;
+    line-height: 1;
 }
 
 .carousel-btn:disabled {
@@ -954,21 +954,21 @@ section {
 .carousel-counter {
     font-size: 0.9rem;
     color: var(--color-text);
+    line-height: 1;
 }
 
 /* Project header and controls layout */
 #projects h2 {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    padding-bottom: 0.5rem;
+    align-items: baseline;
+    margin-bottom: 1rem;
 }
 
 .carousel-controls {
     display: flex;
-    align-items: center;
-    gap: 1rem;
+    align-items: baseline;
+    gap: 0.5rem;
 }
 
 /* Project Carousel */
