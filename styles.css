@@ -739,9 +739,25 @@ section {
     }
 
     .header-content {
-        width: 100%;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        gap: 1rem;
+        max-width: 100%;
+    }
+
+    .profile {
+        align-items: center;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2em;
+        text-align: center;
+    }
+
+    small {
+        text-align: center;
+        display: block;
     }
 
     #threeCanvas {
@@ -754,11 +770,25 @@ section {
         position: static;
         width: 100%;
         margin-top: 20px;
+        display: flex;
+        justify-content: center;
     }
 
     .header-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        justify-content: center;
         width: 100%;
-        gap: 0.15rem;
+        padding: 0;
+        margin: 0;
+    }
+
+    .header-nav a {
+        min-width: auto;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        text-align: center;
     }
 
     .blog-controls,
@@ -794,6 +824,26 @@ section {
     .sound-controls {
         top: 20rem;
         left: 1rem;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .project-card {
+        height: auto;
+        min-height: 100px;
+        padding: 1rem;
+    }
+
+    .project-card h3 {
+        font-size: 1.1em;
+        margin-bottom: 0.3rem;
+    }
+
+    .project-card p {
+        font-size: 0.9em;
     }
 }
 
