@@ -1,6 +1,3 @@
-/* Base Imports */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-
 /* Variables */
 :root {
     --font-primary: "Inter", sans-serif;
@@ -12,7 +9,7 @@
     --color-card-border: #000000;
     --color-shadow: rgba(0, 0, 0, 0.1);
     --color-highlight: #000000;
-    --color-sky: #b0e2ff;
+    --color-sky: #dbb0ff4d;
     --max-width: 1200px;
 }
 
@@ -356,7 +353,7 @@ a:hover {
 }
 
 .header-nav a.active {
-    background: var(--color-background);
+    background: #ffffff21;
     border-bottom: none;
     opacity: 1;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);

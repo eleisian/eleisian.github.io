@@ -10,7 +10,6 @@ class Background {
         this.canvas.style.left = '0';
         this.canvas.style.zIndex = '-1';
 
-        this.gradientColors = ['var(--color-background)', 'var(--color-sky)'];  // Light background to soft sky blue
         this.characters = ['+'];
         this.characterPositions = [];
 
@@ -46,48 +45,10 @@ class Background {
 
     drawGradient(time) {
         const computedStyle = getComputedStyle(document.documentElement);
-        const color1 = computedStyle.getPropertyValue('--color-background').trim();
-        const color2 = computedStyle.getPropertyValue('--color-sky').trim();
+        const backgroundColor = computedStyle.getPropertyValue('--color-background').trim();
         
-        // Create multiple gradients for a more dynamic effect
-        const gradient1 = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height);
-        gradient1.addColorStop(0, color1);
-        gradient1.addColorStop(1, color2);
-        
-        // Add a radial gradient overlay for depth
-        const gradient2 = this.ctx.createRadialGradient(
-            this.canvas.width / 2, 
-            this.canvas.height / 2, 
-            0,
-            this.canvas.width / 2, 
-            this.canvas.height / 2, 
-            this.canvas.height
-        );
-        gradient2.addColorStop(0, 'rgba(255, 255, 255, 0.1)');
-        gradient2.addColorStop(0.5, 'rgba(255, 255, 255, 0)');
-        gradient2.addColorStop(1, 'rgba(0, 0, 0, 0.1)');
-        
-        // Draw base gradient
-        this.ctx.fillStyle = gradient1;
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        
-        // Add subtle wave effect
-        const time_factor = time / 2000;
-        for (let i = 0; i < 3; i++) {
-            this.ctx.beginPath();
-            this.ctx.moveTo(0, this.canvas.height * 0.5);
-            
-            for (let x = 0; x < this.canvas.width; x += 10) {
-                const y = Math.sin(x * 0.01 + time_factor + i) * 20 + this.canvas.height * 0.5;
-                this.ctx.lineTo(x, y);
-            }
-            
-            this.ctx.strokeStyle = `rgba(255, 255, 255, ${0.02 - i * 0.005})`;
-            this.ctx.stroke();
-        }
-        
-        // Overlay the radial gradient
-        this.ctx.fillStyle = gradient2;
+        // Simply fill with solid background color
+        this.ctx.fillStyle = backgroundColor;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
