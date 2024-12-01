@@ -162,6 +162,8 @@ class Router {
       if (!isPopState) {
           history.pushState({ page }, '', `#${page}`);
       }
+      
+      document.dispatchEvent(new CustomEvent('routeChanged', { detail: { page } }));
   }
 }
 

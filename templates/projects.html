@@ -9,32 +9,47 @@
 <body>
     <main>
         <section id="projects">
-            <h2>Projects</h2>
-            <div class="project-grid">
-                <a href="https://fabled.art" class="project-card" target="_blank" rel="noopener noreferrer">
-                    <h3>Fabled Art</h3>
-                    <p>A portfolio for my art & digital immersive experiences.</p>
-                </a>
-                <a href="https://gumroad.com" class="project-card" target="_blank" rel="noopener noreferrer">
-                    <h3>Gumroad Discovery Carousel</h3>
-                    <p>A carousel for Gumroad's discovery page.</p>
-                </a>
-                <a href="https://eleisian.github.io/kindred/" class="project-card" target="_blank" rel="noopener noreferrer">
-                    <h3>Project Kindred</h3>
-                    <p>For Google's case competition.</p>
-                </a>
-                <a href="https://dw-photo.vercel.app/" class="project-card" target="_blank" rel="noopener noreferrer">
-                    <h3>DW-photo</h3>
-                    <p>A photo portfolio for my brother.</p>
-                </a>
-                <a href="https://eleisian.github.io/orbital" class="project-card" target="_blank" rel="noopener noreferrer">
-                    <h3>Orbital</h3>
-                    <p>Fun game.</p>
-                </a>
-                <a href="https://eleisian.github.io/everywhere-is-the-ocean" class="project-card" target="_blank" rel="noopener noreferrer">
-                    <h3>Everywhere is the Ocean</h3>
-                    <p>A game about the ocean.</p>
-                </a>
+            <h2>
+                Projects
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev" aria-label="Previous projects">&lt;</button>
+                    <span class="carousel-counter">1 / 2</span>
+                    <button class="carousel-btn next" aria-label="Next projects">&gt;</button>
+                </div>
+            </h2>
+            <div class="carousel-wrapper">
+                <div class="project-carousel">
+                    <!-- First Page (4 cards) -->
+                    <div class="project-grid active">
+                        <a href="https://fabled.art" class="project-card" target="_blank" rel="noopener noreferrer">
+                            <h3>Fabled Art</h3>
+                            <p>A portfolio for my art & digital immersive experiences.</p>
+                        </a>
+                        <a href="https://gumroad.com" class="project-card" target="_blank" rel="noopener noreferrer">
+                            <h3>Gumroad Discovery Carousel</h3>
+                            <p>A carousel for Gumroad's discovery page.</p>
+                        </a>
+                        <a href="https://eleisian.github.io/kindred/" class="project-card" target="_blank" rel="noopener noreferrer">
+                            <h3>Project Kindred</h3>
+                            <p>For Google's case competition.</p>
+                        </a>
+                        <a href="https://dw-photo.vercel.app/" class="project-card" target="_blank" rel="noopener noreferrer">
+                            <h3>DW-photo</h3>
+                            <p>A photo portfolio for my brother.</p>
+                        </a>
+                    </div>
+                    <!-- Second Page (2 cards) -->
+                    <div class="project-grid">
+                        <a href="https://eleisian.github.io/orbital" class="project-card" target="_blank" rel="noopener noreferrer">
+                            <h3>Orbital</h3>
+                            <p>Fun game.</p>
+                        </a>
+                        <a href="https://eleisian.github.io/everywhere-is-the-ocean" class="project-card" target="_blank" rel="noopener noreferrer">
+                            <h3>Everywhere is the Ocean</h3>
+                            <p>A game about the ocean.</p>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>

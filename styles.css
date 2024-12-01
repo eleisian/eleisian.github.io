@@ -171,9 +171,24 @@ a:hover {
 
 /* Projects */
 .project-grid {
-    display: grid;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+}
+
+.project-grid.active {
+    display: grid;
+    opacity: 1;
+}
+
+/* Adjust second page grid to center the two cards */
+.project-grid:nth-child(2) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 .project-card {
@@ -887,4 +902,103 @@ section {
 #projects,
 #blog {
     position: relative;
+}
+
+/* Project Carousel */
+.carousel-wrapper {
+    position: relative;
+}
+
+.project-carousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-grid {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-grid.active {
+    display: grid;
+    opacity: 1;
+}
+
+.carousel-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.carousel-btn {
+    background: var(--color-background);
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+    font-size: 1.2rem;
+}
+
+.carousel-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.carousel-counter {
+    font-size: 0.9rem;
+    color: var(--color-text);
+}
+
+/* Project header and controls layout */
+#projects h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+}
+
+.carousel-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Project Carousel */
+.project-carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.project-grid {
+    position: absolute;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+    opacity: 1;
+}
+
+.project-grid.active {
+    position: relative;
+    transform: translateX(0);
+    display: grid;
+}
+
+.project-grid.prev {
+    transform: translateX(-100%);
+}
+
+.project-grid.next {
+    transform: translateX(100%);
 }
