@@ -339,34 +339,27 @@ a:hover {
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
-    background: #ffffff00;
+    background: var(--color-card-bg);
     border: 1px solid var(--color-card-border);
     border-bottom: none;
     border-radius: 8px 8px 0 0;
     position: relative;
     transition: background 0.2s ease, opacity 0.2s ease;
-    opacity: 0.8;
+    opacity: 0.7;
+    min-width: 80px;
+    text-align: center;
 }
 
 .header-nav a:hover {
-    background: #ffffff42;
-    text-decoration: none;
     opacity: 0.9;
+    text-decoration: none;
 }
 
 .header-nav a.active {
+    background: var(--color-background);
     border-bottom: none;
-    z-index: 2;
     opacity: 1;
-}
-
-.header-nav a::after {
-    content: attr(data-page);
-    display: block;
-    font-weight: 600;
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
 }
 
 /* Dice Face */
