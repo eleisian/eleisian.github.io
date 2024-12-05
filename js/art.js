@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
             maxAge: 200 + Math.random() * 300,
             colorIndex: Math.floor(Math.random() * currentPalette.length),
             rhythm: Math.random() * Math.PI * 2,
-            opacity: 0,
+            opacity: 0.7,
             note: notes[noteIndex], // This will now start with the first note (C3) for x=0
             isActive: false,
           };
@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const t = cell.age / cell.maxAge;
-      cell.opacity = (1 - t) * (0.3 + rhythmFactor * 0.7);
+      cell.opacity = Math.max(0.7, (1 - t) * (0.7 + rhythmFactor * 0.3));
     }
 
     update(time) {
@@ -216,21 +216,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     draw() {
-      // Clear with transparent background
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      ctx.font = `${cellSize * 0.8}px Arial`;
+      ctx.font = `${cellSize * 0.8}px var(--font-primary)`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
       this.cells.forEach((cell) => {
-        // Only draw the ASCII character, no background
-        ctx.fillStyle = `rgba(0, 0, 0, ${cell.opacity})`;
+        const computedStyle = getComputedStyle(document.documentElement);
+        const themeColor = computedStyle.getPropertyValue('--color-function').trim();
+        
+        // Convert the opacity to a percentage for the CSS color
+        const opacityPercentage = Math.floor(cell.opacity * 100);
+        // Remove any existing opacity value and add our calculated one
+        const color = themeColor.replace(/[0-9.]+%\)$/, `${opacityPercentage}%)`);
+        ctx.fillStyle = color;
+        
         ctx.fillText(cell.char, cell.x + cellSize / 2, cell.y + cellSize / 2);
 
-        // Optional: make highlight more subtle or remove if desired
         if (cell.isActive) {
-          ctx.fillStyle = "rgba(135, 206, 235, 0.2)";
+          const accentColor = computedStyle.getPropertyValue('--color-accent').trim();
+          ctx.fillStyle = `${accentColor}20`;
           ctx.fillRect(cell.x, cell.y, cellSize, cellSize);
         }
       });
