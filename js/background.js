@@ -88,4 +88,17 @@ class Background {
 // Wait for the DOM to be fully loaded before creating the background
 document.addEventListener('DOMContentLoaded', () => {
     new Background();
+
+    // Add click handler for dice face
+    const diceface = document.querySelector('.dice-face');
+    const container = document.querySelector('.profile-pic-container');
+    
+    diceface.addEventListener('click', () => {
+        container.classList.add('animate');
+        
+        // Remove animation class after it completes
+        setTimeout(() => {
+            container.classList.remove('animate');
+        }, 300); // matches the animation duration
+    });
 });
