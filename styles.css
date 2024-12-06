@@ -89,6 +89,8 @@ h2 {
     font-size: 2rem;
     position: relative;
     background-color: var(--color-background);
+    margin: 0;
+    padding: 0;
 }
 
 p {
@@ -100,6 +102,7 @@ p {
 ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 li {
@@ -144,6 +147,7 @@ a:hover {
 
 /* Skills */
 .skills-list {
+    margin-top: 10px;
     flex-basis: calc(50% - 10px);
     display: flex;
     flex-direction: column;
@@ -211,8 +215,12 @@ a:hover {
     background-color: var(--color-card-bg);
     border: 1px solid var(--color-card-border);
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1rem;
     transition: all 0.2s ease;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .project-card:hover {
@@ -223,6 +231,16 @@ a:hover {
 .project-card h3 {
     color: var(--color-text);
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 8px 0;
+    font-size: 0.95rem;
+}
+
+.project-card .iconify {
+    font-size: 1.5em;
+    margin: 0;
 }
 
 .project-card::before {
@@ -235,11 +253,11 @@ a:hover {
 
 .project-card p {
     margin: 0;
-    font-size: 18px;
+    font-size: 0.85rem;
 }
 
 .project-link {
-    font-size: 18px;
+    font-size: 0.85rem;
     color: var(--color-link);
     text-decoration: none;
 }
@@ -738,17 +756,17 @@ a:hover {
 
     .project-card {
         height: auto;
-        min-height: 100px;
-        padding: 1rem;
+        min-height: 80px;
+        padding: 0.75rem;
     }
 
     .project-card h3 {
-        font-size: 1.1em;
+        font-size: 0.9rem;
         margin-bottom: 0.3rem;
     }
 
     .project-card p {
-        font-size: 0.9em;
+        font-size: 0.8rem;
     }
 }
 
@@ -942,4 +960,19 @@ a:hover {
 
 .project-grid.next {
     transform: translateX(100%);
+}
+
+#about p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+/* Update mobile styles */
+@media (max-width: 768px) {
+    #about p {
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+    }
 }
