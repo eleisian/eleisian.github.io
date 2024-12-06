@@ -35,15 +35,20 @@ class Background {
         });
 
         // Physics constants
-        this.waveSpeed = 0.3;
-        this.dampening = 0.995;
+        this.waveSpeed = 0.1;
+        this.dampening = 0.998;
         this.minStrength = 0.05;
         this.waveInterval = 2000;
         this.lastWaveTime = Date.now();
         this.interferenceStrength = 0.1;
-        this.maxVelocity = 0.5;
-        this.numPoints = 36; // Number of points to define wave shape
-        this.elasticity = 0.03; // How quickly waves return to circular shape
+        this.maxVelocity = 0.2;
+        this.numPoints = 36;
+        this.elasticity = 0.015;
+        this.nextWaveDelay = this.getRandomDelay();
+    }
+
+    getRandomDelay() {
+        return Math.random() * 1500 + 500; // Random delay between 500ms and 2000ms
     }
 
     resize() {
@@ -87,13 +92,20 @@ class Background {
             let wavePhase = 0;
 
             this.waves.forEach(wave => {
-                const waveDistX = pos.x - wave.x;
-                const waveDistY = pos.y - wave.y;
-                const distFromWave = Math.sqrt(waveDistX * waveDistX + waveDistY * waveDistY);
-                const waveWidth = 20;
-                
-                if (Math.abs(distFromWave - wave.radius) < waveWidth) {
-                    const phase = 1 - Math.abs(distFromWave - wave.radius) / waveWidth;
+                // Find closest point on deformed wave to character
+                let minDist = Infinity;
+                wave.points.forEach(point => {
+                    const waveX = wave.x + Math.cos(point.angle) * point.radius;
+                    const waveY = wave.y + Math.sin(point.angle) * point.radius;
+                    const dx = pos.x - waveX;
+                    const dy = pos.y - waveY;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    minDist = Math.min(minDist, dist);
+                });
+
+                const waveWidth = 15;
+                if (minDist < waveWidth) {
+                    const phase = 1 - minDist / waveWidth;
                     const influence = phase * wave.strength;
                     
                     // Combine wave influences using interference
@@ -134,7 +146,7 @@ class Background {
                 angle,
                 radius: 0,
                 baseRadius: 0, // Target radius for restoration force
-                velocity: this.waveSpeed
+                velocity: this.waveSpeed * (0.8 + Math.random() * 0.4)
             });
         }
 
@@ -151,26 +163,23 @@ class Background {
 
     animate() {
         const time = Date.now();
-        const deltaTime = 16;
+        const deltaTime = 32;
         
-        // Add new waves periodically from the center
-        if (time - this.lastWaveTime > this.waveInterval) {
+        // Add new waves periodically with randomized timing
+        if (time - this.lastWaveTime > this.nextWaveDelay) {
             const centerX = this.canvas.width / 2;
             const centerY = this.canvas.height / 2;
+            
             this.waves.push(this.createWave(centerX, centerY, 0.8));
             this.lastWaveTime = time;
+            this.nextWaveDelay = this.getRandomDelay(); // Set next random delay
         }
 
         // Update wave physics
         this.waves = this.waves.filter(wave => {
             // Update each point of the wave
-            wave.points.forEach((point, i) => {
+            wave.points.forEach(point => {
                 point.baseRadius += point.velocity * deltaTime;
-                point.radius = point.baseRadius;
-
-                // Apply restoration force towards circular shape
-                const radiusDiff = point.baseRadius - point.radius;
-                point.radius += radiusDiff * this.elasticity;
             });
 
             // Calculate collisions with other waves
@@ -179,35 +188,47 @@ class Background {
 
                 wave.points.forEach((point, i) => {
                     const angle = point.angle;
-                    const x1 = wave.x + Math.cos(angle) * point.radius;
-                    const y1 = wave.y + Math.sin(angle) * point.radius;
+                    const x1 = wave.x + Math.cos(angle) * point.baseRadius;
+                    const y1 = wave.y + Math.sin(angle) * point.baseRadius;
 
-                    otherWave.points.forEach(otherPoint => {
-                        const x2 = otherWave.x + Math.cos(otherPoint.angle) * otherPoint.radius;
-                        const y2 = otherWave.y + Math.sin(otherPoint.angle) * otherPoint.radius;
+                    // Check collision with nearby points on other wave
+                    for (let j = 0; j < otherWave.points.length; j++) {
+                        const otherPoint = otherWave.points[j];
+                        const x2 = otherWave.x + Math.cos(otherPoint.angle) * otherPoint.baseRadius;
+                        const y2 = otherWave.y + Math.sin(otherPoint.angle) * otherPoint.baseRadius;
 
                         const dx = x2 - x1;
                         const dy = y2 - y1;
                         const distance = Math.sqrt(dx * dx + dy * dy);
 
-                        if (distance < 20) { // Collision threshold
-                            const pushForce = (20 - distance) * 0.05;
-                            point.radius -= pushForce;
-                            otherPoint.radius -= pushForce;
+                        if (distance < 40) { // Increased collision radius
+                            const pushForce = (40 - distance) * 0.2; // Increased force
+                            const pushAngle = Math.atan2(dy, dx);
+                            
+                            // Apply deformation
+                            point.radius = point.baseRadius - pushForce * Math.cos(pushAngle - angle);
+                            otherPoint.radius = otherPoint.baseRadius - pushForce * Math.cos(pushAngle - otherPoint.angle);
                         }
-                    });
+                    }
                 });
             });
 
-            // Handle reflection
-            if (!wave.isReflecting) {
-                if (wave.points[0].baseRadius >= wave.maxRadius) {
-                    wave.isReflecting = true;
-                    wave.points.forEach(point => {
-                        point.velocity = -point.velocity * 0.8;
-                    });
-                    wave.strength *= 0.7;
+            // Apply elastic restoration force
+            wave.points.forEach(point => {
+                if (typeof point.radius === 'undefined') {
+                    point.radius = point.baseRadius;
                 }
+                const radiusDiff = point.baseRadius - point.radius;
+                point.radius += radiusDiff * this.elasticity;
+            });
+
+            // Handle reflection
+            if (!wave.isReflecting && wave.points[0].baseRadius >= wave.maxRadius) {
+                wave.isReflecting = true;
+                wave.points.forEach(point => {
+                    point.velocity = -point.velocity * 0.8;
+                });
+                wave.strength *= 0.7;
             }
 
             wave.strength *= this.dampening;
@@ -229,7 +250,7 @@ class Background {
             let waveInfluence = 0;
 
             this.waves.forEach(wave => {
-                // Find closest point on wave to character
+                // Find closest point on deformed wave to character
                 let minDist = Infinity;
                 wave.points.forEach(point => {
                     const waveX = wave.x + Math.cos(point.angle) * point.radius;
