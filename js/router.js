@@ -1,6 +1,5 @@
 class Router {
   constructor() {
-      console.log('Router initialized'); // Debug log
       const mainContent = document.querySelector('main');
       
       // Store initial content from template
@@ -81,8 +80,6 @@ class Router {
   }
 
   navigate(page, isPopState = false) {
-      console.log('Navigation started to page:', page); // Debug log
-      
       // Update active tab
       document.querySelectorAll('.header-nav a').forEach(link => {
           if (link.getAttribute('data-page') === page) {
@@ -169,6 +166,5 @@ class Router {
 
 // Initialize router when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing router...'); // Debug log
     window.router = new Router();
 }); 

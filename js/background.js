@@ -10,8 +10,9 @@ class Background {
         this.canvas.style.left = '0';
         this.canvas.style.zIndex = '-1';
 
-        this.characters = ['+'];
+        this.characters = ['+', '×', '·', '∙', '•'];
         this.characterPositions = [];
+        this.waves = [];
 
         this.initializeCharacterPositions();
 
@@ -22,6 +23,27 @@ class Background {
         // Store the animation frame ID
         this.animationFrameId = null;
         this.animate();
+
+        // Update click handler to use createWave
+        document.addEventListener('click', (e) => {
+            const rect = this.canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Create outward wave using the new wave creation method
+            this.waves.push(this.createWave(x, y, 1.0));
+        });
+
+        // Physics constants
+        this.waveSpeed = 0.3;
+        this.dampening = 0.995;
+        this.minStrength = 0.05;
+        this.waveInterval = 2000;
+        this.lastWaveTime = Date.now();
+        this.interferenceStrength = 0.1;
+        this.maxVelocity = 0.5;
+        this.numPoints = 36; // Number of points to define wave shape
+        this.elasticity = 0.03; // How quickly waves return to circular shape
     }
 
     resize() {
@@ -30,7 +52,7 @@ class Background {
     }
 
     initializeCharacterPositions() {
-        const gridSize = 50;
+        const gridSize = 25;
         for (let x = 0; x < this.canvas.width; x += gridSize) {
             for (let y = 0; y < this.canvas.height; y += gridSize) {
                 this.characterPositions.push({
@@ -53,12 +75,39 @@ class Background {
     }
 
     drawCharacters(time) {
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.02)';
-        this.ctx.font = '20px Arial';
+        const computedStyle = getComputedStyle(document.documentElement);
+        const textColor = computedStyle.getPropertyValue('--color-text').trim();
+        
+        this.ctx.globalAlpha = 1;
+        this.ctx.fillStyle = textColor;
+        this.ctx.font = '15px Arial';
 
         this.characterPositions.forEach(pos => {
-            const offset = 0;
-            this.ctx.fillText(pos.char, pos.x + offset, pos.y + offset);
+            let waveInfluence = 0;
+            let wavePhase = 0;
+
+            this.waves.forEach(wave => {
+                const waveDistX = pos.x - wave.x;
+                const waveDistY = pos.y - wave.y;
+                const distFromWave = Math.sqrt(waveDistX * waveDistX + waveDistY * waveDistY);
+                const waveWidth = 20;
+                
+                if (Math.abs(distFromWave - wave.radius) < waveWidth) {
+                    const phase = 1 - Math.abs(distFromWave - wave.radius) / waveWidth;
+                    const influence = phase * wave.strength;
+                    
+                    // Combine wave influences using interference
+                    wavePhase += phase;
+                    waveInfluence = Math.max(waveInfluence, influence);
+                }
+            });
+
+            if (waveInfluence > 0) {
+                // Apply interference pattern to visibility
+                const interference = Math.sin(wavePhase * Math.PI) * 0.5 + 0.5;
+                this.ctx.globalAlpha = Math.min(1, waveInfluence * interference);
+                this.ctx.fillText(pos.char, pos.x, pos.y);
+            }
         });
     }
 
@@ -76,12 +125,133 @@ class Background {
         this.canvas.remove();
     }
 
+    createWave(x, y, strength = 1) {
+        // Create wave with multiple points around circumference
+        const points = [];
+        for (let i = 0; i < this.numPoints; i++) {
+            const angle = (i / this.numPoints) * Math.PI * 2;
+            points.push({
+                angle,
+                radius: 0,
+                baseRadius: 0, // Target radius for restoration force
+                velocity: this.waveSpeed
+            });
+        }
+
+        return {
+            x,
+            y,
+            points,
+            startTime: Date.now(),
+            maxRadius: Math.max(this.canvas.width, this.canvas.height),
+            isReflecting: false,
+            strength
+        };
+    }
+
     animate() {
         const time = Date.now();
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.drawGradient(time);
-        this.drawCharacters(time);
+        const deltaTime = 16;
+        
+        // Add new waves periodically from the center
+        if (time - this.lastWaveTime > this.waveInterval) {
+            const centerX = this.canvas.width / 2;
+            const centerY = this.canvas.height / 2;
+            this.waves.push(this.createWave(centerX, centerY, 0.8));
+            this.lastWaveTime = time;
+        }
+
+        // Update wave physics
+        this.waves = this.waves.filter(wave => {
+            // Update each point of the wave
+            wave.points.forEach((point, i) => {
+                point.baseRadius += point.velocity * deltaTime;
+                point.radius = point.baseRadius;
+
+                // Apply restoration force towards circular shape
+                const radiusDiff = point.baseRadius - point.radius;
+                point.radius += radiusDiff * this.elasticity;
+            });
+
+            // Calculate collisions with other waves
+            this.waves.forEach(otherWave => {
+                if (wave === otherWave) return;
+
+                wave.points.forEach((point, i) => {
+                    const angle = point.angle;
+                    const x1 = wave.x + Math.cos(angle) * point.radius;
+                    const y1 = wave.y + Math.sin(angle) * point.radius;
+
+                    otherWave.points.forEach(otherPoint => {
+                        const x2 = otherWave.x + Math.cos(otherPoint.angle) * otherPoint.radius;
+                        const y2 = otherWave.y + Math.sin(otherPoint.angle) * otherPoint.radius;
+
+                        const dx = x2 - x1;
+                        const dy = y2 - y1;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 20) { // Collision threshold
+                            const pushForce = (20 - distance) * 0.05;
+                            point.radius -= pushForce;
+                            otherPoint.radius -= pushForce;
+                        }
+                    });
+                });
+            });
+
+            // Handle reflection
+            if (!wave.isReflecting) {
+                if (wave.points[0].baseRadius >= wave.maxRadius) {
+                    wave.isReflecting = true;
+                    wave.points.forEach(point => {
+                        point.velocity = -point.velocity * 0.8;
+                    });
+                    wave.strength *= 0.7;
+                }
+            }
+
+            wave.strength *= this.dampening;
+            return wave.strength > this.minStrength;
+        });
+
+        this.drawWaves();
         this.animationFrameId = requestAnimationFrame(() => this.animate());
+    }
+
+    drawWaves() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.drawGradient(Date.now());
+
+        const computedStyle = getComputedStyle(document.documentElement);
+        const textColor = computedStyle.getPropertyValue('--color-text').trim();
+        
+        this.characterPositions.forEach(pos => {
+            let waveInfluence = 0;
+
+            this.waves.forEach(wave => {
+                // Find closest point on wave to character
+                let minDist = Infinity;
+                wave.points.forEach(point => {
+                    const waveX = wave.x + Math.cos(point.angle) * point.radius;
+                    const waveY = wave.y + Math.sin(point.angle) * point.radius;
+                    const dx = pos.x - waveX;
+                    const dy = pos.y - waveY;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    minDist = Math.min(minDist, dist);
+                });
+
+                if (minDist < 20) {
+                    const influence = (20 - minDist) / 20 * wave.strength;
+                    waveInfluence = Math.max(waveInfluence, influence);
+                }
+            });
+
+            if (waveInfluence > 0) {
+                this.ctx.globalAlpha = Math.min(1, waveInfluence);
+                this.ctx.fillStyle = textColor;
+                this.ctx.fillText(pos.char, pos.x, pos.y);
+            }
+        });
     }
 }
 
