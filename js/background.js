@@ -34,7 +34,7 @@ class Background {
             this.waves.push(this.createWave(x, y, 1.0));
         });
 
-        // Physics constants
+        // Modified physics constants for slower, more granular movement
         this.waveSpeed = 0.1;
         this.dampening = 0.998;
         this.minStrength = 0.05;
@@ -268,7 +268,7 @@ class Background {
             });
 
             if (waveInfluence > 0) {
-                this.ctx.globalAlpha = Math.min(1, waveInfluence);
+                this.ctx.globalAlpha = Math.min(0.6, waveInfluence * 0.6);
                 this.ctx.fillStyle = textColor;
                 this.ctx.fillText(pos.char, pos.x, pos.y);
             }
