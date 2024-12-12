@@ -45,6 +45,11 @@ class Background {
         this.numPoints = 36;
         this.elasticity = 0.015;
         this.nextWaveDelay = this.getRandomDelay();
+
+        // Clear any existing intervals
+        this.clearCharactersInterval = setInterval(() => {
+            this.initializeCharacterPositions();
+        }, 60000); // Reinitialize every minute to prevent memory buildup
     }
 
     getRandomDelay() {
@@ -57,6 +62,9 @@ class Background {
     }
 
     initializeCharacterPositions() {
+        // Clear existing positions
+        this.characterPositions = [];
+        
         const gridSize = 25;
         for (let x = 0; x < this.canvas.width; x += gridSize) {
             for (let y = 0; y < this.canvas.height; y += gridSize) {
@@ -125,13 +133,24 @@ class Background {
 
     // Add destroy method
     destroy() {
-        // Remove event listener
+        // Remove event listeners
         window.removeEventListener('resize', this.resizeHandler);
         
         // Cancel animation frame
         if (this.animationFrameId) {
             cancelAnimationFrame(this.animationFrameId);
+            this.animationFrameId = null;
         }
+        
+        // Clear interval
+        if (this.clearCharactersInterval) {
+            clearInterval(this.clearCharactersInterval);
+            this.clearCharactersInterval = null;
+        }
+
+        // Clear arrays
+        this.characterPositions = [];
+        this.waves = [];
         
         // Remove canvas from DOM
         this.canvas.remove();
@@ -276,9 +295,18 @@ class Background {
     }
 }
 
-// Wait for the DOM to be fully loaded before creating the background
+// Modify the DOMContentLoaded handler to store the background instance
 document.addEventListener('DOMContentLoaded', () => {
-    new Background();
+    let backgroundInstance = new Background();
+
+    // Optional: Add cleanup on page hide/unload
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            backgroundInstance.destroy();
+        } else {
+            backgroundInstance = new Background();
+        }
+    });
 
     // Add click handler for dice face
     const diceface = document.querySelector('.dice-face');
