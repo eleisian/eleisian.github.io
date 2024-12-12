@@ -195,12 +195,20 @@ class Background {
         const time = Date.now();
         const deltaTime = 32;
         
+        // Generate random waves from center
+        if (time - this.lastWaveTime > this.nextWaveDelay) {
+            const centerX = this.canvas.width / 2;
+            const centerY = this.canvas.height / 2;
+            this.waves.push(this.createWave(centerX, centerY, 0.7));
+            this.lastWaveTime = time;
+            this.nextWaveDelay = this.getRandomDelay();
+        }
+        
         // Update wave physics
         this.waves = this.waves.filter(wave => {
             // Update each point of the wave
             wave.points.forEach(point => {
                 point.baseRadius += point.velocity * deltaTime;
-                // Update actual radius to match base radius
                 point.radius = point.baseRadius;
             });
 
