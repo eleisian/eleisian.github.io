@@ -24,15 +24,14 @@ class Background {
         this.animationFrameId = null;
         this.animate();
 
-        // Update click handler to use createWave
-        document.addEventListener('click', (e) => {
+        // Store the click handler reference so we can remove it later
+        this.clickHandler = (e) => {
             const rect = this.canvas.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
-            // Create outward wave using the new wave creation method
             this.waves.push(this.createWave(x, y, 1.0));
-        });
+        };
+        document.addEventListener('click', this.clickHandler);
 
         // Modified physics constants for slower, more granular movement
         this.waveSpeed = 0.1;
@@ -135,6 +134,7 @@ class Background {
     destroy() {
         // Remove event listeners
         window.removeEventListener('resize', this.resizeHandler);
+        document.removeEventListener('click', this.clickHandler);
         
         // Cancel animation frame
         if (this.animationFrameId) {
@@ -148,12 +148,23 @@ class Background {
             this.clearCharactersInterval = null;
         }
 
-        // Clear arrays
-        this.characterPositions = [];
-        this.waves = [];
+        // Properly clear arrays
+        this.characterPositions.length = 0;
+        this.waves.length = 0;
+        
+        // Clear canvas before removal
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
         // Remove canvas from DOM
-        this.canvas.remove();
+        if (this.canvas.parentNode) {
+            this.canvas.parentNode.removeChild(this.canvas);
+        }
+
+        // Null out references
+        this.canvas = null;
+        this.ctx = null;
+        this.characterPositions = null;
+        this.waves = null;
     }
 
     createWave(x, y, strength = 1) {
@@ -295,16 +306,29 @@ class Background {
     }
 }
 
-// Modify the DOMContentLoaded handler to store the background instance
+// Modify the DOMContentLoaded handler to better handle cleanup
 document.addEventListener('DOMContentLoaded', () => {
     let backgroundInstance = new Background();
 
-    // Optional: Add cleanup on page hide/unload
+    // Improve visibility change handling
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
-            backgroundInstance.destroy();
+            if (backgroundInstance) {
+                backgroundInstance.destroy();
+                backgroundInstance = null;
+            }
         } else {
-            backgroundInstance = new Background();
+            if (!backgroundInstance) {
+                backgroundInstance = new Background();
+            }
+        }
+    });
+
+    // Add window unload handler
+    window.addEventListener('unload', () => {
+        if (backgroundInstance) {
+            backgroundInstance.destroy();
+            backgroundInstance = null;
         }
     });
 

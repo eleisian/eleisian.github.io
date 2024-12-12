@@ -796,6 +796,7 @@ a:hover {
         position: static;
         width: 100%;
         margin-top: 20px;
+        margin-bottom: 20px;
         padding: 0;
     }
 
@@ -820,6 +821,54 @@ a:hover {
         white-space: nowrap;
         text-align: center;
         box-sizing: border-box;
+    }
+
+    /* Hide carousel controls in header */
+    #projects h2 .carousel-controls {
+        display: none;
+    }
+
+    /* Show all project cards in a single column */
+    .project-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem;
+        opacity: 1 !important;
+        position: static !important;
+        transform: none !important;
+    }
+
+    /* Override any other grid column settings */
+    .project-grid:nth-child(2) {
+        grid-template-columns: 1fr !important;
+    }
+
+    .project-grid.active,
+    .project-grid.prev,
+    .project-grid.next {
+        display: grid !important;
+        transform: none;
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Standardize card height */
+    .project-card {
+        height: auto;
+        min-height: 100px;
+        padding: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .project-card h3 {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .project-card p {
+        font-size: 0.8rem;
+        margin: 0;
     }
 }
 
