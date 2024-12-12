@@ -33,8 +33,8 @@ class Background {
         };
         document.addEventListener('click', this.clickHandler);
 
-        // Modified physics constants for slower, more granular movement
-        this.waveSpeed = 0.1;
+        // Modified physics constants for better wave behavior
+        this.waveSpeed = 0.2;
         this.dampening = 0.998;
         this.minStrength = 0.05;
         this.waveInterval = 2000;
@@ -195,74 +195,27 @@ class Background {
         const time = Date.now();
         const deltaTime = 32;
         
-        // Add new waves periodically with randomized timing
-        if (time - this.lastWaveTime > this.nextWaveDelay) {
-            const centerX = this.canvas.width / 2;
-            const centerY = this.canvas.height / 2;
-            
-            this.waves.push(this.createWave(centerX, centerY, 0.8));
-            this.lastWaveTime = time;
-            this.nextWaveDelay = this.getRandomDelay(); // Set next random delay
-        }
-
         // Update wave physics
         this.waves = this.waves.filter(wave => {
             // Update each point of the wave
             wave.points.forEach(point => {
                 point.baseRadius += point.velocity * deltaTime;
+                // Update actual radius to match base radius
+                point.radius = point.baseRadius;
             });
 
-            // Calculate collisions with other waves
-            this.waves.forEach(otherWave => {
-                if (wave === otherWave) return;
-
-                wave.points.forEach((point, i) => {
-                    const angle = point.angle;
-                    const x1 = wave.x + Math.cos(angle) * point.baseRadius;
-                    const y1 = wave.y + Math.sin(angle) * point.baseRadius;
-
-                    // Check collision with nearby points on other wave
-                    for (let j = 0; j < otherWave.points.length; j++) {
-                        const otherPoint = otherWave.points[j];
-                        const x2 = otherWave.x + Math.cos(otherPoint.angle) * otherPoint.baseRadius;
-                        const y2 = otherWave.y + Math.sin(otherPoint.angle) * otherPoint.baseRadius;
-
-                        const dx = x2 - x1;
-                        const dy = y2 - y1;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < 40) { // Increased collision radius
-                            const pushForce = (40 - distance) * 0.2; // Increased force
-                            const pushAngle = Math.atan2(dy, dx);
-                            
-                            // Apply deformation
-                            point.radius = point.baseRadius - pushForce * Math.cos(pushAngle - angle);
-                            otherPoint.radius = otherPoint.baseRadius - pushForce * Math.cos(pushAngle - otherPoint.angle);
-                        }
-                    }
-                });
-            });
-
-            // Apply elastic restoration force
-            wave.points.forEach(point => {
-                if (typeof point.radius === 'undefined') {
-                    point.radius = point.baseRadius;
-                }
-                const radiusDiff = point.baseRadius - point.radius;
-                point.radius += radiusDiff * this.elasticity;
-            });
-
-            // Handle reflection
-            if (!wave.isReflecting && wave.points[0].baseRadius >= wave.maxRadius) {
+            // Handle reflection and destruction
+            if (!wave.isReflecting && wave.points[0].baseRadius >= wave.maxRadius * 0.7) {
                 wave.isReflecting = true;
-                wave.points.forEach(point => {
-                    point.velocity = -point.velocity * 0.8;
-                });
-                wave.strength *= 0.7;
+                wave.strength *= 0.5;
             }
 
+            // More aggressive strength reduction
             wave.strength *= this.dampening;
-            return wave.strength > this.minStrength;
+            
+            // Remove waves that are either too weak or have expanded too far
+            return wave.strength > this.minStrength && 
+                   wave.points[0].baseRadius < wave.maxRadius;
         });
 
         this.drawWaves();
