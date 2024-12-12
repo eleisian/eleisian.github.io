@@ -58,7 +58,7 @@ class Background {
 
     resize() {
         this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        this.canvas.height = Math.max(window.innerHeight, document.documentElement.scrollHeight);
     }
 
     initializeCharacterPositions() {
