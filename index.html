@@ -1,80 +1,46 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>emmanuel wang</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="js/background.js" defer></script>
-    <script src="js/art.js" defer></script>
-    <script src="js/router.js" type="module" defer></script>
-    <script src="js/blogRenderer.js" type="module"></script>
-    <script src="js/carousel.js" type="module"></script>
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <title>Image Gallery</title>
     <style>
-        /* Add this to hide content until router is ready */
-        main:not(.router-ready)>section {
-            display: none;
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
         }
     </style>
-    <!-- Fonts for blog -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
-        rel="stylesheet">
-    <base href="/">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-
 </head>
-
 <body>
-    <div class="page-container"></div>
-    <main class="loading">
-        <header>
-            <div class="header-content">
-                <div class="profile">
-                    <div class="profile-pic-container">
-                        <div class="dice-face">
-                            <div class="dot top-right"></div>
-                            <div class="dot bottom-left"></div>
-                        </div>
-                    </div>
-                    <h1><span class="iconify" data-icon="arcticons:treecard"></span>emmanuel wang</h1>
-                    <small>software engineer and artist | creating sustainable and minimalistic design solutions</small>
-                    <canvas id="threeCanvas"></canvas>
-                </div>
-                <nav class="header-nav">
-                    <ul>
-                        <li><a href="#about" data-page="home" class="active">About</a></li>
-                        <li><a href="#skills" data-page="skills">Skills</a></li>
-                        <li><a href="#projects" data-page="projects">Projects</a></li>
-                        <li><a href="#blog" data-page="blog">Blog</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-        <template id="home-template">
-            <section id="about">
-                <h2>About</h2>
-                <p>Hey there! I'm Emmanuel, nice to meet you. I am a software engineer with a passion for creating things that spark joy. When I'm not immersed in my own digital world you'll probably find me tinkering with the latest technologies, or dreaming up my next big idea.</p>
-                <p>For me, the best software is a blend of creativity and technical skill. I love combining my engineering and artist brian to craft experiences that just feel right.</p>
-                <p>I'm eager to learn and collaborate. Have an exciting idea? I'd love to hear about it!</p>
-            </section>
-        </template>
-    </main>
-    <script src="js/blog.js" type="module"></script>
-    <div class="social-links">
-        <a href="mailto:emmanueltwang@gmail.com" aria-label="Email">
-            <span class="iconify" data-icon="mdi:email"></span>
-        </a>
+    <center>
+        <h1>this site has moved to <a href="https://www.emmanuelwang.com">https://www.emmanuelwang.com</a></h1>
+        <p>haters stay mad i stay winning</p>
+    </center>
+    <div class="gallery">
+        <img src="https://pbs.twimg.com/media/GfALg2JX0AA8eIS?format=jpg&name=360x360" alt="Image 1">
+        <img src="https://pbs.twimg.com/media/GfFiOhLWcAAZmUe?format=jpg&name=medium" alt="Image 2">
+        <img src="https://pbs.twimg.com/media/GerihA5bsAACSdr?format=png&name=900x900" alt="Image 3">
+        <img src="https://pbs.twimg.com/media/GekSio2bQAAurfU?format=jpg&name=4096x4096" alt="Image 4">
+        <img src="https://pbs.twimg.com/media/GfZv9b-W0AAgmm1?format=png&name=900x900" alt="Image 5">
+        <img src="https://pbs.twimg.com/media/GbTi5QkWsAAb3xb?format=jpg&name=large" alt="Image 6">
+        <img src="https://pbs.twimg.com/media/GfW9Q6JWoAAFZnU?format=jpg&name=medium" alt="Image 7">
+        <img src="https://pbs.twimg.com/media/Ge89OiMbsAAd-aW?format=jpg&name=large" alt="Image 8">
+        <img src="https://pbs.twimg.com/media/GdrLi4eWkAA6eAm?format=jpg&name=large" alt="Image 9">
     </div>
 </body>
-
 </html>
